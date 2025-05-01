@@ -1,0 +1,31 @@
+Rule ID,Rule Name,Description,Domain,Implementation Level,Status
+BR001,PartyTypeRequired,Every party must have a valid party type (Person or Organization),Party,Required,Active
+BR002,UniquePartyIdentifier,Each party must have at least one unique identifier,Party,Required,Active
+BR003,PersonNameRequired,Person records must have at least first and last name,Party,Required,Active
+BR004,OrganizationNameRequired,Organization records must have a legal name,Party,Required,Active
+BR005,ValidContactInformation,At least one valid contact method must be provided for each party,Party,Required,Active
+BR006,ValidPartyRelationship,Party relationships must specify valid parties and relationship types,Party,Required,Active
+BR007,RelationshipEndDateRule,Relationship end date must be after relationship start date,Party,Required,Active
+BR008,ValidateEmailFormat,Email addresses must conform to RFC 5322 standard,Party,Required,Active
+BR009,ValidatePhoneFormat,Phone numbers must include country code and follow E.164 standard,Party,Required,Active
+BR010,AddressValidation,Physical addresses should be validated against postal authority data,Party,Recommended,Active
+BR011,PersonIdentificationValidation,Person identification documents should be validated with issuing authorities,Party,Recommended,Active
+BR012,OrganizationIdentificationValidation,Organization identifiers should be validated with issuing authorities,Party,Recommended,Active
+BR013,DuplicatePartyDetection,System must detect potential duplicate party records using matching rules,Party,Required,Active
+BR014,GoldenRecordCreation,System must create and maintain a golden record for each unique party,Party,Required,Active
+BR015,DataSourceTracking,All party data must maintain source system information,Party,Required,Active
+BR016,DataChangeTracking,All changes to party data must be tracked with timestamp and user,Party,Required,Active
+BR017,DataQualityAssessment,All party records must have a data quality score,Party,Required,Active
+BR018,SensitiveDataMasking,Sensitive personal data must be masked or encrypted when displayed,Party,Required,Active
+BR019,DataRetentionCompliance,Party data must comply with applicable data retention policies,Party,Required,Active
+BR020,PersonalDataConsent,Processing of personal data must be tied to appropriate consent records,Party,Required,Active
+BR021,DeletedPartyHandling,Deleted party records must be handled according to privacy regulations,Party,Required,Active
+BR022,MergedPartyHandling,When parties are merged, source records must be properly linked to survivor,Party,Required,Active
+BR023,MatchingRuleHierarchy,Party matching rules must be applied in defined hierarchical order,Party,Required,Active
+BR024,PartyMergeApproval,Party merges must be approved by authorized data stewards,Party,Required,Active
+BR025,PartyHierarchyIntegrity,Organizational hierarchies must maintain integrity (no cycles),Party,Required,Active
+BR026,PartyRelationshipApproval,Certain party relationships require approval workflow,Party,Conditional,Active
+BR027,AuditTrailRequirement,Full audit trail must be maintained for all party data changes,Party,Required,Active
+BR028,PartyStatusTracking,Party status must be tracked (Active, Inactive, Merged, Deleted),Party,Required,Active
+BR029,DataStewardAssignment,Each party domain must have assigned data stewards,Party,Required,Active
+BR030,ExternalSystemSynchronization,Changes to golden records must be synchronized to subscribing systems,Party,Required,Active 

@@ -1,0 +1,221 @@
+# MDM models
+MatchRequest:
+  type: object
+  required:
+    - match_criteria
+  properties:
+    match_criteria:
+      type: object
+      description: Criteria for matching parties
+      oneOf:
+        - $ref: '#/components/schemas/PersonMatchCriteria'
+        - $ref: '#/components/schemas/OrganizationMatchCriteria'
+    match_threshold:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 100
+      default: 80
+      description: Threshold for considering a match (0-100)
+    max_results:
+      type: integer
+      minimum: 1
+      maximum: 100
+      default: 10
+      description: Maximum number of matching results to return
+    ignore_party_ids:
+      type: array
+      items:
+        type: string
+      description: Party IDs to exclude from matching
+
+PersonMatchCriteria:
+  type: object
+  properties:
+    first_name:
+      type: string
+      description: First name of the person
+    last_name:
+      type: string
+      description: Last name of the person
+    birth_date:
+      type: string
+      format: date
+      description: Date of birth
+    identifications:
+      type: array
+      items:
+        type: object
+        properties:
+          identification_type:
+            type: string
+            description: Type of identification
+          identification_value:
+            type: string
+            description: Value of the identification
+      description: Identifications to match against
+    contact_points:
+      type: array
+      items:
+        type: object
+        properties:
+          contact_type:
+            type: string
+            description: Type of contact
+          contact_value:
+            type: string
+            description: Value of the contact point
+      description: Contact points to match against
+    addresses:
+      type: array
+      items:
+        type: object
+        properties:
+          postal_code:
+            type: string
+            description: Postal or ZIP code
+          country:
+            type: string
+            description: Country
+      description: Addresses to match against
+
+OrganizationMatchCriteria:
+  type: object
+  properties:
+    organization_name:
+      type: string
+      description: Name of the organization
+    trading_name:
+      type: string
+      description: Trading name of the organization
+    identifications:
+      type: array
+      items:
+        type: object
+        properties:
+          identification_type:
+            type: string
+            description: Type of identification
+          identification_value:
+            type: string
+            description: Value of the identification
+      description: Identifications to match against
+    contact_points:
+      type: array
+      items:
+        type: object
+        properties:
+          contact_type:
+            type: string
+            description: Type of contact
+          contact_value:
+            type: string
+            description: Value of the contact point
+      description: Contact points to match against
+    addresses:
+      type: array
+      items:
+        type: object
+        properties:
+          postal_code:
+            type: string
+            description: Postal or ZIP code
+          country:
+            type: string
+            description: Country
+      description: Addresses to match against
+
+MatchResponse:
+  type: object
+  properties:
+    matches:
+      type: array
+      items:
+        type: object
+        properties:
+          party_id:
+            type: string
+            description: ID of the matching party
+          party_name:
+            type: string
+            description: Name of the matching party
+          party_type:
+            type: string
+            enum: [Person, Organization]
+            description: Type of party
+          match_score:
+            type: number
+            format: double
+            description: Match score (0-100)
+          match_details:
+            type: object
+            description: Details of the match
+            additionalProperties: true
+      description: Matching parties found
+    rule_applied:
+      type: string
+      description: Match rule that was applied
+    match_date:
+      type: string
+      format: date-time
+      description: Date and time when the match was performed
+
+MergeRequest:
+  type: object
+  required:
+    - survivor_party_id
+    - merged_party_ids
+  properties:
+    survivor_party_id:
+      type: string
+      description: ID of the party that should survive (golden record)
+    merged_party_ids:
+      type: array
+      items:
+        type: string
+      minItems: 1
+      description: IDs of parties to merge into the survivor
+    merge_reason:
+      type: string
+      description: Reason for the merge
+    field_resolution:
+      type: object
+      description: How to resolve conflicting fields
+      additionalProperties:
+        type: object
+        properties:
+          source_party_id:
+            type: string
+            description: ID of the party to take the field value from
+          custom_value:
+            type: string
+            description: Custom value to use for the field
+
+MergeResponse:
+  type: object
+  properties:
+    merge_id:
+      type: string
+      description: Unique identifier for this merge operation
+    survivor_party_id:
+      type: string
+      description: ID of the surviving party (golden record)
+    merged_party_ids:
+      type: array
+      items:
+        type: string
+      description: IDs of merged parties
+    merge_date:
+      type: string
+      format: date-time
+      description: Date and time when the merge was performed
+    merge_reason:
+      type: string
+      description: Reason for the merge
+    merge_status:
+      type: string
+      enum: [Pending, Approved, Rejected, Completed]
+      description: Status of the merge
+    merge_by:
+      type: string
+      description: User who performed the merge 

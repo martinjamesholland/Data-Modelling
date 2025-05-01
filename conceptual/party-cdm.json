@@ -1,0 +1,121 @@
+{
+  "modelName": "Party Conceptual Data Model",
+  "version": "1.0.0",
+  "date": "2023-08-10",
+  "description": "CDM for Party domain in the Master Data Management system",
+  "entities": [
+    {
+      "name": "Party",
+      "description": "A person or organization that can enter into business relationships",
+      "supertype": null
+    },
+    {
+      "name": "Person",
+      "description": "A human being with personal information",
+      "supertype": "Party"
+    },
+    {
+      "name": "Organization",
+      "description": "A legal entity, company, or institution",
+      "supertype": "Party"
+    },
+    {
+      "name": "PartyRelationship",
+      "description": "A business relationship between two parties",
+      "supertype": null
+    },
+    {
+      "name": "CustomerRelationship",
+      "description": "A relationship where one party is a customer of another",
+      "supertype": "PartyRelationship"
+    },
+    {
+      "name": "Agreement",
+      "description": "A formal arrangement between parties",
+      "supertype": null
+    },
+    {
+      "name": "PartyLocation",
+      "description": "A geographic location associated with a party",
+      "supertype": null
+    },
+    {
+      "name": "ContactPoint",
+      "description": "A means of contacting a party",
+      "supertype": null
+    },
+    {
+      "name": "PartyReference",
+      "description": "A reference to a party in an external directory",
+      "supertype": null
+    },
+    {
+      "name": "Location",
+      "description": "A physical or virtual place",
+      "supertype": null
+    },
+    {
+      "name": "PersonProfile",
+      "description": "Additional information about a person",
+      "supertype": null
+    }
+  ],
+  "relationships": [
+    {
+      "name": "party_has_locations",
+      "source": "Party",
+      "target": "PartyLocation",
+      "cardinality": "one-to-many",
+      "description": "A party may have multiple locations"
+    },
+    {
+      "name": "party_has_contact_points",
+      "source": "Party",
+      "target": "ContactPoint",
+      "cardinality": "one-to-many",
+      "description": "A party may have multiple contact points"
+    },
+    {
+      "name": "party_has_party_references",
+      "source": "Party",
+      "target": "PartyReference",
+      "cardinality": "one-to-many",
+      "description": "A party may be referenced in multiple directories"
+    },
+    {
+      "name": "party_has_relationships",
+      "source": "Party",
+      "target": "PartyRelationship",
+      "cardinality": "one-to-many",
+      "description": "A party may have multiple relationships with other parties"
+    },
+    {
+      "name": "party_relationship_has_agreements",
+      "source": "PartyRelationship",
+      "target": "Agreement",
+      "cardinality": "many-to-many",
+      "description": "A party relationship may be governed by multiple agreements"
+    },
+    {
+      "name": "party_location_at_location",
+      "source": "PartyLocation",
+      "target": "Location",
+      "cardinality": "many-to-one",
+      "description": "Multiple party locations may reference the same location"
+    },
+    {
+      "name": "person_has_profile",
+      "source": "Person",
+      "target": "PersonProfile",
+      "cardinality": "one-to-one",
+      "description": "A person has one profile with additional information"
+    },
+    {
+      "name": "organization_has_locations",
+      "source": "Organization",
+      "target": "Location",
+      "cardinality": "one-to-many",
+      "description": "An organization may have multiple locations"
+    }
+  ]
+} 

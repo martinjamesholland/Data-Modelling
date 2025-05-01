@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="900" viewBox="0 0 1200 900">
+  <style>
+    .hub { fill: #4e73df; }
+    .link { fill: #1cc88a; }
+    .satellite-history { fill: #f6c23e; }
+    .satellite-current { fill: #36b9cc; }
+    .sync { fill: #858796; }
+    .text { font-family: Arial, sans-serif; font-size: 12px; fill: white; text-anchor: middle; }
+    .heading { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: white; text-anchor: middle; }
+    .connector { stroke: #858796; stroke-width: 2; fill: none; }
+    .sync-connector { stroke: #e74a3b; stroke-width: 2; stroke-dasharray: 5,5; fill: none; }
+    .title { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #5a5c69; text-anchor: middle; }
+    .subtitle { font-family: Arial, sans-serif; font-size: 16px; fill: #5a5c69; text-anchor: middle; }
+  </style>
+  
+  <!-- Title and Subtitle -->
+  <text x="600" y="30" class="title">Party Domain - Data Vault 2.0 Physical Model (Split Satellites)</text>
+  <text x="600" y="55" class="subtitle">Delta Format on Hadoop / GCP BigQuery - Optimized for Performance</text>
+  
+  <!-- HUB_PARTY -->
+  <g>
+    <rect x="400" y="100" width="120" height="60" rx="5" class="hub" />
+    <text x="460" y="125" class="heading">HUB_PARTY</text>
+    <text x="460" y="145" class="text">party_id</text>
+  </g>
+  
+  <!-- HUB_PERSON -->
+  <g>
+    <rect x="200" y="200" width="120" height="60" rx="5" class="hub" />
+    <text x="260" y="225" class="heading">HUB_PERSON</text>
+    <text x="260" y="245" class="text">party_id</text>
+  </g>
+  
+  <!-- HUB_ORGANIZATION -->
+  <g>
+    <rect x="600" y="200" width="120" height="60" rx="5" class="hub" />
+    <text x="660" y="225" class="heading">HUB_ORGANIZATION</text>
+    <text x="660" y="245" class="text">party_id</text>
+  </g>
+  
+  <!-- LINKS -->
+  <g>
+    <rect x="300" y="150" width="120" height="60" rx="5" class="link" />
+    <text x="360" y="175" class="heading">LINK_PARTY_PERSON</text>
+    <text x="360" y="195" class="text">party → person</text>
+  </g>
+  
+  <g>
+    <rect x="500" y="150" width="120" height="60" rx="5" class="link" />
+    <text x="560" y="175" class="heading">LINK_PARTY_ORG</text>
+    <text x="560" y="195" class="text">party → organization</text>
+  </g>
+  
+  <!-- SAT_PARTY_CURRENT -->
+  <g>
+    <rect x="350" y="280" width="120" height="60" rx="5" class="satellite-current" />
+    <text x="410" y="305" class="heading">SAT_PARTY_CURRENT</text>
+    <text x="410" y="325" class="text">Current values only</text>
+  </g>
+  
+  <!-- SAT_PARTY_HISTORY -->
+  <g>
+    <rect x="450" y="360" width="120" height="60" rx="5" class="satellite-history" />
+    <text x="510" y="385" class="heading">SAT_PARTY_HISTORY</text>
+    <text x="510" y="405" class="text">Full time-series data</text>
+  </g>
+  
+  <!-- SAT_PERSON_CURRENT -->
+  <g>
+    <rect x="100" y="280" width="120" height="60" rx="5" class="satellite-current" />
+    <text x="160" y="305" class="heading">SAT_PERSON_CURRENT</text>
+    <text x="160" y="325" class="text">Current values only</text>
+  </g>
+  
+  <!-- SAT_PERSON_HISTORY -->
+  <g>
+    <rect x="200" y="360" width="120" height="60" rx="5" class="satellite-history" />
+    <text x="260" y="385" class="heading">SAT_PERSON_HISTORY</text>
+    <text x="260" y="405" class="text">Full time-series data</text>
+  </g>
+  
+  <!-- SAT_ORG_CURRENT -->
+  <g>
+    <rect x="700" y="280" width="120" height="60" rx="5" class="satellite-current" />
+    <text x="760" y="305" class="heading">SAT_ORG_CURRENT</text>
+    <text x="760" y="325" class="text">Current values only</text>
+  </g>
+  
+  <!-- SAT_ORG_HISTORY -->
+  <g>
+    <rect x="650" y="360" width="120" height="60" rx="5" class="satellite-history" />
+    <text x="710" y="385" class="heading">SAT_ORG_HISTORY</text>
+    <text x="710" y="405" class="text">Full time-series data</text>
+  </g>
+  
+  <!-- SYNC TRIGGERS -->
+  <g>
+    <rect x="350" y="500" width="140" height="60" rx="5" class="sync" />
+    <text x="420" y="525" class="heading">SYNC TRIGGERS</text>
+    <text x="420" y="545" class="text">History → Current</text>
+  </g>
+  
+  <!-- HUB to LINK Connectors -->
+  <line x1="460" y1="160" x2="420" y2="200" class="connector" />
+  <line x1="460" y1="130" x2="360" y2="150" class="connector" />
+  <line x1="460" y1="130" x2="560" y2="150" class="connector" />
+  
+  <!-- LINKS to HUBS -->
+  <line x1="300" y1="180" x2="260" y2="200" class="connector" />
+  <line x1="620" y1="180" x2="660" y2="200" class="connector" />
+  
+  <!-- HUB to SAT Connectors -->
+  <line x1="460" y1="160" x2="410" y2="280" class="connector" />
+  <line x1="460" y1="160" x2="510" y2="360" class="connector" />
+  
+  <line x1="260" y1="260" x2="160" y2="280" class="connector" />
+  <line x1="260" y1="260" x2="260" y2="360" class="connector" />
+  
+  <line x1="660" y1="260" x2="760" y2="280" class="connector" />
+  <line x1="660" y1="260" x2="710" y2="360" class="connector" />
+  
+  <!-- SYNC Connectors -->
+  <line x1="510" y1="420" x2="450" y2="500" class="sync-connector" />
+  <line x1="410" y1="340" x2="400" y2="500" class="sync-connector" />
+  
+  <line x1="260" y1="420" x2="350" y2="530" class="sync-connector" />
+  <line x1="160" y1="340" x2="350" y2="515" class="sync-connector" />
+  
+  <line x1="710" y1="420" x2="490" y2="530" class="sync-connector" />
+  <line x1="760" y1="340" x2="490" y2="515" class="sync-connector" />
+  
+  <!-- Legend -->
+  <g transform="translate(900, 100)">
+    <rect x="0" y="0" width="250" height="200" rx="5" fill="#ffffff" stroke="#858796"/>
+    <text x="125" y="20" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#5a5c69" text-anchor="middle">Legend</text>
+    
+    <rect x="10" y="30" width="20" height="20" rx="2" class="hub"/>
+    <text x="40" y="45" font-family="Arial, sans-serif" font-size="12" fill="#5a5c69" text-anchor="start">Hub</text>
+    
+    <rect x="10" y="60" width="20" height="20" rx="2" class="link"/>
+    <text x="40" y="75" font-family="Arial, sans-serif" font-size="12" fill="#5a5c69" text-anchor="start">Link</text>
+    
+    <rect x="10" y="90" width="20" height="20" rx="2" class="satellite-current"/>
+    <text x="40" y="105" font-family="Arial, sans-serif" font-size="12" fill="#5a5c69" text-anchor="start">Satellite (Current Values)</text>
+    
+    <rect x="10" y="120" width="20" height="20" rx="2" class="satellite-history"/>
+    <text x="40" y="135" font-family="Arial, sans-serif" font-size="12" fill="#5a5c69" text-anchor="start">Satellite (Historical Data)</text>
+    
+    <rect x="10" y="150" width="20" height="20" rx="2" class="sync"/>
+    <text x="40" y="165" font-family="Arial, sans-serif" font-size="12" fill="#5a5c69" text-anchor="start">Synchronization Triggers</text>
+    
+    <line x1="10" y1="185" x2="30" y2="185" class="sync-connector"/>
+    <text x="40" y="190" font-family="Arial, sans-serif" font-size="12" fill="#5a5c69" text-anchor="start">Sync Connection</text>
+  </g>
+  
+  <!-- Performance Notes -->
+  <g transform="translate(900, 330)">
+    <rect x="0" y="0" width="250" height="270" rx="5" fill="#ffffff" stroke="#858796"/>
+    <text x="125" y="20" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#5a5c69" text-anchor="middle">Split Satellite Benefits</text>
+    
+    <text x="10" y="45" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">• Faster queries for current data</text>
+    <text x="10" y="70" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">• Smaller table sizes for common reads</text>
+    <text x="10" y="95" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">• No filtering needed for current data</text>
+    <text x="10" y="120" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">• Full time-series capability retained</text>
+    <text x="10" y="145" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">• Point-in-time recovery in history</text>
+    <text x="10" y="170" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">• Optimized storage partitioning</text>
+    <text x="10" y="195" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">• Different indexing strategies per table</text>
+    <text x="10" y="220" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">• Automated synchronization</text>
+    <text x="10" y="245" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">• Works for real-time and batch</text>
+  </g>
+  
+  <!-- Flow Note -->
+  <g transform="translate(900, 630)">
+    <rect x="0" y="0" width="250" height="120" rx="5" fill="#ffffff" stroke="#858796"/>
+    <text x="125" y="20" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#5a5c69" text-anchor="middle">Data Flow</text>
+    
+    <text x="10" y="45" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">1. Data loaded to history satellites</text>
+    <text x="10" y="70" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">2. Sync triggers update current satellites</text>
+    <text x="10" y="95" font-family="Arial, sans-serif" font-size="11" fill="#5a5c69" text-anchor="start">3. Applications query optimized tables</text>
+  </g>
+</svg> 

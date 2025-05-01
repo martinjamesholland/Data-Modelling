@@ -1,0 +1,148 @@
+{
+  "relationships": [
+    {
+      "name": "party_to_person",
+      "source": "Party",
+      "target": "Person",
+      "type": "one-to-one",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A person is a type of party"
+    },
+    {
+      "name": "party_to_organization",
+      "source": "Party",
+      "target": "Organization",
+      "type": "one-to-one",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "An organization is a type of party"
+    },
+    {
+      "name": "party_to_party_identification",
+      "source": "Party",
+      "target": "PartyIdentification",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can have multiple identifications"
+    },
+    {
+      "name": "party_to_party_location",
+      "source": "Party",
+      "target": "PartyLocation",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can have multiple locations"
+    },
+    {
+      "name": "party_to_contact_point",
+      "source": "Party",
+      "target": "ContactPoint",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can have multiple contact points"
+    },
+    {
+      "name": "party_to_party_relationship_from",
+      "source": "Party",
+      "target": "PartyRelationship",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "from_party_id",
+      "description": "A party can be the source of multiple relationships"
+    },
+    {
+      "name": "party_to_party_relationship_to",
+      "source": "Party",
+      "target": "PartyRelationship",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "to_party_id",
+      "description": "A party can be the target of multiple relationships"
+    },
+    {
+      "name": "party_relationship_to_customer_relationship",
+      "source": "PartyRelationship",
+      "target": "CustomerRelationship",
+      "type": "one-to-one",
+      "sourceAttribute": "party_relationship_id",
+      "targetAttribute": "party_relationship_id",
+      "description": "A customer relationship is a type of party relationship"
+    },
+    {
+      "name": "person_to_person_profile",
+      "source": "Person",
+      "target": "PersonProfile",
+      "type": "one-to-one",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A person can have one profile with additional information"
+    },
+    {
+      "name": "party_to_party_agreement",
+      "source": "Party",
+      "target": "PartyAgreement",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can be involved in multiple agreements"
+    },
+    {
+      "name": "agreement_to_party_agreement",
+      "source": "Agreement",
+      "target": "PartyAgreement",
+      "type": "one-to-many",
+      "sourceAttribute": "agreement_id",
+      "targetAttribute": "agreement_id",
+      "description": "An agreement can involve multiple parties"
+    },
+    {
+      "name": "party_to_directory_reference",
+      "source": "Party",
+      "target": "PartyDirectoryReference",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can be referenced in multiple external directories"
+    },
+    {
+      "name": "organization_to_parent_organization",
+      "source": "Organization",
+      "target": "Organization",
+      "type": "many-to-one",
+      "sourceAttribute": "parent_organization_id",
+      "targetAttribute": "party_id",
+      "description": "An organization can have a parent organization"
+    },
+    {
+      "name": "party_to_merge_history_survivor",
+      "source": "Party",
+      "target": "PartyMergeHistory",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "survivor_party_id",
+      "description": "A party can be the survivor in multiple merge operations"
+    },
+    {
+      "name": "party_to_audit_log",
+      "source": "Party",
+      "target": "PartyAuditLog",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can have multiple audit log entries"
+    },
+    {
+      "name": "party_to_data_quality",
+      "source": "Party",
+      "target": "PartyDataQuality",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can have multiple data quality assessments"
+    }
+  ]
+} 

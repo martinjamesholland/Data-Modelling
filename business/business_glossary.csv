@@ -1,0 +1,27 @@
+Term,Definition,Domain,Owner,Status
+Party,A person or organization capable of entering into business agreements or relationships,Party,MDM Team,Active
+Person,An individual human being with personal details and identification,Party,MDM Team,Active
+Organization,A legal entity such as a company, institution, or government body,Party,MDM Team,Active
+PartyRelationship,A defined business connection between two parties,Party,MDM Team,Active
+CustomerRelationship,A relationship where one party is a customer of another party,Party,MDM Team,Active
+PartyRole,A function or part played by a party in a specific context,Party,MDM Team,Active
+CustomerRole,A specific role where a party acts as a customer,Party,MDM Team,Active
+SupplierRole,A specific role where a party acts as a supplier of goods or services,Party,MDM Team,Active
+EmployeeRole,A specific role where a person is employed by an organization,Party,MDM Team,Active
+Agreement,A formal arrangement or contract between parties,Party,Legal Team,Active
+PartyReferenceData,Information that uniquely identifies a party in an external system,Party,MDM Team,Active
+PartyLocation,A physical or virtual place associated with a party,Party,MDM Team,Active
+ContactPoint,A means of reaching or contacting a party,Party,MDM Team,Active
+PersonIdentification,Documents or codes that uniquely identify a person,Party,MDM Team,Active
+OrganizationIdentification,Documents or codes that uniquely identify an organization,Party,MDM Team,Active
+Nationality,The status of belonging to a particular nation,Party,MDM Team,Active
+PersonProfile,Additional demographic and personal information about a person,Party,MDM Team,Active
+LEI,Legal Entity Identifier - a 20-character code that uniquely identifies legal entities,Party,Compliance Team,Active
+TaxIdentificationNumber,A unique number assigned to taxpayers,Party,Finance Team,Active
+OrganizationStructure,The arrangement of departments and reporting lines in an organization,Party,MDM Team,Active
+MDM,Master Data Management - the process of creating and maintaining a single source of truth for key business data,System,Data Governance Team,Active
+GoldenRecord,The authoritative, most accurate version of a master data entity,System,Data Governance Team,Active
+DataSteward,A person responsible for managing and governing specific data domains,System,Data Governance Team,Active
+DataQuality,The degree to which data is accurate, complete, and suitable for its intended use,System,Data Governance Team,Active
+DataGovernance,The overall management of data availability, usability, integrity, and security,System,Data Governance Team,Active
+DataLineage,Documentation of where data originates and how it transforms throughout its lifecycle,System,Data Governance Team,Active 

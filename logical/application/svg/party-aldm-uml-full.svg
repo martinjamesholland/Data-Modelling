@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="3400" height="3200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+        </marker>
+    </defs>
+
+    <!-- Title -->
+    <text x="1700" y="40" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle">Party Application Logical Data Model - UML Class Diagram</text>
+    <text x="1700" y="70" font-family="Arial" font-size="16" text-anchor="middle">All Entities, Attributes, Keys, and Relationships</text>
+
+    <!-- Legend -->
+    <rect x="2900" y="60" width="450" height="220" rx="5" ry="5" fill="white" stroke="black" stroke-width="1"/>
+    <text x="3125" y="90" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Legend</text>
+    <text x="2920" y="120" font-family="Arial" font-size="14" font-weight="bold">PK</text>
+    <text x="2960" y="120" font-family="Arial" font-size="14">Primary Key</text>
+    <text x="2920" y="140" font-family="Arial" font-size="14" font-weight="bold">FK</text>
+    <text x="2960" y="140" font-family="Arial" font-size="14">Foreign Key</text>
+    <line x1="2920" y1="160" x2="2960" y2="160" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="2970" y="165" font-family="Arial" font-size="14">Association</text>
+    <line x1="2920" y1="180" x2="2960" y2="180" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="2970" y="185" font-family="Arial" font-size="14">Inheritance</text>
+    <text x="2920" y="205" font-family="Arial" font-size="14">1, *: Cardinality</text>
+
+    <!-- Core Entities -->
+    <!-- Party -->
+    <rect x="1500" y="120" width="400" height="360" rx="0" ry="0" fill="#E1F5FE" stroke="black" stroke-width="2"/>
+    <text x="1700" y="145" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">Party</text>
+    <line x1="1500" y1="160" x2="1900" y2="160" stroke="black" stroke-width="1"/>
+    <text x="1510" y="180" font-family="Arial" font-size="14" font-weight="bold">PK party_id: string</text>
+    <text x="1510" y="200" font-family="Arial" font-size="14">party_name: string</text>
+    <text x="1510" y="220" font-family="Arial" font-size="14">party_type: string</text>
+    <text x="1510" y="240" font-family="Arial" font-size="14">party_date_time: datetime</text>
+    <text x="1510" y="260" font-family="Arial" font-size="14">status: string</text>
+    <text x="1510" y="280" font-family="Arial" font-size="14">data_source_system: string</text>
+    <text x="1510" y="300" font-family="Arial" font-size="14">data_source_id: string</text>
+    <text x="1510" y="320" font-family="Arial" font-size="14">is_golden_record: boolean</text>
+    <text x="1510" y="340" font-family="Arial" font-size="14">data_quality_score: decimal</text>
+    <text x="1510" y="360" font-family="Arial" font-size="14">confidence_score: decimal</text>
+    <text x="1510" y="380" font-family="Arial" font-size="14">last_verified_date: date</text>
+    <text x="1510" y="400" font-family="Arial" font-size="14">party_identification: string</text>
+    <text x="1510" y="420" font-family="Arial" font-size="14">data_steward_id: string</text>
+    <line x1="1500" y1="440" x2="1900" y2="440" stroke="black" stroke-width="1"/>
+    <text x="1510" y="460" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="1510" y="480" font-family="Arial" font-size="14">created_by: string</text>
+    <text x="1510" y="500" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="1510" y="520" font-family="Arial" font-size="14">updated_by: string</text>
+    <text x="1510" y="540" font-family="Arial" font-size="14">deleted_at: datetime</text>
+
+    <!-- Person -->
+    <rect x="400" y="600" width="400" height="320" rx="0" ry="0" fill="#E1F5FE" stroke="black" stroke-width="2"/>
+    <text x="600" y="625" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">Person</text>
+    <line x1="400" y1="640" x2="800" y2="640" stroke="black" stroke-width="1"/>
+    <text x="410" y="660" font-family="Arial" font-size="14" font-weight="bold">PK,FK party_id: string</text>
+    <text x="410" y="680" font-family="Arial" font-size="14">first_name: string</text>
+    <text x="410" y="700" font-family="Arial" font-size="14">middle_name: string</text>
+    <text x="410" y="720" font-family="Arial" font-size="14">last_name: string</text>
+    <text x="410" y="740" font-family="Arial" font-size="14">given_name: string</text>
+    <text x="410" y="760" font-family="Arial" font-size="14">family_name: string</text>
+    <text x="410" y="780" font-family="Arial" font-size="14">birth_date: date</text>
+    <text x="410" y="800" font-family="Arial" font-size="14">gender: string</text>
+    <text x="410" y="820" font-family="Arial" font-size="14">marital_status: string</text>
+    <text x="410" y="840" font-family="Arial" font-size="14">nationality: string</text>
+    <text x="410" y="860" font-family="Arial" font-size="14">residence_country: string</text>
+    <text x="410" y="880" font-family="Arial" font-size="14">ethnicity: string</text>
+    <text x="410" y="900" font-family="Arial" font-size="14">religion: string</text>
+    <text x="410" y="920" font-family="Arial" font-size="14">preferred_language: string</text>
+    <text x="410" y="940" font-family="Arial" font-size="14">residential_status: string</text>
+    <!-- Inheritance from Party to Person -->
+    <line x1="600" y1="600" x2="1700" y2="460" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Organization -->
+    <rect x="2500" y="600" width="400" height="380" rx="0" ry="0" fill="#E1F5FE" stroke="black" stroke-width="2"/>
+    <text x="2700" y="625" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">Organization</text>
+    <line x1="2500" y1="640" x2="2900" y2="640" stroke="black" stroke-width="1"/>
+    <text x="2510" y="660" font-family="Arial" font-size="14" font-weight="bold">PK,FK party_id: string</text>
+    <text x="2510" y="680" font-family="Arial" font-size="14">organization_name: string</text>
+    <text x="2510" y="700" font-family="Arial" font-size="14">trading_name: string</text>
+    <text x="2510" y="720" font-family="Arial" font-size="14">organization_type: string</text>
+    <text x="2510" y="740" font-family="Arial" font-size="14">organization_sector: string</text>
+    <text x="2510" y="760" font-family="Arial" font-size="14">registration_date: date</text>
+    <text x="2510" y="780" font-family="Arial" font-size="14">registration_country: string</text>
+    <text x="2510" y="800" font-family="Arial" font-size="14">tax_country: string</text>
+    <text x="2510" y="820" font-family="Arial" font-size="14">organization_structure: string</text>
+    <text x="2510" y="840" font-family="Arial" font-size="14">employee_count: integer</text>
+    <text x="2510" y="860" font-family="Arial" font-size="14">annual_revenue: decimal</text>
+    <text x="2510" y="880" font-family="Arial" font-size="14">registration_authority: string</text>
+    <text x="2510" y="900" font-family="Arial" font-size="14">website: string</text>
+    <text x="2510" y="920" font-family="Arial" font-size="14">parent_organization_id: string (FK)</text>
+    <!-- Inheritance from Party to Organization -->
+    <line x1="2700" y1="600" x2="1700" y2="460" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Reference/Supporting Entities -->
+    <!-- PartyIdentification -->
+    <rect x="100" y="1100" width="400" height="320" rx="0" ry="0" fill="#FFF3E0" stroke="black" stroke-width="2"/>
+    <text x="300" y="1125" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">PartyIdentification</text>
+    <line x1="100" y1="1140" x2="500" y2="1140" stroke="black" stroke-width="1"/>
+    <text x="110" y="1160" font-family="Arial" font-size="14" font-weight="bold">PK party_identification_id: string</text>
+    <text x="110" y="1180" font-family="Arial" font-size="14" font-weight="bold">FK party_id: string</text>
+    <text x="110" y="1200" font-family="Arial" font-size="14">identification_type: string</text>
+    <text x="110" y="1220" font-family="Arial" font-size="14">identification_value: string</text>
+    <text x="110" y="1240" font-family="Arial" font-size="14">issuing_authority: string</text>
+    <text x="110" y="1260" font-family="Arial" font-size="14">issuing_country: string</text>
+    <text x="110" y="1280" font-family="Arial" font-size="14">issue_date: date</text>
+    <text x="110" y="1300" font-family="Arial" font-size="14">expiry_date: date</text>
+    <text x="110" y="1320" font-family="Arial" font-size="14">is_primary: boolean</text>
+    <text x="110" y="1340" font-family="Arial" font-size="14">verification_status: string</text>
+    <text x="110" y="1360" font-family="Arial" font-size="14">verification_date: date</text>
+    <text x="110" y="1380" font-family="Arial" font-size="14">verification_method: string</text>
+    <line x1="100" y1="1400" x2="500" y2="1400" stroke="black" stroke-width="1"/>
+    <text x="110" y="1420" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="110" y="1440" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="110" y="1460" font-family="Arial" font-size="14">deleted_at: datetime</text>
+    <!-- Association to Party -->
+    <line x1="300" y1="1100" x2="1700" y2="540" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="1700" cy="540" r="5" fill="black"/>
+
+    <!-- PartyLocation -->
+    <rect x="700" y="1100" width="400" height="340" rx="0" ry="0" fill="#FFF3E0" stroke="black" stroke-width="2"/>
+    <text x="900" y="1125" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">PartyLocation</text>
+    <line x1="700" y1="1140" x2="1100" y2="1140" stroke="black" stroke-width="1"/>
+    <text x="710" y="1160" font-family="Arial" font-size="14" font-weight="bold">PK party_location_id: string</text>
+    <text x="710" y="1180" font-family="Arial" font-size="14" font-weight="bold">FK party_id: string</text>
+    <text x="710" y="1200" font-family="Arial" font-size="14">location_type: string</text>
+    <text x="710" y="1220" font-family="Arial" font-size="14">address_line_1: string</text>
+    <text x="710" y="1240" font-family="Arial" font-size="14">address_line_2: string</text>
+    <text x="710" y="1260" font-family="Arial" font-size="14">address_line_3: string</text>
+    <text x="710" y="1280" font-family="Arial" font-size="14">city: string</text>
+    <text x="710" y="1300" font-family="Arial" font-size="14">state_province: string</text>
+    <text x="710" y="1320" font-family="Arial" font-size="14">postal_code: string</text>
+    <text x="710" y="1340" font-family="Arial" font-size="14">country: string</text>
+    <text x="710" y="1360" font-family="Arial" font-size="14">is_primary: boolean</text>
+    <text x="710" y="1380" font-family="Arial" font-size="14">is_valid: boolean</text>
+    <text x="710" y="1400" font-family="Arial" font-size="14">validation_date: date</text>
+    <text x="710" y="1420" font-family="Arial" font-size="14">validation_method: string</text>
+    <text x="710" y="1440" font-family="Arial" font-size="14">latitude: decimal</text>
+    <text x="710" y="1460" font-family="Arial" font-size="14">longitude: decimal</text>
+    <text x="710" y="1480" font-family="Arial" font-size="14">effective_from: date</text>
+    <text x="710" y="1500" font-family="Arial" font-size="14">effective_to: date</text>
+    <line x1="700" y1="1520" x2="1100" y2="1520" stroke="black" stroke-width="1"/>
+    <text x="710" y="1540" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="710" y="1560" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="710" y="1580" font-family="Arial" font-size="14">deleted_at: datetime</text>
+    <!-- Association to Party -->
+    <line x1="900" y1="1100" x2="1700" y2="540" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="1700" cy="540" r="5" fill="black"/>
+
+    <!-- ContactPoint -->
+    <rect x="1300" y="1100" width="400" height="320" rx="0" ry="0" fill="#FFF3E0" stroke="black" stroke-width="2"/>
+    <text x="1500" y="1125" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">ContactPoint</text>
+    <line x1="1300" y1="1140" x2="1700" y2="1140" stroke="black" stroke-width="1"/>
+    <text x="1310" y="1160" font-family="Arial" font-size="14" font-weight="bold">PK contact_point_id: string</text>
+    <text x="1310" y="1180" font-family="Arial" font-size="14" font-weight="bold">FK party_id: string</text>
+    <text x="1310" y="1200" font-family="Arial" font-size="14">contact_type: string</text>
+    <text x="1310" y="1220" font-family="Arial" font-size="14">contact_value: string</text>
+    <text x="1310" y="1240" font-family="Arial" font-size="14">is_primary: boolean</text>
+    <text x="1310" y="1260" font-family="Arial" font-size="14">purpose: string</text>
+    <text x="1310" y="1280" font-family="Arial" font-size="14">effective_from: date</text>
+    <text x="1310" y="1300" font-family="Arial" font-size="14">effective_to: date</text>
+    <text x="1310" y="1320" font-family="Arial" font-size="14">is_valid: boolean</text>
+    <text x="1310" y="1340" font-family="Arial" font-size="14">validation_date: date</text>
+    <text x="1310" y="1360" font-family="Arial" font-size="14">validation_method: string</text>
+    <line x1="1300" y1="1380" x2="1700" y2="1380" stroke="black" stroke-width="1"/>
+    <text x="1310" y="1400" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="1310" y="1420" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="1310" y="1440" font-family="Arial" font-size="14">deleted_at: datetime</text>
+    <!-- Association to Party -->
+    <line x1="1500" y1="1100" x2="1700" y2="540" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="1700" cy="540" r="5" fill="black"/>
+
+    <!-- PersonProfile -->
+    <rect x="2200" y="1100" width="400" height="260" rx="0" ry="0" fill="#FFF3E0" stroke="black" stroke-width="2"/>
+    <text x="2400" y="1125" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">PersonProfile</text>
+    <line x1="2200" y1="1140" x2="2600" y2="1140" stroke="black" stroke-width="1"/>
+    <text x="2210" y="1160" font-family="Arial" font-size="14" font-weight="bold">PK person_profile_id: string</text>
+    <text x="2210" y="1180" font-family="Arial" font-size="14" font-weight="bold">FK party_id: string</text>
+    <text x="2210" y="1200" font-family="Arial" font-size="14">political_exposure_type: string</text>
+    <text x="2210" y="1220" font-family="Arial" font-size="14">political_exposure_description: string</text>
+    <text x="2210" y="1240" font-family="Arial" font-size="14">education_level: string</text>
+    <text x="2210" y="1260" font-family="Arial" font-size="14">profession: string</text>
+    <text x="2210" y="1280" font-family="Arial" font-size="14">income_range: string</text>
+    <text x="2210" y="1300" font-family="Arial" font-size="14">wealth_source: string</text>
+    <text x="2210" y="1320" font-family="Arial" font-size="14">employment_status: string</text>
+    <text x="2210" y="1340" font-family="Arial" font-size="14">employer_name: string</text>
+    <text x="2210" y="1360" font-family="Arial" font-size="14">job_title: string</text>
+    <text x="2210" y="1380" font-family="Arial" font-size="14">family_size: integer</text>
+    <line x1="2200" y1="1400" x2="2600" y2="1400" stroke="black" stroke-width="1"/>
+    <text x="2210" y="1420" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="2210" y="1440" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="2210" y="1460" font-family="Arial" font-size="14">deleted_at: datetime</text>
+    <!-- Association to Person -->
+    <line x1="2400" y1="1100" x2="600" y2="920" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="600" cy="920" r="5" fill="black"/>
+
+    <!-- PartyDirectoryReference -->
+    <rect x="2900" y="1100" width="400" height="240" rx="0" ry="0" fill="#FFF3E0" stroke="black" stroke-width="2"/>
+    <text x="3100" y="1125" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">PartyDirectoryReference</text>
+    <line x1="2900" y1="1140" x2="3300" y2="1140" stroke="black" stroke-width="1"/>
+    <text x="2910" y="1160" font-family="Arial" font-size="14" font-weight="bold">PK party_directory_reference_id: string</text>
+    <text x="2910" y="1180" font-family="Arial" font-size="14" font-weight="bold">FK party_id: string</text>
+    <text x="2910" y="1200" font-family="Arial" font-size="14">directory_name: string</text>
+    <text x="2910" y="1220" font-family="Arial" font-size="14">directory_entry_id: string</text>
+    <text x="2910" y="1240" font-family="Arial" font-size="14">directory_entry_type: string</text>
+    <text x="2910" y="1260" font-family="Arial" font-size="14">directory_entry_date: date</text>
+    <text x="2910" y="1280" font-family="Arial" font-size="14">directory_valid_period: string</text>
+    <text x="2910" y="1300" font-family="Arial" font-size="14">is_verified: boolean</text>
+    <text x="2910" y="1320" font-family="Arial" font-size="14">verification_date: date</text>
+    <text x="2910" y="1340" font-family="Arial" font-size="14">verification_method: string</text>
+    <line x1="2900" y1="1360" x2="3300" y2="1360" stroke="black" stroke-width="1"/>
+    <text x="2910" y="1380" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="2910" y="1400" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="2910" y="1420" font-family="Arial" font-size="14">deleted_at: datetime</text>
+    <!-- Association to Party -->
+    <line x1="3100" y1="1100" x2="1700" y2="540" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="1700" cy="540" r="5" fill="black"/>
+
+    <!-- Relationship Entities -->
+    <!-- PartyRelationship -->
+    <rect x="900" y="1700" width="400" height="320" rx="0" ry="0" fill="#E8F5E9" stroke="black" stroke-width="2"/>
+    <text x="1100" y="1725" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">PartyRelationship</text>
+    <line x1="900" y1="1740" x2="1300" y2="1740" stroke="black" stroke-width="1"/>
+    <text x="910" y="1760" font-family="Arial" font-size="14" font-weight="bold">PK party_relationship_id: string</text>
+    <text x="910" y="1780" font-family="Arial" font-size="14" font-weight="bold">FK from_party_id: string</text>
+    <text x="910" y="1800" font-family="Arial" font-size="14" font-weight="bold">FK to_party_id: string</text>
+    <text x="910" y="1820" font-family="Arial" font-size="14">relationship_type: string</text>
+    <text x="910" y="1840" font-family="Arial" font-size="14">relationship_validity_period: string</text>
+    <text x="910" y="1860" font-family="Arial" font-size="14">start_date: date</text>
+    <text x="910" y="1880" font-family="Arial" font-size="14">end_date: date</text>
+    <text x="910" y="1900" font-family="Arial" font-size="14">status: string</text>
+    <text x="910" y="1920" font-family="Arial" font-size="14">description: string</text>
+    <text x="910" y="1940" font-family="Arial" font-size="14">priority: integer</text>
+    <text x="910" y="1960" font-family="Arial" font-size="14">is_bidirectional: boolean</text>
+    <line x1="900" y1="1980" x2="1300" y2="1980" stroke="black" stroke-width="1"/>
+    <text x="910" y="2000" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="910" y="2020" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="910" y="2040" font-family="Arial" font-size="14">deleted_at: datetime</text>
+    <!-- Association to Party (from/to) -->
+    <line x1="1100" y1="1700" x2="1700" y2="540" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="1700" cy="540" r="5" fill="black"/>
+
+    <!-- CustomerRelationship -->
+    <rect x="1400" y="2100" width="400" height="260" rx="0" ry="0" fill="#E8F5E9" stroke="black" stroke-width="2"/>
+    <text x="1600" y="2125" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">CustomerRelationship</text>
+    <line x1="1400" y1="2140" x2="1800" y2="2140" stroke="black" stroke-width="1"/>
+    <text x="1410" y="2160" font-family="Arial" font-size="14" font-weight="bold">PK,FK party_relationship_id: string</text>
+    <text x="1410" y="2180" font-family="Arial" font-size="14">customer_type: string</text>
+    <text x="1410" y="2200" font-family="Arial" font-size="14">customer_category: string</text>
+    <text x="1410" y="2220" font-family="Arial" font-size="14">customer_risk_rating: string</text>
+    <text x="1410" y="2240" font-family="Arial" font-size="14">account_manager_id: string</text>
+    <text x="1410" y="2260" font-family="Arial" font-size="14">lifecycle_stage: string</text>
+    <text x="1410" y="2280" font-family="Arial" font-size="14">credit_limit: decimal</text>
+    <text x="1410" y="2300" font-family="Arial" font-size="14">payment_terms: string</text>
+    <text x="1410" y="2320" font-family="Arial" font-size="14">onboarding_date: date</text>
+    <text x="1410" y="2340" font-family="Arial" font-size="14">kyc_status: string</text>
+    <text x="1410" y="2360" font-family="Arial" font-size="14">kyc_review_date: date</text>
+    <!-- Inheritance from PartyRelationship -->
+    <line x1="1600" y1="2100" x2="1100" y2="2020" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Agreement -->
+    <rect x="2200" y="1700" width="400" height="320" rx="0" ry="0" fill="#E8F5E9" stroke="black" stroke-width="2"/>
+    <text x="2400" y="1725" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">Agreement</text>
+    <line x1="2200" y1="1740" x2="2600" y2="1740" stroke="black" stroke-width="1"/>
+    <text x="2210" y="1760" font-family="Arial" font-size="14" font-weight="bold">PK agreement_id: string</text>
+    <text x="2210" y="1780" font-family="Arial" font-size="14">agreement_name: string</text>
+    <text x="2210" y="1800" font-family="Arial" font-size="14">agreement_type: string</text>
+    <text x="2210" y="1820" font-family="Arial" font-size="14">description: string</text>
+    <text x="2210" y="1840" font-family="Arial" font-size="14">effective_date: date</text>
+    <text x="2210" y="1860" font-family="Arial" font-size="14">expiry_date: date</text>
+    <text x="2210" y="1880" font-family="Arial" font-size="14">renewal_date: date</text>
+    <text x="2210" y="1900" font-family="Arial" font-size="14">status: string</text>
+    <text x="2210" y="1920" font-family="Arial" font-size="14">terms: string</text>
+    <text x="2210" y="1940" font-family="Arial" font-size="14">agreement_document_url: string</text>
+    <line x1="2200" y1="1960" x2="2600" y2="1960" stroke="black" stroke-width="1"/>
+    <text x="2210" y="1980" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="2210" y="2000" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="2210" y="2020" font-family="Arial" font-size="14">deleted_at: datetime</text>
+
+    <!-- PartyAgreement -->
+    <rect x="2200" y="2100" width="400" height="220" rx="0" ry="0" fill="#E8F5E9" stroke="black" stroke-width="2"/>
+    <text x="2400" y="2125" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">PartyAgreement</text>
+    <line x1="2200" y1="2140" x2="2600" y2="2140" stroke="black" stroke-width="1"/>
+    <text x="2210" y="2160" font-family="Arial" font-size="14" font-weight="bold">PK party_agreement_id: string</text>
+    <text x="2210" y="2180" font-family="Arial" font-size="14" font-weight="bold">FK party_id: string</text>
+    <text x="2210" y="2200" font-family="Arial" font-size="14" font-weight="bold">FK agreement_id: string</text>
+    <text x="2210" y="2220" font-family="Arial" font-size="14">role: string</text>
+    <text x="2210" y="2240" font-family="Arial" font-size="14">signature_date: date</text>
+    <text x="2210" y="2260" font-family="Arial" font-size="14">status: string</text>
+    <line x1="2200" y1="2280" x2="2600" y2="2280" stroke="black" stroke-width="1"/>
+    <text x="2210" y="2300" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="2210" y="2320" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="2210" y="2340" font-family="Arial" font-size="14">deleted_at: datetime</text>
+    <!-- Association to Party and Agreement -->
+    <line x1="2400" y1="2100" x2="1700" y2="540" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="1700" cy="540" r="5" fill="black"/>
+    <line x1="2400" y1="2100" x2="2400" y2="2020" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="2400" cy="2020" r="5" fill="black"/>
+
+    <!-- MDM-Specific Entities -->
+    <!-- PartyMergeHistory -->
+    <rect x="400" y="2600" width="400" height="220" rx="0" ry="0" fill="#E3F2FD" stroke="black" stroke-width="2"/>
+    <text x="600" y="2625" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">PartyMergeHistory</text>
+    <line x1="400" y1="2640" x2="800" y2="2640" stroke="black" stroke-width="1"/>
+    <text x="410" y="2660" font-family="Arial" font-size="14" font-weight="bold">PK merge_id: string</text>
+    <text x="410" y="2680" font-family="Arial" font-size="14" font-weight="bold">FK survivor_party_id: string</text>
+    <text x="410" y="2700" font-family="Arial" font-size="14" font-weight="bold">FK merged_party_id: string</text>
+    <text x="410" y="2720" font-family="Arial" font-size="14">merge_date: datetime</text>
+    <text x="410" y="2740" font-family="Arial" font-size="14">merge_reason: string</text>
+    <text x="410" y="2760" font-family="Arial" font-size="14">merge_status: string</text>
+    <text x="410" y="2780" font-family="Arial" font-size="14">merge_by: string</text>
+    <text x="410" y="2800" font-family="Arial" font-size="14">field_resolution: jsonb</text>
+    <text x="410" y="2820" font-family="Arial" font-size="14">confidence_score: decimal</text>
+    <line x1="400" y1="2840" x2="800" y2="2840" stroke="black" stroke-width="1"/>
+    <text x="410" y="2860" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="410" y="2880" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="410" y="2900" font-family="Arial" font-size="14">deleted_at: datetime</text>
+    <!-- Association to Party (survivor/merged) -->
+    <line x1="600" y1="2600" x2="1700" y2="540" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="1700" cy="540" r="5" fill="black"/>
+
+    <!-- PartyMatchRule -->
+    <rect x="1400" y="2600" width="400" height="220" rx="0" ry="0" fill="#E3F2FD" stroke="black" stroke-width="2"/>
+    <text x="1600" y="2625" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">PartyMatchRule</text>
+    <line x1="1400" y1="2640" x2="1800" y2="2640" stroke="black" stroke-width="1"/>
+    <text x="1410" y="2660" font-family="Arial" font-size="14" font-weight="bold">PK match_rule_id: string</text>
+    <text x="1410" y="2680" font-family="Arial" font-size="14">rule_name: string</text>
+    <text x="1410" y="2700" font-family="Arial" font-size="14">rule_description: string</text>
+    <text x="1410" y="2720" font-family="Arial" font-size="14">rule_type: string</text>
+    <text x="1410" y="2740" font-family="Arial" font-size="14">rule_definition: jsonb</text>
+    <text x="1410" y="2760" font-family="Arial" font-size="14">threshold: decimal</text>
+    <text x="1410" y="2780" font-family="Arial" font-size="14">priority: integer</text>
+    <text x="1410" y="2800" font-family="Arial" font-size="14">party_type: string</text>
+    <text x="1410" y="2820" font-family="Arial" font-size="14">is_active: boolean</text>
+    <line x1="1400" y1="2840" x2="1800" y2="2840" stroke="black" stroke-width="1"/>
+    <text x="1410" y="2860" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="1410" y="2880" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="1410" y="2900" font-family="Arial" font-size="14">deleted_at: datetime</text>
+
+    <!-- PartyAuditLog -->
+    <rect x="2400" y="2600" width="400" height="220" rx="0" ry="0" fill="#E3F2FD" stroke="black" stroke-width="2"/>
+    <text x="2600" y="2625" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">PartyAuditLog</text>
+    <line x1="2400" y1="2640" x2="2800" y2="2640" stroke="black" stroke-width="1"/>
+    <text x="2410" y="2660" font-family="Arial" font-size="14" font-weight="bold">PK audit_log_id: string</text>
+    <text x="2410" y="2680" font-family="Arial" font-size="14" font-weight="bold">FK party_id: string</text>
+    <text x="2410" y="2700" font-family="Arial" font-size="14">action_type: string</text>
+    <text x="2410" y="2720" font-family="Arial" font-size="14">action_date: datetime</text>
+    <text x="2410" y="2740" font-family="Arial" font-size="14">action_by: string</text>
+    <text x="2410" y="2760" font-family="Arial" font-size="14">details: jsonb</text>
+    <text x="2410" y="2780" font-family="Arial" font-size="14">old_value: jsonb</text>
+    <text x="2410" y="2800" font-family="Arial" font-size="14">new_value: jsonb</text>
+    <line x1="2400" y1="2820" x2="2800" y2="2820" stroke="black" stroke-width="1"/>
+    <text x="2410" y="2840" font-family="Arial" font-size="14">created_at: datetime</text>
+    <text x="2410" y="2860" font-family="Arial" font-size="14">updated_at: datetime</text>
+    <text x="2410" y="2880" font-family="Arial" font-size="14">deleted_at: datetime</text>
+    <!-- Association to Party -->
+    <line x1="2600" y1="2600" x2="1700" y2="540" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="1700" cy="540" r="5" fill="black"/>
+
+</svg> 

@@ -1,0 +1,172 @@
+# Request/response models for Party
+PersonCreate:
+  allOf:
+    - $ref: '#/components/schemas/PartyBase'
+    - $ref: '#/components/schemas/PersonBase'
+  required:
+    - party_name
+    - party_type
+    - first_name
+    - last_name
+
+OrganizationCreate:
+  allOf:
+    - $ref: '#/components/schemas/PartyBase'
+    - $ref: '#/components/schemas/OrganizationBase'
+  required:
+    - party_name
+    - party_type
+    - organization_name
+
+PersonUpdate:
+  allOf:
+    - $ref: '#/components/schemas/PersonBase'
+
+OrganizationUpdate:
+  allOf:
+    - $ref: '#/components/schemas/OrganizationBase'
+
+PartyResponse:
+  type: object
+  properties:
+    party_id:
+      type: string
+      description: Unique identifier for the party
+    party_name:
+      type: string
+      description: The name of the party as it is known in business
+    party_type:
+      type: string
+      enum: [Person, Organization]
+      description: Type of party
+    status:
+      type: string
+      enum: [Active, Inactive, Merged, Deleted]
+      description: Current status of the party
+    data_source_system:
+      type: string
+      description: System where this party data originated
+    data_source_id:
+      type: string
+      description: ID of this party in the source system
+    is_golden_record:
+      type: boolean
+      description: Flag indicating if this is the golden record
+    data_quality_score:
+      type: number
+      format: double
+      description: Calculated data quality score from 0-100
+      nullable: true
+    confidence_score:
+      type: number
+      format: double
+      description: Confidence level in the correctness of this record
+      nullable: true
+    last_verified_date:
+      type: string
+      format: date
+      description: Date when this record was last verified
+      nullable: true
+    party_identification:
+      type: string
+      description: A general identification for the party (e.g., TaxID)
+      nullable: true
+    data_steward_id:
+      type: string
+      description: ID of the data steward responsible for this party
+      nullable: true
+    person_details:
+      $ref: '#/components/schemas/PersonBase'
+      nullable: true
+    organization_details:
+      $ref: '#/components/schemas/OrganizationBase'
+      nullable: true
+    identifications:
+      type: array
+      items:
+        $ref: '#/components/schemas/PartyIdentification'
+      nullable: true
+    locations:
+      type: array
+      items:
+        $ref: '#/components/schemas/PartyLocation'
+      nullable: true
+    contact_points:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContactPoint'
+      nullable: true
+    person_profile:
+      $ref: '#/components/schemas/PersonProfile'
+      nullable: true
+    directory_references:
+      type: array
+      items:
+        $ref: '#/components/schemas/PartyDirectoryReference'
+      nullable: true
+    timestamps:
+      $ref: '#/components/schemas/Timestamp'
+
+# Identification models
+PartyIdentificationCreate:
+  type: object
+  required:
+    - identification_type
+    - identification_value
+  properties:
+    identification_type:
+      type: string
+      description: Type of identification (e.g., Passport, Tax ID, DUNS)
+    identification_value:
+      type: string
+      description: Value of the identification
+    issuing_authority:
+      type: string
+      description: Authority that issued the identification
+      nullable: true
+    issuing_country:
+      type: string
+      description: Country that issued the identification
+      nullable: true
+    issue_date:
+      type: string
+      format: date
+      description: Date when the identification was issued
+      nullable: true
+    expiry_date:
+      type: string
+      format: date
+      description: Date when the identification expires
+      nullable: true
+    is_primary:
+      type: boolean
+      description: Flag indicating if this is the primary identification
+      default: false
+
+PartyIdentification:
+  allOf:
+    - $ref: '#/components/schemas/PartyIdentificationCreate'
+    - type: object
+      properties:
+        identification_id:
+          type: string
+          description: Unique identifier for this identification
+        party_id:
+          type: string
+          description: ID of the party this identification belongs to
+        verification_status:
+          type: string
+          enum: [Verified, Unverified, Failed]
+          description: Status of verification of this identification
+          nullable: true
+        verification_date:
+          type: string
+          format: date
+          description: Date when this identification was verified
+          nullable: true
+        verification_method:
+          type: string
+          description: Method used to verify this identification
+          nullable: true
+        timestamps:
+          $ref: '#/components/schemas/Timestamp' 

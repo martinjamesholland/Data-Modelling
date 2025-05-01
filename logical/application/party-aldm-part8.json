@@ -1,0 +1,169 @@
+{
+  "entities": [
+    {
+      "name": "PartyAuditLog",
+      "description": "Audit log for party data changes in the MDM system",
+      "attributes": [
+        {
+          "name": "audit_id",
+          "dataType": "string",
+          "description": "Unique identifier for this audit record",
+          "isPrimaryKey": true,
+          "nullable": false
+        },
+        {
+          "name": "party_id",
+          "dataType": "string",
+          "description": "ID of the party being audited",
+          "nullable": false,
+          "isForeignKey": true,
+          "referencedEntity": "Party",
+          "referencedAttribute": "party_id"
+        },
+        {
+          "name": "entity_name",
+          "dataType": "string",
+          "description": "Name of the entity being audited",
+          "nullable": false
+        },
+        {
+          "name": "action",
+          "dataType": "string",
+          "description": "Action performed on the entity",
+          "nullable": false,
+          "validValues": ["Create", "Update", "Delete", "Merge", "Split", "Link", "Unlink"]
+        },
+        {
+          "name": "action_date",
+          "dataType": "datetime",
+          "description": "Date and time when the action was performed",
+          "nullable": false
+        },
+        {
+          "name": "user_id",
+          "dataType": "string",
+          "description": "ID of the user who performed the action",
+          "nullable": false
+        },
+        {
+          "name": "ip_address",
+          "dataType": "string",
+          "description": "IP address from which the action was performed",
+          "nullable": true
+        },
+        {
+          "name": "old_values",
+          "dataType": "json",
+          "description": "JSON representation of the old values",
+          "nullable": true
+        },
+        {
+          "name": "new_values",
+          "dataType": "json",
+          "description": "JSON representation of the new values",
+          "nullable": true
+        },
+        {
+          "name": "change_reason",
+          "dataType": "string",
+          "description": "Reason for the change",
+          "nullable": true
+        },
+        {
+          "name": "source_system",
+          "dataType": "string",
+          "description": "System from which the change originated",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "PartyDataQuality",
+      "description": "Data quality metrics for party data in the MDM system",
+      "attributes": [
+        {
+          "name": "data_quality_id",
+          "dataType": "string",
+          "description": "Unique identifier for this data quality record",
+          "isPrimaryKey": true,
+          "nullable": false
+        },
+        {
+          "name": "party_id",
+          "dataType": "string",
+          "description": "ID of the party being assessed",
+          "nullable": false,
+          "isForeignKey": true,
+          "referencedEntity": "Party",
+          "referencedAttribute": "party_id"
+        },
+        {
+          "name": "assessment_date",
+          "dataType": "datetime",
+          "description": "Date and time when the assessment was performed",
+          "nullable": false
+        },
+        {
+          "name": "completeness_score",
+          "dataType": "decimal",
+          "description": "Score for data completeness (0-100)",
+          "nullable": false
+        },
+        {
+          "name": "accuracy_score",
+          "dataType": "decimal",
+          "description": "Score for data accuracy (0-100)",
+          "nullable": false
+        },
+        {
+          "name": "consistency_score",
+          "dataType": "decimal",
+          "description": "Score for data consistency (0-100)",
+          "nullable": false
+        },
+        {
+          "name": "timeliness_score",
+          "dataType": "decimal",
+          "description": "Score for data timeliness (0-100)",
+          "nullable": false
+        },
+        {
+          "name": "uniqueness_score",
+          "dataType": "decimal",
+          "description": "Score for data uniqueness (0-100)",
+          "nullable": false
+        },
+        {
+          "name": "overall_score",
+          "dataType": "decimal",
+          "description": "Overall data quality score (0-100)",
+          "nullable": false
+        },
+        {
+          "name": "issues_found",
+          "dataType": "json",
+          "description": "JSON representation of data quality issues found",
+          "nullable": true
+        },
+        {
+          "name": "improvement_suggestions",
+          "dataType": "json",
+          "description": "JSON representation of suggestions for improvement",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was created",
+          "nullable": false
+        },
+        {
+          "name": "created_by",
+          "dataType": "string",
+          "description": "User or system that created this record",
+          "nullable": false
+        }
+      ]
+    }
+  ]
+} 

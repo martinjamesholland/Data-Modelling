@@ -1,0 +1,203 @@
+{
+  "entities": [
+    {
+      "name": "Organization",
+      "description": "A legal entity, company, or institution",
+      "parentEntity": "Party",
+      "attributes": [
+        {
+          "name": "party_id",
+          "dataType": "string",
+          "description": "Foreign key to the Party entity",
+          "isPrimaryKey": true,
+          "isForeignKey": true,
+          "referencedEntity": "Party",
+          "referencedAttribute": "party_id"
+        },
+        {
+          "name": "organization_name",
+          "dataType": "string",
+          "description": "Legal name of the organization",
+          "nullable": false
+        },
+        {
+          "name": "trading_name",
+          "dataType": "string",
+          "description": "Name under which the organization conducts business",
+          "nullable": true
+        },
+        {
+          "name": "organization_type",
+          "dataType": "string",
+          "description": "Type of organization (e.g., Corporation, LLC, Partnership)",
+          "nullable": true
+        },
+        {
+          "name": "organization_sector",
+          "dataType": "string",
+          "description": "Business sector of the organization",
+          "nullable": true
+        },
+        {
+          "name": "registration_date",
+          "dataType": "date",
+          "description": "Date of registration/incorporation",
+          "nullable": true
+        },
+        {
+          "name": "registration_country",
+          "dataType": "string",
+          "description": "Country of registration",
+          "nullable": true
+        },
+        {
+          "name": "tax_country",
+          "dataType": "string",
+          "description": "Country for tax purposes",
+          "nullable": true
+        },
+        {
+          "name": "organization_structure",
+          "dataType": "string",
+          "description": "Structure of the organization",
+          "nullable": true
+        },
+        {
+          "name": "employee_count",
+          "dataType": "integer",
+          "description": "Number of employees",
+          "nullable": true
+        },
+        {
+          "name": "annual_revenue",
+          "dataType": "decimal",
+          "description": "Annual revenue of the organization",
+          "nullable": true
+        },
+        {
+          "name": "registration_authority",
+          "dataType": "string",
+          "description": "Authority with which the organization is registered",
+          "nullable": true
+        },
+        {
+          "name": "website",
+          "dataType": "string",
+          "description": "Official website of the organization",
+          "nullable": true
+        },
+        {
+          "name": "parent_organization_id",
+          "dataType": "string",
+          "description": "ID of the parent organization if any",
+          "nullable": true,
+          "isForeignKey": true,
+          "referencedEntity": "Organization",
+          "referencedAttribute": "party_id"
+        }
+      ]
+    },
+    {
+      "name": "PartyIdentification",
+      "description": "Documents or codes that uniquely identify a party",
+      "attributes": [
+        {
+          "name": "party_identification_id",
+          "dataType": "string",
+          "description": "Unique identifier for this identification",
+          "isPrimaryKey": true,
+          "nullable": false
+        },
+        {
+          "name": "party_id",
+          "dataType": "string",
+          "description": "Foreign key to the Party entity",
+          "nullable": false,
+          "isForeignKey": true,
+          "referencedEntity": "Party",
+          "referencedAttribute": "party_id"
+        },
+        {
+          "name": "identification_type",
+          "dataType": "string",
+          "description": "Type of identification (e.g., Passport, Tax ID, DUNS)",
+          "nullable": false
+        },
+        {
+          "name": "identification_value",
+          "dataType": "string",
+          "description": "Value of the identification",
+          "nullable": false
+        },
+        {
+          "name": "issuing_authority",
+          "dataType": "string",
+          "description": "Authority that issued the identification",
+          "nullable": true
+        },
+        {
+          "name": "issuing_country",
+          "dataType": "string",
+          "description": "Country that issued the identification",
+          "nullable": true
+        },
+        {
+          "name": "issue_date",
+          "dataType": "date",
+          "description": "Date when the identification was issued",
+          "nullable": true
+        },
+        {
+          "name": "expiry_date",
+          "dataType": "date",
+          "description": "Date when the identification expires",
+          "nullable": true
+        },
+        {
+          "name": "is_primary",
+          "dataType": "boolean",
+          "description": "Flag indicating if this is the primary identification",
+          "nullable": false,
+          "defaultValue": false
+        },
+        {
+          "name": "verification_status",
+          "dataType": "string",
+          "description": "Status of verification of this identification",
+          "nullable": true,
+          "validValues": ["Verified", "Unverified", "Failed"]
+        },
+        {
+          "name": "verification_date",
+          "dataType": "date",
+          "description": "Date when this identification was verified",
+          "nullable": true
+        },
+        {
+          "name": "verification_method",
+          "dataType": "string",
+          "description": "Method used to verify this identification",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was created",
+          "nullable": false
+        },
+        {
+          "name": "updated_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was last updated",
+          "nullable": false
+        },
+        {
+          "name": "deleted_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was marked as deleted",
+          "nullable": true
+        }
+      ]
+    }
+  ]
+} 

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+        </marker>
+    </defs>
+
+    <!-- Title -->
+    <text x="500" y="30" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">Party Application Logical Data Model</text>
+    <text x="500" y="55" font-family="Arial" font-size="12" text-anchor="middle">Version 1.0.0 | 2023-08-10</text>
+    
+    <!-- Party (core entity) -->
+    <rect x="400" y="80" width="200" height="120" rx="5" ry="5" fill="#B3E0FF" stroke="black" stroke-width="2"/>
+    <text x="500" y="100" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Party</text>
+    <line x1="400" y1="110" x2="600" y2="110" stroke="black" stroke-width="1"/>
+    <text x="410" y="130" font-family="Arial" font-size="12">+ party_id (PK)</text>
+    <text x="410" y="145" font-family="Arial" font-size="12">+ party_name</text>
+    <text x="410" y="160" font-family="Arial" font-size="12">+ party_type</text>
+    <text x="410" y="175" font-family="Arial" font-size="12">+ status</text>
+    <text x="410" y="190" font-family="Arial" font-size="12">+ created_at, updated_at</text>
+
+    <!-- Person inherits from Party -->
+    <rect x="100" y="250" width="200" height="120" rx="5" ry="5" fill="#B3E0FF" stroke="black" stroke-width="2"/>
+    <text x="200" y="270" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Person</text>
+    <line x1="100" y1="280" x2="300" y2="280" stroke="black" stroke-width="1"/>
+    <text x="110" y="300" font-family="Arial" font-size="12">+ party_id (PK, FK)</text>
+    <text x="110" y="315" font-family="Arial" font-size="12">+ first_name</text>
+    <text x="110" y="330" font-family="Arial" font-size="12">+ last_name</text>
+    <text x="110" y="345" font-family="Arial" font-size="12">+ birth_date</text>
+    <text x="110" y="360" font-family="Arial" font-size="12">+ gender</text>
+    <!-- Inheritance from Party to Person -->
+    <line x1="200" y1="250" x2="400" y2="140" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <!-- Organization inherits from Party -->
+    <rect x="700" y="250" width="200" height="120" rx="5" ry="5" fill="#B3E0FF" stroke="black" stroke-width="2"/>
+    <text x="800" y="270" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Organization</text>
+    <line x1="700" y1="280" x2="900" y2="280" stroke="black" stroke-width="1"/>
+    <text x="710" y="300" font-family="Arial" font-size="12">+ party_id (PK, FK)</text>
+    <text x="710" y="315" font-family="Arial" font-size="12">+ organization_name</text>
+    <text x="710" y="330" font-family="Arial" font-size="12">+ trading_name</text>
+    <text x="710" y="345" font-family="Arial" font-size="12">+ organization_type</text>
+    <text x="710" y="360" font-family="Arial" font-size="12">+ registration_date</text>
+    <!-- Inheritance from Party to Organization -->
+    <line x1="800" y1="250" x2="600" y2="140" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- PartyIdentification -->
+    <rect x="400" y="250" width="200" height="120" rx="5" ry="5" fill="#B3E0FF" stroke="black" stroke-width="2"/>
+    <text x="500" y="270" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PartyIdentification</text>
+    <line x1="400" y1="280" x2="600" y2="280" stroke="black" stroke-width="1"/>
+    <text x="410" y="300" font-family="Arial" font-size="12">+ party_identification_id (PK)</text>
+    <text x="410" y="315" font-family="Arial" font-size="12">+ party_id (FK)</text>
+    <text x="410" y="330" font-family="Arial" font-size="12">+ identification_type</text>
+    <text x="410" y="345" font-family="Arial" font-size="12">+ identification_value</text>
+    <text x="410" y="360" font-family="Arial" font-size="12">+ created_at, updated_at</text>
+    <!-- Relationship from Party to PartyIdentification -->
+    <line x1="500" y1="250" x2="500" y2="200" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="500" cy="200" r="5" fill="black"/>
+    <text x="515" y="230" font-family="Arial" font-size="12">1</text>
+    <text x="515" y="250" font-family="Arial" font-size="12">*</text>
+
+    <!-- PartyLocation -->
+    <rect x="100" y="440" width="200" height="120" rx="5" ry="5" fill="#B3E0FF" stroke="black" stroke-width="2"/>
+    <text x="200" y="460" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PartyLocation</text>
+    <line x1="100" y1="470" x2="300" y2="470" stroke="black" stroke-width="1"/>
+    <text x="110" y="490" font-family="Arial" font-size="12">+ location_id (PK)</text>
+    <text x="110" y="505" font-family="Arial" font-size="12">+ party_id (FK)</text>
+    <text x="110" y="520" font-family="Arial" font-size="12">+ location_type</text>
+    <text x="110" y="535" font-family="Arial" font-size="12">+ address_line_1</text>
+    <text x="110" y="550" font-family="Arial" font-size="12">+ created_at, updated_at</text>
+    <!-- Relationship from Party to PartyLocation -->
+    <line x1="200" y1="440" x2="450" y2="200" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="450" cy="200" r="5" fill="black"/>
+    <text x="320" y="300" font-family="Arial" font-size="12">1</text>
+    <text x="210" y="430" font-family="Arial" font-size="12">*</text>
+
+    <!-- ContactPoint -->
+    <rect x="700" y="440" width="200" height="120" rx="5" ry="5" fill="#B3E0FF" stroke="black" stroke-width="2"/>
+    <text x="800" y="460" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">ContactPoint</text>
+    <line x1="700" y1="470" x2="900" y2="470" stroke="black" stroke-width="1"/>
+    <text x="710" y="490" font-family="Arial" font-size="12">+ contact_id (PK)</text>
+    <text x="710" y="505" font-family="Arial" font-size="12">+ party_id (FK)</text>
+    <text x="710" y="520" font-family="Arial" font-size="12">+ contact_type</text>
+    <text x="710" y="535" font-family="Arial" font-size="12">+ contact_value</text>
+    <text x="710" y="550" font-family="Arial" font-size="12">+ created_at, updated_at</text>
+    <!-- Relationship from Party to ContactPoint -->
+    <line x1="800" y1="440" x2="550" y2="200" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="550" cy="200" r="5" fill="black"/>
+    <text x="680" y="300" font-family="Arial" font-size="12">1</text>
+    <text x="790" y="430" font-family="Arial" font-size="12">*</text>
+
+    <!-- PartyRelationship -->
+    <rect x="400" y="440" width="200" height="120" rx="5" ry="5" fill="#B3E0FF" stroke="black" stroke-width="2"/>
+    <text x="500" y="460" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PartyRelationship</text>
+    <line x1="400" y1="470" x2="600" y2="470" stroke="black" stroke-width="1"/>
+    <text x="410" y="490" font-family="Arial" font-size="12">+ relationship_id (PK)</text>
+    <text x="410" y="505" font-family="Arial" font-size="12">+ from_party_id (FK)</text>
+    <text x="410" y="520" font-family="Arial" font-size="12">+ to_party_id (FK)</text>
+    <text x="410" y="535" font-family="Arial" font-size="12">+ relationship_type</text>
+    <text x="410" y="550" font-family="Arial" font-size="12">+ created_at, updated_at</text>
+    <!-- Relationship from Party to PartyRelationship (from) -->
+    <line x1="470" y1="440" x2="480" y2="200" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="480" cy="200" r="5" fill="black"/>
+    <text x="465" y="330" font-family="Arial" font-size="12">1</text>
+    <text x="465" y="430" font-family="Arial" font-size="12">*</text>
+    <!-- Relationship from Party to PartyRelationship (to) -->
+    <line x1="530" y1="440" x2="520" y2="200" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="520" cy="200" r="5" fill="black"/>
+    <text x="535" y="330" font-family="Arial" font-size="12">1</text>
+    <text x="535" y="430" font-family="Arial" font-size="12">*</text>
+
+    <!-- CustomerRelationship inherits from PartyRelationship -->
+    <rect x="400" y="630" width="200" height="120" rx="5" ry="5" fill="#B3E0FF" stroke="black" stroke-width="2"/>
+    <text x="500" y="650" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">CustomerRelationship</text>
+    <line x1="400" y1="660" x2="600" y2="660" stroke="black" stroke-width="1"/>
+    <text x="410" y="680" font-family="Arial" font-size="12">+ relationship_id (PK, FK)</text>
+    <text x="410" y="695" font-family="Arial" font-size="12">+ customer_type</text>
+    <text x="410" y="710" font-family="Arial" font-size="12">+ customer_category</text>
+    <text x="410" y="725" font-family="Arial" font-size="12">+ customer_risk_rating</text>
+    <text x="410" y="740" font-family="Arial" font-size="12">+ created_at, updated_at</text>
+    <!-- Inheritance from PartyRelationship to CustomerRelationship -->
+    <line x1="500" y1="630" x2="500" y2="560" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- PersonProfile -->
+    <rect x="100" y="630" width="200" height="120" rx="5" ry="5" fill="#B3E0FF" stroke="black" stroke-width="2"/>
+    <text x="200" y="650" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PersonProfile</text>
+    <line x1="100" y1="660" x2="300" y2="660" stroke="black" stroke-width="1"/>
+    <text x="110" y="680" font-family="Arial" font-size="12">+ person_profile_id (PK)</text>
+    <text x="110" y="695" font-family="Arial" font-size="12">+ party_id (FK)</text>
+    <text x="110" y="710" font-family="Arial" font-size="12">+ political_exposure_type</text>
+    <text x="110" y="725" font-family="Arial" font-size="12">+ education_level</text>
+    <text x="110" y="740" font-family="Arial" font-size="12">+ created_at, updated_at</text>
+    <!-- Relationship from Person to PersonProfile -->
+    <line x1="200" y1="630" x2="200" y2="370" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="200" cy="370" r="5" fill="black"/>
+    <text x="185" y="390" font-family="Arial" font-size="12">1</text>
+    <text x="185" y="620" font-family="Arial" font-size="12">0..1</text>
+
+    <!-- PartyMergeHistory (MDM-specific) -->
+    <rect x="700" y="630" width="200" height="120" rx="5" ry="5" fill="#B3E0FF" stroke="black" stroke-width="2"/>
+    <text x="800" y="650" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PartyMergeHistory</text>
+    <line x1="700" y1="660" x2="900" y2="660" stroke="black" stroke-width="1"/>
+    <text x="710" y="680" font-family="Arial" font-size="12">+ merge_id (PK)</text>
+    <text x="710" y="695" font-family="Arial" font-size="12">+ survivor_party_id (FK)</text>
+    <text x="710" y="710" font-family="Arial" font-size="12">+ merged_party_id (FK)</text>
+    <text x="710" y="725" font-family="Arial" font-size="12">+ merge_date</text>
+    <text x="710" y="740" font-family="Arial" font-size="12">+ created_at, updated_at</text>
+    <!-- Relationship from Party to PartyMergeHistory -->
+    <line x1="800" y1="630" x2="570" y2="200" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="570" cy="200" r="5" fill="black"/>
+    <text x="650" y="400" font-family="Arial" font-size="12">1</text>
+    <text x="780" y="620" font-family="Arial" font-size="12">*</text>
+
+    <!-- Legend -->
+    <rect x="800" y="20" width="180" height="140" rx="5" ry="5" fill="white" stroke="black" stroke-width="1"/>
+    <text x="890" y="40" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Legend</text>
+    <rect x="820" y="50" width="30" height="20" fill="#B3E0FF" stroke="black" stroke-width="1"/>
+    <text x="860" y="65" font-family="Arial" font-size="12" text-anchor="start">Entity</text>
+    <line x1="820" y1="80" x2="850" y2="80" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="860" y="85" font-family="Arial" font-size="12" text-anchor="start">Relationship</text>
+    <line x1="820" y1="100" x2="850" y2="100" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="860" y="105" font-family="Arial" font-size="12" text-anchor="start">Inheritance</text>
+    <text x="820" y="125" font-family="Arial" font-size="12" text-anchor="start">PK = Primary Key</text>
+    <text x="820" y="140" font-family="Arial" font-size="12" text-anchor="start">FK = Foreign Key</text>
+    <text x="820" y="155" font-family="Arial" font-size="12" text-anchor="start">* = Many (0 to many)</text>
+</svg> 

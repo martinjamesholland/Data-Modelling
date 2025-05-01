@@ -1,0 +1,549 @@
+{
+  "title": "Party Physical Data Model - MongoDB Schema",
+  "version": "1.0.0",
+  "description": "MongoDB schema for Party domain in the Master Data Management system",
+  "collections": [
+    {
+      "name": "parties",
+      "description": "Collection storing party data (both persons and organizations)",
+      "validator": {
+        "$jsonSchema": {
+          "bsonType": "object",
+          "required": ["party_id", "party_name", "party_type", "status", "created_at", "created_by", "updated_at", "updated_by"],
+          "properties": {
+            "party_id": {
+              "bsonType": "string",
+              "description": "Unique identifier for the party"
+            },
+            "party_name": {
+              "bsonType": "string",
+              "description": "The name of the party as it is known in business"
+            },
+            "party_type": {
+              "enum": ["Person", "Organization"],
+              "description": "Type of party (Person or Organization)"
+            },
+            "party_date_time": {
+              "bsonType": "date",
+              "description": "Date and time when the party record was created"
+            },
+            "status": {
+              "enum": ["Active", "Inactive", "Merged", "Deleted"],
+              "description": "Current status of the party"
+            },
+            "data_source_system": {
+              "bsonType": "string",
+              "description": "System where this party data originated"
+            },
+            "data_source_id": {
+              "bsonType": "string",
+              "description": "ID of this party in the source system"
+            },
+            "is_golden_record": {
+              "bsonType": "bool",
+              "description": "Flag indicating if this is the golden record",
+              "default": false
+            },
+            "data_quality_score": {
+              "bsonType": "double",
+              "description": "Calculated data quality score from 0-100"
+            },
+            "confidence_score": {
+              "bsonType": "double",
+              "description": "Confidence level in the correctness of this record"
+            },
+            "last_verified_date": {
+              "bsonType": "date",
+              "description": "Date when this record was last verified"
+            },
+            "party_identification": {
+              "bsonType": "string",
+              "description": "A general identification for the party (e.g., TaxID)"
+            },
+            "data_steward_id": {
+              "bsonType": "string",
+              "description": "ID of the data steward responsible for this party"
+            },
+            "person_details": {
+              "bsonType": "object",
+              "description": "Person-specific details (only for party_type = Person)",
+              "properties": {
+                "first_name": {
+                  "bsonType": "string",
+                  "description": "First name of the person"
+                },
+                "middle_name": {
+                  "bsonType": "string",
+                  "description": "Middle name of the person"
+                },
+                "last_name": {
+                  "bsonType": "string",
+                  "description": "Last name of the person"
+                },
+                "given_name": {
+                  "bsonType": "string",
+                  "description": "Given name of the person (if different from first name)"
+                },
+                "family_name": {
+                  "bsonType": "string",
+                  "description": "Family name of the person (if different from last name)"
+                },
+                "birth_date": {
+                  "bsonType": "date",
+                  "description": "Date of birth"
+                },
+                "gender": {
+                  "bsonType": "string",
+                  "description": "Gender of the person"
+                },
+                "marital_status": {
+                  "bsonType": "string",
+                  "description": "Marital status of the person"
+                },
+                "nationality": {
+                  "bsonType": "string",
+                  "description": "Nationality of the person"
+                },
+                "residence_country": {
+                  "bsonType": "string",
+                  "description": "Country of residence"
+                },
+                "ethnicity": {
+                  "bsonType": "string",
+                  "description": "Ethnicity of the person"
+                },
+                "religion": {
+                  "bsonType": "string",
+                  "description": "Religion of the person"
+                },
+                "preferred_language": {
+                  "bsonType": "string",
+                  "description": "Preferred language for communication"
+                },
+                "residential_status": {
+                  "bsonType": "string",
+                  "description": "Residential status in the country of residence"
+                }
+              }
+            },
+            "organization_details": {
+              "bsonType": "object",
+              "description": "Organization-specific details (only for party_type = Organization)",
+              "properties": {
+                "organization_name": {
+                  "bsonType": "string",
+                  "description": "Legal name of the organization"
+                },
+                "trading_name": {
+                  "bsonType": "string",
+                  "description": "Name under which the organization conducts business"
+                },
+                "organization_type": {
+                  "bsonType": "string",
+                  "description": "Type of organization (e.g., Corporation, LLC, Partnership)"
+                },
+                "organization_sector": {
+                  "bsonType": "string",
+                  "description": "Business sector of the organization"
+                },
+                "registration_date": {
+                  "bsonType": "date",
+                  "description": "Date of registration/incorporation"
+                },
+                "registration_country": {
+                  "bsonType": "string",
+                  "description": "Country of registration"
+                },
+                "tax_country": {
+                  "bsonType": "string",
+                  "description": "Country for tax purposes"
+                },
+                "organization_structure": {
+                  "bsonType": "string",
+                  "description": "Structure of the organization"
+                },
+                "employee_count": {
+                  "bsonType": "int",
+                  "description": "Number of employees"
+                },
+                "annual_revenue": {
+                  "bsonType": "double",
+                  "description": "Annual revenue of the organization"
+                },
+                "registration_authority": {
+                  "bsonType": "string",
+                  "description": "Authority with which the organization is registered"
+                },
+                "website": {
+                  "bsonType": "string",
+                  "description": "Official website of the organization"
+                },
+                "parent_organization_id": {
+                  "bsonType": "string",
+                  "description": "ID of the parent organization if any"
+                }
+              }
+            },
+            "identifications": {
+              "bsonType": "array",
+              "description": "Array of identifications for this party",
+              "items": {
+                "bsonType": "object",
+                "required": ["identification_type", "identification_value"],
+                "properties": {
+                  "identification_id": {
+                    "bsonType": "string",
+                    "description": "Unique identifier for this identification"
+                  },
+                  "identification_type": {
+                    "bsonType": "string",
+                    "description": "Type of identification (e.g., Passport, Tax ID, DUNS)"
+                  },
+                  "identification_value": {
+                    "bsonType": "string",
+                    "description": "Value of the identification"
+                  },
+                  "issuing_authority": {
+                    "bsonType": "string",
+                    "description": "Authority that issued the identification"
+                  },
+                  "issuing_country": {
+                    "bsonType": "string",
+                    "description": "Country that issued the identification"
+                  },
+                  "issue_date": {
+                    "bsonType": "date",
+                    "description": "Date when the identification was issued"
+                  },
+                  "expiry_date": {
+                    "bsonType": "date",
+                    "description": "Date when the identification expires"
+                  },
+                  "is_primary": {
+                    "bsonType": "bool",
+                    "description": "Flag indicating if this is the primary identification",
+                    "default": false
+                  },
+                  "verification_status": {
+                    "enum": ["Verified", "Unverified", "Failed"],
+                    "description": "Status of verification of this identification"
+                  },
+                  "verification_date": {
+                    "bsonType": "date",
+                    "description": "Date when this identification was verified"
+                  },
+                  "verification_method": {
+                    "bsonType": "string",
+                    "description": "Method used to verify this identification"
+                  }
+                }
+              }
+            },
+            "locations": {
+              "bsonType": "array",
+              "description": "Array of locations for this party",
+              "items": {
+                "bsonType": "object",
+                "required": ["location_type", "address_line_1", "city", "country"],
+                "properties": {
+                  "location_id": {
+                    "bsonType": "string",
+                    "description": "Unique identifier for this location"
+                  },
+                  "location_type": {
+                    "bsonType": "string",
+                    "description": "Type of location (e.g., Registered, Business, Residential)"
+                  },
+                  "address_line_1": {
+                    "bsonType": "string",
+                    "description": "First line of the address"
+                  },
+                  "address_line_2": {
+                    "bsonType": "string",
+                    "description": "Second line of the address"
+                  },
+                  "address_line_3": {
+                    "bsonType": "string",
+                    "description": "Third line of the address"
+                  },
+                  "city": {
+                    "bsonType": "string",
+                    "description": "City of the address"
+                  },
+                  "state_province": {
+                    "bsonType": "string",
+                    "description": "State or province of the address"
+                  },
+                  "postal_code": {
+                    "bsonType": "string",
+                    "description": "Postal or ZIP code of the address"
+                  },
+                  "country": {
+                    "bsonType": "string",
+                    "description": "Country of the address"
+                  },
+                  "is_primary": {
+                    "bsonType": "bool",
+                    "description": "Flag indicating if this is the primary location",
+                    "default": false
+                  },
+                  "is_valid": {
+                    "bsonType": "bool",
+                    "description": "Flag indicating if this address has been validated",
+                    "default": false
+                  },
+                  "validation_date": {
+                    "bsonType": "date",
+                    "description": "Date when this address was validated"
+                  },
+                  "validation_method": {
+                    "bsonType": "string",
+                    "description": "Method used to validate this address"
+                  },
+                  "latitude": {
+                    "bsonType": "double",
+                    "description": "Latitude coordinate of the address"
+                  },
+                  "longitude": {
+                    "bsonType": "double",
+                    "description": "Longitude coordinate of the address"
+                  },
+                  "effective_from": {
+                    "bsonType": "date",
+                    "description": "Date from which this address is effective"
+                  },
+                  "effective_to": {
+                    "bsonType": "date",
+                    "description": "Date until which this address is effective"
+                  }
+                }
+              }
+            },
+            "contact_points": {
+              "bsonType": "array",
+              "description": "Array of contact points for this party",
+              "items": {
+                "bsonType": "object",
+                "required": ["contact_type", "contact_value"],
+                "properties": {
+                  "contact_id": {
+                    "bsonType": "string",
+                    "description": "Unique identifier for this contact point"
+                  },
+                  "contact_type": {
+                    "bsonType": "string",
+                    "description": "Type of contact (e.g., Email, Phone, PostalAddress, SocialNetwork)"
+                  },
+                  "contact_value": {
+                    "bsonType": "string",
+                    "description": "Value of the contact point (e.g., email address, phone number)"
+                  },
+                  "is_primary": {
+                    "bsonType": "bool",
+                    "description": "Flag indicating if this is the primary contact point of its type",
+                    "default": false
+                  },
+                  "is_valid": {
+                    "bsonType": "bool",
+                    "description": "Flag indicating if this contact point has been validated",
+                    "default": false
+                  },
+                  "validation_date": {
+                    "bsonType": "date",
+                    "description": "Date when this contact point was validated"
+                  },
+                  "validation_method": {
+                    "bsonType": "string",
+                    "description": "Method used to validate this contact point"
+                  },
+                  "purpose": {
+                    "bsonType": "string",
+                    "description": "Purpose of this contact point (e.g., Business, Personal, Billing)"
+                  },
+                  "effective_from": {
+                    "bsonType": "date",
+                    "description": "Date from which this contact point is effective"
+                  },
+                  "effective_to": {
+                    "bsonType": "date",
+                    "description": "Date until which this contact point is effective"
+                  }
+                }
+              }
+            },
+            "person_profile": {
+              "bsonType": "object",
+              "description": "Profile information for a person (only for party_type = Person)",
+              "properties": {
+                "political_exposure_type": {
+                  "enum": ["Foreign", "Domestic", "None"],
+                  "description": "Type of political exposure"
+                },
+                "political_exposure_description": {
+                  "bsonType": "string",
+                  "description": "Description of the political exposure"
+                },
+                "education_level": {
+                  "bsonType": "string",
+                  "description": "Highest level of education"
+                },
+                "profession": {
+                  "bsonType": "string",
+                  "description": "Current profession"
+                },
+                "income_range": {
+                  "bsonType": "string",
+                  "description": "Income range"
+                },
+                "wealth_source": {
+                  "bsonType": "string",
+                  "description": "Source of wealth"
+                },
+                "employment_status": {
+                  "bsonType": "string",
+                  "description": "Current employment status"
+                },
+                "employer_name": {
+                  "bsonType": "string",
+                  "description": "Name of the employer"
+                },
+                "job_title": {
+                  "bsonType": "string",
+                  "description": "Job title"
+                },
+                "family_size": {
+                  "bsonType": "int",
+                  "description": "Number of family members"
+                }
+              }
+            },
+            "directory_references": {
+              "bsonType": "array",
+              "description": "Array of references to external directories",
+              "items": {
+                "bsonType": "object",
+                "required": ["directory_name", "directory_entry_id"],
+                "properties": {
+                  "reference_id": {
+                    "bsonType": "string",
+                    "description": "Unique identifier for this reference"
+                  },
+                  "directory_name": {
+                    "bsonType": "string",
+                    "description": "Name of the external directory"
+                  },
+                  "directory_entry_id": {
+                    "bsonType": "string",
+                    "description": "ID of the party in the external directory"
+                  },
+                  "directory_entry_type": {
+                    "bsonType": "string",
+                    "description": "Type of entry in the directory"
+                  },
+                  "directory_entry_date": {
+                    "bsonType": "date",
+                    "description": "Date of the entry in the directory"
+                  },
+                  "directory_valid_period": {
+                    "bsonType": "string",
+                    "description": "Period for which the directory entry is valid"
+                  },
+                  "is_verified": {
+                    "bsonType": "bool",
+                    "description": "Flag indicating if this reference has been verified",
+                    "default": false
+                  },
+                  "verification_date": {
+                    "bsonType": "date",
+                    "description": "Date when this reference was verified"
+                  },
+                  "verification_method": {
+                    "bsonType": "string",
+                    "description": "Method used to verify this reference"
+                  }
+                }
+              }
+            },
+            "created_at": {
+              "bsonType": "date",
+              "description": "Date and time when this record was created"
+            },
+            "created_by": {
+              "bsonType": "string",
+              "description": "User who created this record"
+            },
+            "updated_at": {
+              "bsonType": "date",
+              "description": "Date and time when this record was last updated"
+            },
+            "updated_by": {
+              "bsonType": "string",
+              "description": "User who last updated this record"
+            },
+            "deleted_at": {
+              "bsonType": "date",
+              "description": "Date and time when this record was marked as deleted"
+            }
+          }
+        }
+      },
+      "indexes": [
+        {
+          "name": "party_id_idx",
+          "key": { "party_id": 1 },
+          "unique": true
+        },
+        {
+          "name": "party_name_idx",
+          "key": { "party_name": 1 }
+        },
+        {
+          "name": "party_type_idx",
+          "key": { "party_type": 1 }
+        },
+        {
+          "name": "status_idx",
+          "key": { "status": 1 }
+        },
+        {
+          "name": "golden_record_idx",
+          "key": { "is_golden_record": 1 }
+        },
+        {
+          "name": "person_name_idx",
+          "key": { 
+            "person_details.first_name": 1, 
+            "person_details.last_name": 1 
+          },
+          "partialFilterExpression": { "party_type": "Person" }
+        },
+        {
+          "name": "organization_name_idx",
+          "key": { "organization_details.organization_name": 1 },
+          "partialFilterExpression": { "party_type": "Organization" }
+        },
+        {
+          "name": "identifications_idx",
+          "key": { 
+            "identifications.identification_type": 1, 
+            "identifications.identification_value": 1 
+          }
+        },
+        {
+          "name": "contact_points_idx",
+          "key": { 
+            "contact_points.contact_type": 1, 
+            "contact_points.contact_value": 1 
+          }
+        },
+        {
+          "name": "data_source_idx",
+          "key": { 
+            "data_source_system": 1, 
+            "data_source_id": 1 
+          }
+        }
+      ]
+    }
+  ]
+} 

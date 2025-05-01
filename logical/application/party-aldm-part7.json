@@ -1,0 +1,181 @@
+{
+  "entities": [
+    {
+      "name": "PartyMergeHistory",
+      "description": "History of party merges in the MDM system",
+      "attributes": [
+        {
+          "name": "party_merge_id",
+          "dataType": "string",
+          "description": "Unique identifier for this merge record",
+          "isPrimaryKey": true,
+          "nullable": false
+        },
+        {
+          "name": "survivor_party_id",
+          "dataType": "string",
+          "description": "ID of the surviving party",
+          "nullable": false,
+          "isForeignKey": true,
+          "referencedEntity": "Party",
+          "referencedAttribute": "party_id"
+        },
+        {
+          "name": "merged_party_id",
+          "dataType": "string",
+          "description": "ID of the merged party",
+          "nullable": false
+        },
+        {
+          "name": "merge_date",
+          "dataType": "datetime",
+          "description": "Date and time when the merge occurred",
+          "nullable": false
+        },
+        {
+          "name": "merge_reason",
+          "dataType": "string",
+          "description": "Reason for the merge",
+          "nullable": true
+        },
+        {
+          "name": "merge_score",
+          "dataType": "decimal",
+          "description": "Confidence score for the merge",
+          "nullable": true
+        },
+        {
+          "name": "merge_rule",
+          "dataType": "string",
+          "description": "Rule used for the merge",
+          "nullable": true
+        },
+        {
+          "name": "approved_by",
+          "dataType": "string",
+          "description": "User who approved the merge",
+          "nullable": true
+        },
+        {
+          "name": "approval_date",
+          "dataType": "datetime",
+          "description": "Date and time when the merge was approved",
+          "nullable": true
+        },
+        {
+          "name": "merged_record_json",
+          "dataType": "json",
+          "description": "JSON representation of the merged record",
+          "nullable": true
+        },
+        {
+          "name": "status",
+          "dataType": "string",
+          "description": "Current status of the merge",
+          "nullable": false,
+          "validValues": ["Pending", "Approved", "Rejected", "Undone"]
+        },
+        {
+          "name": "created_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was created",
+          "nullable": false
+        },
+        {
+          "name": "created_by",
+          "dataType": "string",
+          "description": "User who created this record",
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "PartyMatchRule",
+      "description": "Rules for matching parties in the MDM system",
+      "attributes": [
+        {
+          "name": "match_rule_id",
+          "dataType": "string",
+          "description": "Unique identifier for this match rule",
+          "isPrimaryKey": true,
+          "nullable": false
+        },
+        {
+          "name": "rule_name",
+          "dataType": "string",
+          "description": "Name of the match rule",
+          "nullable": false
+        },
+        {
+          "name": "rule_description",
+          "dataType": "string",
+          "description": "Description of the match rule",
+          "nullable": true
+        },
+        {
+          "name": "rule_type",
+          "dataType": "string",
+          "description": "Type of match rule",
+          "nullable": false,
+          "validValues": ["Exact", "Fuzzy", "Deterministic", "Probabilistic", "Hybrid"]
+        },
+        {
+          "name": "rule_definition",
+          "dataType": "json",
+          "description": "Definition of the match rule in JSON format",
+          "nullable": false
+        },
+        {
+          "name": "threshold",
+          "dataType": "decimal",
+          "description": "Threshold for considering a match",
+          "nullable": false
+        },
+        {
+          "name": "priority",
+          "dataType": "integer",
+          "description": "Priority of this rule in the matching hierarchy",
+          "nullable": false
+        },
+        {
+          "name": "party_type",
+          "dataType": "string",
+          "description": "Type of party this rule applies to",
+          "nullable": true,
+          "validValues": ["Person", "Organization", "Both"]
+        },
+        {
+          "name": "is_active",
+          "dataType": "boolean",
+          "description": "Flag indicating if this rule is active",
+          "nullable": false,
+          "defaultValue": true
+        },
+        {
+          "name": "created_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was created",
+          "nullable": false
+        },
+        {
+          "name": "updated_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was last updated",
+          "nullable": false
+        },
+        {
+          "name": "created_by",
+          "dataType": "string",
+          "description": "User who created this rule",
+          "nullable": false
+        },
+        {
+          "name": "updated_by",
+          "dataType": "string",
+          "description": "User who last updated this rule",
+          "nullable": false
+        }
+      ]
+    }
+  ]
+} 

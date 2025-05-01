@@ -1,0 +1,194 @@
+{
+  "entities": [
+    {
+      "name": "PersonProfile",
+      "description": "Additional information about a person",
+      "attributes": [
+        {
+          "name": "person_profile_id",
+          "dataType": "string",
+          "description": "Unique identifier for this profile",
+          "isPrimaryKey": true,
+          "nullable": false
+        },
+        {
+          "name": "party_id",
+          "dataType": "string",
+          "description": "Foreign key to the Party entity",
+          "nullable": false,
+          "isForeignKey": true,
+          "referencedEntity": "Person",
+          "referencedAttribute": "party_id"
+        },
+        {
+          "name": "political_exposure_type",
+          "dataType": "string",
+          "description": "Type of political exposure",
+          "nullable": true,
+          "validValues": ["Foreign", "Domestic", "None"]
+        },
+        {
+          "name": "political_exposure_description",
+          "dataType": "string",
+          "description": "Description of the political exposure",
+          "nullable": true
+        },
+        {
+          "name": "education_level",
+          "dataType": "string",
+          "description": "Highest level of education",
+          "nullable": true
+        },
+        {
+          "name": "profession",
+          "dataType": "string",
+          "description": "Current profession",
+          "nullable": true
+        },
+        {
+          "name": "income_range",
+          "dataType": "string",
+          "description": "Income range",
+          "nullable": true
+        },
+        {
+          "name": "wealth_source",
+          "dataType": "string",
+          "description": "Source of wealth",
+          "nullable": true
+        },
+        {
+          "name": "employment_status",
+          "dataType": "string",
+          "description": "Current employment status",
+          "nullable": true
+        },
+        {
+          "name": "employer_name",
+          "dataType": "string",
+          "description": "Name of the employer",
+          "nullable": true
+        },
+        {
+          "name": "job_title",
+          "dataType": "string",
+          "description": "Job title",
+          "nullable": true
+        },
+        {
+          "name": "family_size",
+          "dataType": "integer",
+          "description": "Number of family members",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was created",
+          "nullable": false
+        },
+        {
+          "name": "updated_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was last updated",
+          "nullable": false
+        },
+        {
+          "name": "deleted_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was marked as deleted",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "PartyDirectoryReference",
+      "description": "Reference to a party in an external directory",
+      "attributes": [
+        {
+          "name": "party_directory_reference_id",
+          "dataType": "string",
+          "description": "Unique identifier for this reference",
+          "isPrimaryKey": true,
+          "nullable": false
+        },
+        {
+          "name": "party_id",
+          "dataType": "string",
+          "description": "Foreign key to the Party entity",
+          "nullable": false,
+          "isForeignKey": true,
+          "referencedEntity": "Party",
+          "referencedAttribute": "party_id"
+        },
+        {
+          "name": "directory_name",
+          "dataType": "string",
+          "description": "Name of the external directory",
+          "nullable": false
+        },
+        {
+          "name": "directory_entry_id",
+          "dataType": "string",
+          "description": "ID of the party in the external directory",
+          "nullable": false
+        },
+        {
+          "name": "directory_entry_type",
+          "dataType": "string",
+          "description": "Type of entry in the directory",
+          "nullable": true
+        },
+        {
+          "name": "directory_entry_date",
+          "dataType": "date",
+          "description": "Date of the entry in the directory",
+          "nullable": true
+        },
+        {
+          "name": "directory_valid_period",
+          "dataType": "string",
+          "description": "Period for which the directory entry is valid",
+          "nullable": true
+        },
+        {
+          "name": "is_verified",
+          "dataType": "boolean",
+          "description": "Flag indicating if this reference has been verified",
+          "nullable": false,
+          "defaultValue": false
+        },
+        {
+          "name": "verification_date",
+          "dataType": "date",
+          "description": "Date when this reference was verified",
+          "nullable": true
+        },
+        {
+          "name": "verification_method",
+          "dataType": "string",
+          "description": "Method used to verify this reference",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was created",
+          "nullable": false
+        },
+        {
+          "name": "updated_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was last updated",
+          "nullable": false
+        },
+        {
+          "name": "deleted_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was marked as deleted",
+          "nullable": true
+        }
+      ]
+    }
+  ]
+} 

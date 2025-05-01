@@ -1,0 +1,70 @@
+Attribute,Value,Description,Business Rule
+PartyType,Person,An individual human being,Required for all party records
+PartyType,Organization,A legal entity such as a company or institution,Required for all party records
+RelationshipType,Customer,A party that receives goods or services,
+RelationshipType,Supplier,A party that provides goods or services,
+RelationshipType,Employee,A person employed by an organization,
+RelationshipType,Partner,A party with a collaborative business relationship,
+RelationshipType,Subsidiary,An organization that is controlled by another,
+RelationshipType,Parent,An organization that controls another,
+RelationshipType,Agent,A party that acts on behalf of another,
+RelationshipType,Manager,A relationship between a manager and a subordinate,
+OrganizationSector,Financial Services,Banking, insurance, investment companies,
+OrganizationSector,Healthcare,Hospitals, clinics, medical services,
+OrganizationSector,Manufacturing,Production of goods,
+OrganizationSector,Retail,Sale of goods to consumers,
+OrganizationSector,Technology,Software, hardware, IT services,
+OrganizationSector,Government,Public sector organizations,
+OrganizationSector,Education,Schools, universities, educational services,
+OrganizationSector,Energy,Oil, gas, electricity, renewables,
+ContactPointType,Email,Electronic mail address,Must be in valid email format
+ContactPointType,Phone,Telephone number,Must include country code
+ContactPointType,PostalAddress,Physical mail delivery address,Must include country
+ContactPointType,SocialNetwork,Social media account,Must include platform name
+PartyLocationType,Registered,Legally registered address,One per legal entity
+PartyLocationType,Business,Place of business operations,
+PartyLocationType,Residential,Residential address for a person,
+PartyLocationType,Mailing,Address for receiving mail,
+PartyLocationType,Billing,Address for billing purposes,
+PersonIdentificationType,Passport,Government-issued passport,Requires issuing country
+PersonIdentificationType,DriverLicense,Government-issued driving license,Requires issuing authority
+PersonIdentificationType,NationalID,National identification document,Requires issuing country
+PersonIdentificationType,SocialSecurity,Social security number,Format depends on country
+PersonIdentificationType,TaxID,Tax identification number,Format depends on country
+OrganizationIdentificationType,LEI,Legal Entity Identifier,Must be 20 characters
+OrganizationIdentificationType,VAT,Value-added tax registration number,Format depends on country
+OrganizationIdentificationType,TaxID,Tax identification number,Format depends on country
+OrganizationIdentificationType,DUNS,Data Universal Numbering System,Must be 9 digits
+OrganizationIdentificationType,CompanyRegNumber,Company registration number,Format depends on country
+Ethnicity,White,Caucasian ethnicity,Optional demographic data
+Ethnicity,Black,African or African-American ethnicity,Optional demographic data
+Ethnicity,Asian,Asian ethnicity,Optional demographic data
+Ethnicity,Hispanic,Hispanic or Latino ethnicity,Optional demographic data
+Ethnicity,MiddleEastern,Middle Eastern ethnicity,Optional demographic data
+Ethnicity,Indigenous,Indigenous or Aboriginal ethnicity,Optional demographic data
+Ethnicity,Other,Other or mixed ethnicity,Optional demographic data
+Religion,Christianity,Christian faith,Optional demographic data
+Religion,Islam,Islamic faith,Optional demographic data
+Religion,Judaism,Jewish faith,Optional demographic data
+Religion,Hinduism,Hindu faith,Optional demographic data
+Religion,Buddhism,Buddhist faith,Optional demographic data
+Religion,Sikhism,Sikh faith,Optional demographic data
+Religion,Other,Other religious belief,Optional demographic data
+Religion,None,No religious belief,Optional demographic data
+PoliticalExposureType,Foreign,Politically exposed person in a foreign country,Requires enhanced due diligence
+PoliticalExposureType,Domestic,Politically exposed person in the home country,Requires enhanced due diligence
+PoliticalExposureType,None,Not politically exposed,Standard due diligence
+EducationLevel,Primary,Primary education,Optional demographic data
+EducationLevel,Secondary,Secondary education,Optional demographic data
+EducationLevel,Undergraduate,Undergraduate degree,Optional demographic data
+EducationLevel,Graduate,Graduate degree,Optional demographic data
+EducationLevel,Doctorate,Doctoral degree,Optional demographic data
+DataSourceSystem,CRM,Customer Relationship Management system,Source system for party data
+DataSourceSystem,ERP,Enterprise Resource Planning system,Source system for party data
+DataSourceSystem,HR,Human Resources system,Source system for party data
+DataSourceSystem,KYC,Know Your Customer system,Source system for party data
+DataSourceSystem,Manual,Manually entered data,Source system for party data
+DataQualityStatus,Verified,Data has been verified as accurate,
+DataQualityStatus,Unverified,Data has not been verified,
+DataQualityStatus,Suspect,Data may be inaccurate or outdated,
+DataQualityStatus,Invalid,Data is known to be incorrect, 

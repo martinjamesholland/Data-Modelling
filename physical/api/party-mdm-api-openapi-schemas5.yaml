@@ -1,0 +1,256 @@
+CustomerRelationshipCreate:
+  allOf:
+    - $ref: '#/components/schemas/PartyRelationshipBase'
+    - $ref: '#/components/schemas/CustomerRelationshipBase'
+
+CustomerRelationshipUpdate:
+  allOf:
+    - $ref: '#/components/schemas/PartyRelationshipUpdate'
+    - $ref: '#/components/schemas/CustomerRelationshipBase'
+
+PartyRelationshipResponse:
+  type: object
+  properties:
+    party_relationship_id:
+      type: string
+      description: Unique identifier for this relationship
+    from_party_id:
+      type: string
+      description: ID of the source party
+    from_party_name:
+      type: string
+      description: Name of the source party
+    to_party_id:
+      type: string
+      description: ID of the target party
+    to_party_name:
+      type: string
+      description: Name of the target party
+    relationship_type:
+      type: string
+      description: Type of relationship between the parties
+    relationship_validity_period:
+      type: string
+      description: The period for which this relationship is valid
+      nullable: true
+    start_date:
+      type: string
+      format: date
+      description: Date when this relationship started
+    end_date:
+      type: string
+      format: date
+      description: Date when this relationship ended
+      nullable: true
+    status:
+      type: string
+      enum: [Active, Inactive, Suspended, Terminated]
+      description: Current status of the relationship
+    description:
+      type: string
+      description: Description of the relationship
+      nullable: true
+    priority:
+      type: integer
+      description: Priority of this relationship
+      nullable: true
+    is_bidirectional:
+      type: boolean
+      description: Flag indicating if this relationship is bidirectional
+    customer_details:
+      $ref: '#/components/schemas/CustomerRelationshipBase'
+      nullable: true
+    timestamps:
+      $ref: '#/components/schemas/Timestamp'
+
+# Agreement models
+AgreementListItem:
+  type: object
+  properties:
+    agreement_id:
+      type: string
+      description: Unique identifier for this agreement
+    agreement_name:
+      type: string
+      description: Name of the agreement
+    agreement_type:
+      type: string
+      description: Type of agreement (e.g., Contract, SLA, MOU)
+    status:
+      type: string
+      enum: [Draft, Active, Expired, Terminated, Renewed]
+      description: Current status of the agreement
+    effective_date:
+      type: string
+      format: date
+      description: Date from which the agreement is effective
+    expiry_date:
+      type: string
+      format: date
+      description: Date when the agreement expires
+      nullable: true
+    party_count:
+      type: integer
+      description: Number of parties involved in this agreement
+
+AgreementBase:
+  type: object
+  required:
+    - agreement_name
+    - agreement_type
+    - effective_date
+  properties:
+    agreement_name:
+      type: string
+      description: Name of the agreement
+    agreement_type:
+      type: string
+      description: Type of agreement (e.g., Contract, SLA, MOU)
+    description:
+      type: string
+      description: Description of the agreement
+      nullable: true
+    effective_date:
+      type: string
+      format: date
+      description: Date from which the agreement is effective
+    expiry_date:
+      type: string
+      format: date
+      description: Date when the agreement expires
+      nullable: true
+    renewal_date:
+      type: string
+      format: date
+      description: Date when the agreement renews
+      nullable: true
+    status:
+      type: string
+      enum: [Draft, Active, Expired, Terminated, Renewed]
+      default: Draft
+      description: Current status of the agreement
+    terms:
+      type: string
+      description: Terms of the agreement
+      nullable: true
+    agreement_document_url:
+      type: string
+      description: URL to the agreement document
+      nullable: true
+
+PartyAgreementBase:
+  type: object
+  required:
+    - party_id
+    - role
+  properties:
+    party_id:
+      type: string
+      description: ID of the party
+    role:
+      type: string
+      description: Role of the party in this agreement
+    signature_date:
+      type: string
+      format: date
+      description: Date when the party signed the agreement
+      nullable: true
+    status:
+      type: string
+      enum: [Draft, Signed, Revoked, Expired]
+      default: Draft
+      description: Status of the party in this agreement
+
+AgreementCreate:
+  allOf:
+    - $ref: '#/components/schemas/AgreementBase'
+    - type: object
+      required:
+        - parties
+      properties:
+        parties:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartyAgreementBase'
+          minItems: 1
+          description: Parties involved in this agreement
+
+AgreementUpdate:
+  allOf:
+    - $ref: '#/components/schemas/AgreementBase'
+    - type: object
+      properties:
+        parties:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartyAgreementBase'
+          description: Parties involved in this agreement
+
+AgreementResponse:
+  type: object
+  properties:
+    agreement_id:
+      type: string
+      description: Unique identifier for this agreement
+    agreement_name:
+      type: string
+      description: Name of the agreement
+    agreement_type:
+      type: string
+      description: Type of agreement (e.g., Contract, SLA, MOU)
+    description:
+      type: string
+      description: Description of the agreement
+      nullable: true
+    effective_date:
+      type: string
+      format: date
+      description: Date from which the agreement is effective
+    expiry_date:
+      type: string
+      format: date
+      description: Date when the agreement expires
+      nullable: true
+    renewal_date:
+      type: string
+      format: date
+      description: Date when the agreement renews
+      nullable: true
+    status:
+      type: string
+      enum: [Draft, Active, Expired, Terminated, Renewed]
+      description: Current status of the agreement
+    terms:
+      type: string
+      description: Terms of the agreement
+      nullable: true
+    agreement_document_url:
+      type: string
+      description: URL to the agreement document
+      nullable: true
+    parties:
+      type: array
+      items:
+        type: object
+        properties:
+          party_id:
+            type: string
+            description: ID of the party
+          party_name:
+            type: string
+            description: Name of the party
+          role:
+            type: string
+            description: Role of the party in this agreement
+          signature_date:
+            type: string
+            format: date
+            description: Date when the party signed the agreement
+            nullable: true
+          status:
+            type: string
+            enum: [Draft, Signed, Revoked, Expired]
+            description: Status of the party in this agreement
+      description: Parties involved in this agreement
+    timestamps:
+      $ref: '#/components/schemas/Timestamp' 

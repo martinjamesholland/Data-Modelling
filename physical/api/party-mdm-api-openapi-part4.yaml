@@ -1,0 +1,186 @@
+  /agreements:
+    get:
+      summary: Get agreements
+      description: Retrieve a list of agreements with optional filtering
+      operationId: getAgreements
+      tags:
+        - Agreement
+      parameters:
+        - name: agreement_type
+          in: query
+          schema:
+            type: string
+          description: Filter by agreement type
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [Draft, Active, Expired, Terminated, Renewed]
+          description: Filter by agreement status
+        - name: party_id
+          in: query
+          schema:
+            type: string
+          description: Filter by party ID (returns agreements involving this party)
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number for pagination
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+          description: Number of records per page
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AgreementListItem'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Create a new agreement
+      description: Create a new agreement between parties
+      operationId: createAgreement
+      tags:
+        - Agreement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgreementCreate'
+      responses:
+        '201':
+          description: Agreement created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgreementResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /agreements/{agreement_id}:
+    get:
+      summary: Get an agreement by ID
+      description: Retrieve detailed information about a specific agreement
+      operationId: getAgreementById
+      tags:
+        - Agreement
+      parameters:
+        - name: agreement_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the agreement
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgreementResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update an agreement
+      description: Update an agreement between parties
+      operationId: updateAgreement
+      tags:
+        - Agreement
+      parameters:
+        - name: agreement_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the agreement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgreementUpdate'
+      responses:
+        '200':
+          description: Agreement updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgreementResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete an agreement
+      description: Mark an agreement as deleted (soft delete)
+      operationId: deleteAgreement
+      tags:
+        - Agreement
+      parameters:
+        - name: agreement_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the agreement
+      responses:
+        '204':
+          description: Agreement deleted successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError' 

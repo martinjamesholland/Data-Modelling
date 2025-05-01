@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1100" height="1400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+        </marker>
+    </defs>
+
+    <!-- Title -->
+    <text x="550" y="30" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">Party Application Logical Data Model - UML Class Diagram (Part 2)</text>
+    <text x="550" y="55" font-family="Arial" font-size="12" text-anchor="middle">Version 1.0.0 | 2023-08-10</text>
+    
+    <!-- PersonProfile -->
+    <rect x="50" y="100" width="300" height="180" rx="0" ry="0" fill="#E1F5FE" stroke="black" stroke-width="2"/>
+    <text x="200" y="120" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PersonProfile</text>
+    <!-- Class members separator -->
+    <line x1="50" y1="130" x2="350" y2="130" stroke="black" stroke-width="1"/>
+    <!-- Attributes -->
+    <text x="60" y="150" font-family="Arial" font-size="12" font-weight="bold">PK person_profile_id: string</text>
+    <text x="60" y="165" font-family="Arial" font-size="12" font-weight="bold">FK party_id: string</text>
+    <text x="60" y="180" font-family="Arial" font-size="12">political_exposure_type: string</text>
+    <text x="60" y="195" font-family="Arial" font-size="12">political_exposure_description: string</text>
+    <text x="60" y="210" font-family="Arial" font-size="12">education_level: string</text>
+    <text x="60" y="225" font-family="Arial" font-size="12">profession: string</text>
+    <text x="60" y="240" font-family="Arial" font-size="12">income_range: string</text>
+    <text x="60" y="255" font-family="Arial" font-size="12">wealth_source: string</text>
+    <text x="60" y="270" font-family="Arial" font-size="12">employment_status: string</text>
+    <!-- Standard timestamps -->
+    <line x1="50" y1="280" x2="350" y2="280" stroke="black" stroke-width="1"/>
+    <text x="60" y="295" font-family="Arial" font-size="12">created_at, updated_at, deleted_at</text>
+    <!-- Note for relationship -->
+    <text x="60" y="80" font-family="Arial" font-size="12" font-style="italic">(References Person entity)</text>
+    
+    <!-- PartyDirectoryReference -->
+    <rect x="400" y="100" width="300" height="180" rx="0" ry="0" fill="#E1F5FE" stroke="black" stroke-width="2"/>
+    <text x="550" y="120" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PartyDirectoryReference</text>
+    <!-- Class members separator -->
+    <line x1="400" y1="130" x2="700" y2="130" stroke="black" stroke-width="1"/>
+    <!-- Attributes -->
+    <text x="410" y="150" font-family="Arial" font-size="12" font-weight="bold">PK party_directory_reference_id: string</text>
+    <text x="410" y="165" font-family="Arial" font-size="12" font-weight="bold">FK party_id: string</text>
+    <text x="410" y="180" font-family="Arial" font-size="12">directory_name: string</text>
+    <text x="410" y="195" font-family="Arial" font-size="12">directory_entry_id: string</text>
+    <text x="410" y="210" font-family="Arial" font-size="12">directory_entry_type: string</text>
+    <text x="410" y="225" font-family="Arial" font-size="12">directory_entry_date: date</text>
+    <text x="410" y="240" font-family="Arial" font-size="12">directory_valid_period: string</text>
+    <text x="410" y="255" font-family="Arial" font-size="12">is_verified: boolean</text>
+    <text x="410" y="270" font-family="Arial" font-size="12">verification_date: date</text>
+    <!-- Standard timestamps -->
+    <line x1="400" y1="280" x2="700" y2="280" stroke="black" stroke-width="1"/>
+    <text x="410" y="295" font-family="Arial" font-size="12">created_at, updated_at, deleted_at</text>
+    <!-- Note for relationship -->
+    <text x="410" y="80" font-family="Arial" font-size="12" font-style="italic">(References Party entity)</text>
+
+    <!-- PartyMergeHistory (MDM-specific) -->
+    <rect x="750" y="100" width="300" height="180" rx="0" ry="0" fill="#E1F5FE" stroke="black" stroke-width="2"/>
+    <text x="900" y="120" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PartyMergeHistory</text>
+    <!-- Class members separator -->
+    <line x1="750" y1="130" x2="1050" y2="130" stroke="black" stroke-width="1"/>
+    <!-- Attributes -->
+    <text x="760" y="150" font-family="Arial" font-size="12" font-weight="bold">PK merge_id: string</text>
+    <text x="760" y="165" font-family="Arial" font-size="12" font-weight="bold">FK survivor_party_id: string</text>
+    <text x="760" y="180" font-family="Arial" font-size="12" font-weight="bold">FK merged_party_id: string</text>
+    <text x="760" y="195" font-family="Arial" font-size="12">merge_date: datetime</text>
+    <text x="760" y="210" font-family="Arial" font-size="12">merge_reason: string</text>
+    <text x="760" y="225" font-family="Arial" font-size="12">merge_status: string</text>
+    <text x="760" y="240" font-family="Arial" font-size="12">merge_by: string</text>
+    <text x="760" y="255" font-family="Arial" font-size="12">field_resolution: jsonb</text>
+    <text x="760" y="270" font-family="Arial" font-size="12">confidence_score: decimal</text>
+    <!-- Standard timestamps -->
+    <line x1="750" y1="280" x2="1050" y2="280" stroke="black" stroke-width="1"/>
+    <text x="760" y="295" font-family="Arial" font-size="12">created_at, updated_at, deleted_at</text>
+    <!-- Note for relationship -->
+    <text x="760" y="80" font-family="Arial" font-size="12" font-style="italic">(References Party entity twice)</text>
+    
+    <!-- Agreement -->
+    <rect x="50" y="350" width="300" height="180" rx="0" ry="0" fill="#E1F5FE" stroke="black" stroke-width="2"/>
+    <text x="200" y="370" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Agreement</text>
+    <!-- Class members separator -->
+    <line x1="50" y1="380" x2="350" y2="380" stroke="black" stroke-width="1"/>
+    <!-- Attributes -->
+    <text x="60" y="400" font-family="Arial" font-size="12" font-weight="bold">PK agreement_id: string</text>
+    <text x="60" y="415" font-family="Arial" font-size="12">agreement_name: string</text>
+    <text x="60" y="430" font-family="Arial" font-size="12">agreement_type: string</text>
+    <text x="60" y="445" font-family="Arial" font-size="12">description: string</text>
+    <text x="60" y="460" font-family="Arial" font-size="12">effective_date: date</text>
+    <text x="60" y="475" font-family="Arial" font-size="12">expiry_date: date</text>
+    <text x="60" y="490" font-family="Arial" font-size="12">renewal_date: date</text>
+    <text x="60" y="505" font-family="Arial" font-size="12">status: string</text>
+    <text x="60" y="520" font-family="Arial" font-size="12">terms: string</text>
+    <!-- Standard timestamps -->
+    <line x1="50" y1="530" x2="350" y2="530" stroke="black" stroke-width="1"/>
+    <text x="60" y="545" font-family="Arial" font-size="12">created_at, updated_at, deleted_at</text>
+
+    <!-- PartyAgreement -->
+    <rect x="400" y="350" width="300" height="150" rx="0" ry="0" fill="#E1F5FE" stroke="black" stroke-width="2"/>
+    <text x="550" y="370" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PartyAgreement</text>
+    <!-- Class members separator -->
+    <line x1="400" y1="380" x2="700" y2="380" stroke="black" stroke-width="1"/>
+    <!-- Attributes -->
+    <text x="410" y="400" font-family="Arial" font-size="12" font-weight="bold">PK party_agreement_id: string</text>
+    <text x="410" y="415" font-family="Arial" font-size="12" font-weight="bold">FK party_id: string</text>
+    <text x="410" y="430" font-family="Arial" font-size="12" font-weight="bold">FK agreement_id: string</text>
+    <text x="410" y="445" font-family="Arial" font-size="12">role: string</text>
+    <text x="410" y="460" font-family="Arial" font-size="12">signature_date: date</text>
+    <text x="410" y="475" font-family="Arial" font-size="12">status: string</text>
+    <!-- Standard timestamps -->
+    <line x1="400" y1="490" x2="700" y2="490" stroke="black" stroke-width="1"/>
+    <text x="410" y="505" font-family="Arial" font-size="12">created_at, updated_at, deleted_at</text>
+    <!-- Relationship from Agreement to PartyAgreement -->
+    <line x1="350" y1="440" x2="400" y2="440" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="360" y="430" font-family="Arial" font-size="12">1</text>
+    <text x="390" y="430" font-family="Arial" font-size="12">*</text>
+    <!-- Note for relationship -->
+    <text x="410" y="330" font-family="Arial" font-size="12" font-style="italic">(References Party entity)</text>
+
+    <!-- PartyMatchRule -->
+    <rect x="750" y="350" width="300" height="180" rx="0" ry="0" fill="#E1F5FE" stroke="black" stroke-width="2"/>
+    <text x="900" y="370" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PartyMatchRule</text>
+    <!-- Class members separator -->
+    <line x1="750" y1="380" x2="1050" y2="380" stroke="black" stroke-width="1"/>
+    <!-- Attributes -->
+    <text x="760" y="400" font-family="Arial" font-size="12" font-weight="bold">PK match_rule_id: string</text>
+    <text x="760" y="415" font-family="Arial" font-size="12">rule_name: string</text>
+    <text x="760" y="430" font-family="Arial" font-size="12">rule_description: string</text>
+    <text x="760" y="445" font-family="Arial" font-size="12">rule_type: string</text>
+    <text x="760" y="460" font-family="Arial" font-size="12">rule_definition: jsonb</text>
+    <text x="760" y="475" font-family="Arial" font-size="12">threshold: decimal</text>
+    <text x="760" y="490" font-family="Arial" font-size="12">priority: integer</text>
+    <text x="760" y="505" font-family="Arial" font-size="12">party_type: string</text>
+    <text x="760" y="520" font-family="Arial" font-size="12">is_active: boolean</text>
+    <!-- Standard timestamps -->
+    <line x1="750" y1="530" x2="1050" y2="530" stroke="black" stroke-width="1"/>
+    <text x="760" y="545" font-family="Arial" font-size="12">created_at, updated_at, deleted_at</text>
+
+    <!-- PartyAuditLog -->
+    <rect x="400" y="600" width="300" height="150" rx="0" ry="0" fill="#E1F5FE" stroke="black" stroke-width="2"/>
+    <text x="550" y="620" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">PartyAuditLog</text>
+    <!-- Class members separator -->
+    <line x1="400" y1="630" x2="700" y2="630" stroke="black" stroke-width="1"/>
+    <!-- Attributes -->
+    <text x="410" y="650" font-family="Arial" font-size="12" font-weight="bold">PK audit_log_id: string</text>
+    <text x="410" y="665" font-family="Arial" font-size="12" font-weight="bold">FK party_id: string</text>
+    <text x="410" y="680" font-family="Arial" font-size="12">action_type: string</text>
+    <text x="410" y="695" font-family="Arial" font-size="12">action_date: datetime</text>
+    <text x="410" y="710" font-family="Arial" font-size="12">action_by: string</text>
+    <text x="410" y="725" font-family="Arial" font-size="12">details: jsonb</text>
+    <text x="410" y="740" font-family="Arial" font-size="12">old_value: jsonb</text>
+    <text x="410" y="755" font-family="Arial" font-size="12">new_value: jsonb</text>
+    <!-- Note for relationship -->
+    <text x="410" y="580" font-family="Arial" font-size="12" font-style="italic">(References Party entity)</text>
+
+    <!-- Legend -->
+    <rect x="850" y="600" width="230" height="150" rx="5" ry="5" fill="white" stroke="black" stroke-width="1"/>
+    <text x="965" y="620" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">UML Legend</text>
+    <text x="870" y="645" font-family="Arial" font-size="12" font-weight="bold">PK</text>
+    <text x="900" y="645" font-family="Arial" font-size="12">Primary Key</text>
+    <text x="870" y="665" font-family="Arial" font-size="12" font-weight="bold">FK</text>
+    <text x="900" y="665" font-family="Arial" font-size="12">Foreign Key</text>
+    
+    <line x1="870" y1="680" x2="900" y2="680" stroke="black" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="910" y="685" font-family="Arial" font-size="12">Association</text>
+    <circle cx="870" cy="700" r="5" fill="black"/>
+    <text x="880" y="705" font-family="Arial" font-size="12">1</text>
+    <text x="910" y="705" font-family="Arial" font-size="12">Cardinality one</text>
+    <text x="880" y="725" font-family="Arial" font-size="12">*</text>
+    <text x="910" y="725" font-family="Arial" font-size="12">Cardinality many</text>
+    <line x1="870" y1="740" x2="900" y2="740" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="910" y="745" font-family="Arial" font-size="12">Inheritance</text>
+
+    <!-- Additional notes -->
+    <text x="100" y="800" font-family="Arial" font-size="14" font-weight="bold">Note: This is Part 2 of the UML diagram for the Party ALDM.</text>
+    <text x="100" y="825" font-family="Arial" font-size="14">The core entities Party, Person, Organization, PartyRelationship and their relationships</text>
+    <text x="100" y="850" font-family="Arial" font-size="14">are shown in Part 1 of this diagram.</text>
+</svg> 

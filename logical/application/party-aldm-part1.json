@@ -1,0 +1,226 @@
+{
+  "modelName": "Party Application Logical Data Model",
+  "version": "1.0.0",
+  "date": "2023-08-10",
+  "description": "ALDM for Party domain in the Master Data Management system",
+  "entities": [
+    {
+      "name": "Party",
+      "description": "A person or organization that can enter into business relationships",
+      "attributes": [
+        {
+          "name": "party_id",
+          "dataType": "string",
+          "description": "Unique identifier for the party",
+          "isPrimaryKey": true,
+          "nullable": false
+        },
+        {
+          "name": "party_name",
+          "dataType": "string",
+          "description": "The name of the party as it is known in business",
+          "nullable": false
+        },
+        {
+          "name": "party_type",
+          "dataType": "string",
+          "description": "Type of party (Person or Organization)",
+          "nullable": false,
+          "validValues": ["Person", "Organization"]
+        },
+        {
+          "name": "party_date_time",
+          "dataType": "datetime",
+          "description": "Date and time when the party record was created",
+          "nullable": false
+        },
+        {
+          "name": "status",
+          "dataType": "string",
+          "description": "Current status of the party",
+          "nullable": false,
+          "validValues": ["Active", "Inactive", "Merged", "Deleted"]
+        },
+        {
+          "name": "data_source_system",
+          "dataType": "string",
+          "description": "System where this party data originated",
+          "nullable": false
+        },
+        {
+          "name": "data_source_id",
+          "dataType": "string",
+          "description": "ID of this party in the source system",
+          "nullable": true
+        },
+        {
+          "name": "is_golden_record",
+          "dataType": "boolean",
+          "description": "Flag indicating if this is the golden record",
+          "nullable": false,
+          "defaultValue": false
+        },
+        {
+          "name": "data_quality_score",
+          "dataType": "decimal",
+          "description": "Calculated data quality score from 0-100",
+          "nullable": true
+        },
+        {
+          "name": "confidence_score",
+          "dataType": "decimal",
+          "description": "Confidence level in the correctness of this record",
+          "nullable": true
+        },
+        {
+          "name": "last_verified_date",
+          "dataType": "date",
+          "description": "Date when this record was last verified",
+          "nullable": true
+        },
+        {
+          "name": "party_identification",
+          "dataType": "string",
+          "description": "A general identification for the party (e.g., TaxID)",
+          "nullable": true
+        },
+        {
+          "name": "data_steward_id",
+          "dataType": "string",
+          "description": "ID of the data steward responsible for this party",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was created",
+          "nullable": false
+        },
+        {
+          "name": "created_by",
+          "dataType": "string",
+          "description": "User who created this record",
+          "nullable": false
+        },
+        {
+          "name": "updated_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was last updated",
+          "nullable": false
+        },
+        {
+          "name": "updated_by",
+          "dataType": "string",
+          "description": "User who last updated this record",
+          "nullable": false
+        },
+        {
+          "name": "deleted_at",
+          "dataType": "datetime",
+          "description": "Date and time when this record was marked as deleted",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "Person",
+      "description": "A human being with personal information",
+      "parentEntity": "Party",
+      "attributes": [
+        {
+          "name": "party_id",
+          "dataType": "string",
+          "description": "Foreign key to the Party entity",
+          "isPrimaryKey": true,
+          "isForeignKey": true,
+          "referencedEntity": "Party",
+          "referencedAttribute": "party_id"
+        },
+        {
+          "name": "first_name",
+          "dataType": "string",
+          "description": "First name of the person",
+          "nullable": false
+        },
+        {
+          "name": "middle_name",
+          "dataType": "string",
+          "description": "Middle name of the person",
+          "nullable": true
+        },
+        {
+          "name": "last_name",
+          "dataType": "string",
+          "description": "Last name of the person",
+          "nullable": false
+        },
+        {
+          "name": "given_name",
+          "dataType": "string",
+          "description": "Given name of the person (if different from first name)",
+          "nullable": true
+        },
+        {
+          "name": "family_name",
+          "dataType": "string",
+          "description": "Family name of the person (if different from last name)",
+          "nullable": true
+        },
+        {
+          "name": "birth_date",
+          "dataType": "date",
+          "description": "Date of birth",
+          "nullable": true
+        },
+        {
+          "name": "gender",
+          "dataType": "string",
+          "description": "Gender of the person",
+          "nullable": true
+        },
+        {
+          "name": "marital_status",
+          "dataType": "string",
+          "description": "Marital status of the person",
+          "nullable": true
+        },
+        {
+          "name": "nationality",
+          "dataType": "string",
+          "description": "Nationality of the person",
+          "nullable": true
+        },
+        {
+          "name": "residence_country",
+          "dataType": "string",
+          "description": "Country of residence",
+          "nullable": true
+        },
+        {
+          "name": "ethnicity",
+          "dataType": "string",
+          "description": "Ethnicity of the person",
+          "nullable": true
+        },
+        {
+          "name": "religion",
+          "dataType": "string",
+          "description": "Religion of the person",
+          "nullable": true
+        },
+        {
+          "name": "preferred_language",
+          "dataType": "string",
+          "description": "Preferred language for communication",
+          "nullable": true
+        },
+        {
+          "name": "residential_status",
+          "dataType": "string",
+          "description": "Residential status in the country of residence",
+          "nullable": true
+        }
+      ]
+    }
+  ]
+} 
