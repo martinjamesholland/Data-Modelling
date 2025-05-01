@@ -1,0 +1,122 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+ Data Modelling Standards
+
+## Purpose & Scope
+This rule defines standards for conceptual, logical, and physical data models across the enterprise. It applies to all stakeholders (data architects, developers, business analysts, etc.) and ensures consistency, quality, and maintainability in data modelling outputs.
+
+## Model Type Definitions
+- **Enterprise Conceptual Data Model (CDM):** Describes the semantics of the data domain, including entity classes and relationships. Defines the allowed expressions and facts within the model's scope.
+- **Enterprise Logical Data Model (ELDM):** Org-wide, ideal future-state structure. Describes tables, columns, classes, and tags. Must be in third normal form (3NF).
+- **Application Logical Data Model (ALDM):** Application-specific, current-state structure. Reusable across application layers (data stores, APIs, analytics). Must be in 3NF and include standard attributes (e.g., `created_at`, `updated_at`).
+- **Business Information Model (BIM):** Includes a business glossary, glossary of terms, and acceptable values. Ensures clarity, consistency, and data quality.
+- **Physical Data Model (PDM):** Describes physical storage (partitions, table spaces, schemas, API contracts, analytics platforms). Can use the most suitable form for the technology (e.g., 3NF, star, snowflake, Data Vault).
+
+## Model Hierarchy & Alignment
+- PDM aligns to ALDM.
+- ALDM aligns to ELDM.
+- ALDM maps to BIM (glossary, values, business rules).
+- ELDM aligns to CDM.
+
+## Naming Conventions & Diagramming Standards
+- Use clear, descriptive, and consistent names for entities, attributes, and relationships.
+- Use lower_snake_case for physical database objects; PascalCase for logical/conceptual entities.
+- Diagrams should use standard notations (e.g., Crow's Foot, UML) and be version-controlled.
+- All diagrams must include a legend and date.
+
+## Tool Recommendations
+- Use ERD tools (e.g., dbdiagram.io, Lucidchart, ER/Studio) for diagrams.
+- Use version control (e.g., Git) for model files and diagrams.
+- Use data modelling tools that support 3NF validation and metadata export.
+
+## Review & Approval Process
+- All model changes must undergo peer review.
+- Use pull requests for version-controlled artefacts.
+- Approval from a data architect is required for ELDM/ALDM changes.
+- Document review outcomes and rationale.
+
+## Model Type Definitions
+- **Enterprise Conceptual Data Model (CDM):** Describes the semantics of the data domain, including entity classes and relationships. Defines the allowed expressions and facts within the model's scope. **An SVG image of the model must be created or updated for each CDM output.**
+- **Enterprise Logical Data Model (ELDM):** Org-wide, ideal future-state structure. Describes tables, columns, classes, and tags. Must be in third normal form (3NF). **An SVG image of the model must be created or updated for each ELDM output.**
+- **Application Logical Data Model (ALDM):** Application-specific, current-state structure. Reusable across application layers (data stores, APIs, analytics). Must be in 3NF and include standard attributes (e.g., `created_at`, `updated_at`). **An SVG image of the model must be created or updated for each ALDM output.**
+
+## Best Practices
+- ELDM and ALDM must be in third normal form (3NF).
+- ALDM must include standard application attributes: `created_at`, `updated_at`, `deleted_at` (if soft deletes are used).
+- PDM may use any form (3NF, 2NF, 1NF, star, snowflake, Data Vault) best suited to the technology and use case.
+- Use business glossary and acceptable values in BIM to ensure clarity and data quality.
+- Ensure all models are accessible and understandable to both technical and business users.
+- **For every CDM, ELDM, and ALDM output, create or update an SVG image of the model and store it alongside the model artefact.**
+
+## Folder Structure Standards
+- Place all model artefacts in the correct folders:
+  - `/conceptual/` for CDM
+  - `/logical/enterprise/` for ELDM
+  - `/logical/application/` for ALDM
+  - `/business/` for BIM (glossary, values, rules)
+  - `/physical/` for PDM
+- Do not place model files in root or unrelated folders.
+- Diagrams should be stored alongside their respective model files.
+
+## Examples
+### Good Example (ALDM Table)
+```sql
+CREATE TABLE product (
+    product_id INT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10,2) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
+```
+
+### Bad Example (ALDM Table)
+```sql
+CREATE TABLE prod (
+    id INT,
+    n VARCHAR(255),
+    p DECIMAL(10,2)
+);
+-- Missing primary key, unclear names, missing timestamps
+```
+
+### Good Example (Folder Structure)
+```
+/data-modelling/
+  /conceptual/
+    cdm-overview.vsdx
+  /logical/
+    /enterprise/
+      eldm-customer.vsdx
+    /application/
+      aldm-ecommerce.vsdx
+  /business/
+    glossary.xlsx
+    acceptable-values.xlsx
+  /physical/
+    pdm-oracle.sql
+    pdm-bigquery.sql
+```
+
+## Anti-patterns
+- Using ambiguous or inconsistent naming.
+- Skipping standard attributes in ALDM.
+- Storing model files in incorrect folders.
+- Not using 3NF for ELDM/ALDM.
+- Lack of review or documentation.
+
+## Compliance, Security, and Privacy
+- Ensure sensitive data is identified and classified in all models.
+- Apply data masking or encryption recommendations in PDM where required.
+- Document data retention and deletion policies in ALDM and PDM.
+- Follow organizational and regulatory requirements for data privacy.
+
+## References
+- [Data Vault 2.0](mdc:https:/danlinstedt.com/all-about-data-vault)
+- [Kimball Methodology](mdc:https:/www.kimballgroup.com)
+- [3NF Definition](mdc:https:/en.wikipedia.org/wiki/Third_normal_form)
+- [Crow's Foot Notation](mdc:https:/vertabelo.com/blog/crow-s-foot-notation)

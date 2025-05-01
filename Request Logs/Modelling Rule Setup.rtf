@@ -1,0 +1,140 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww24780\viewh13960\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf2 \expnd0\expndtw0\kerning0
+\'97\'97\
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+using@cursor-rules.mdc I Like to setup cursor rules for data modelling standards, here are the concepts and some of the rules, please enhance:\
+\
+Enterprise Conceptual Data Model (CDM): describes the semantics of data domain (the scope of the organisation). For example, it may be a model of the interest area of an organisation or of an industry. This consists of entity classes, representing kinds of things of significance in the domain, and relationship assertions about associations between pairs of entity classes. A conceptual schema specifies the kinds of facts or propositions that can be expressed using the model. In that sense, it defines the allowed expressions in an artificial "language" with a scope that is limited by the scope of the model. Simply described, a conceptual schema is the first step in organising the data requirements.\
+Enterprise Logical Data Model (ELDM): describes the structure of domain of information, in the ideal future state. This consists of descriptions of (for example) tables, columns, object-oriented classes, and tags. The logical schema and conceptual schema are sometimes implemented as one and the same.\
+\
+\
+Application Logical Data Model (ALDM): describes the structure of data domains of information, in the current state of a data and its relationships in the application it will be used in. this model is reusable across all part of the physical application of the model, from data stores, api contacts, analytics data platforms (Data vault 2.0 framework). This consists of descriptions of (for example) tables, columns, object-oriented classes, and tags. The logical schema and conceptual schema are sometimes implemented as one and the same.\
+Business Information Model (BIM): include a business glossary, a glossary of terms, and acceptable values within a logical model (ALDM). These elements are crucial for defining the scope, understanding the data, and ensuring consistency across the model. \
+Elaboration:\
+	\'95	Business Glossary:\uc0\u8232 A business glossary defines key business terms and concepts relevant to the model, ensuring everyone involved understands the language used. This helps avoid ambiguity and promotes effective communication.\
+	\'95	Glossary of Terms:\uc0\u8232 A glossary of terms provides specific definitions for technical terms used within the model, such as data attributes, relationships, and constraints. This ensures clarity and consistency in the model's structure and content.\
+	\'95	Acceptable Values in a Logical Model:\uc0\u8232 A logical model defines the structure and relationships between business objects and their attributes. Acceptable values specify the valid options or ranges for each attribute, ensuring data integrity and consistency. \
+Why these elements are important:\
+	\'95	Communication and Collaboration:\uc0\u8232 A well-defined glossary enables clear communication and collaboration among stakeholders, including business users, data architects, and technical developers.\
+	\'95	Data Quality and Integrity:\uc0\u8232 Specifying acceptable values ensures that the data in the model is accurate, complete, and consistent, which is essential for reliable decision-making.\
+	\'95	Model Consistency:\uc0\u8232 Using a consistent set of definitions and acceptable values helps maintain consistency across different parts of the model and prevents inconsistencies that can arise from different interpretations.\
+	\'95	Model Maintainability:\uc0\u8232 A well-documented model with clear definitions and acceptable values is easier to understand, maintain, and evolve over time, as the business needs change.\u8232 \
+Physical data Model (PDM): describes the physical means used to store data. This is concerned with partitions, CPUs, table spaces, and the like. Physical data models cover database schemas for such as operational data stores (database example oracle mysql mongodb cloudSQL) normally in third normal form schema, API Data contracts (xml, JSON structures), Data Platforms (Data vault 2.0 framework for Delta format for Hadoop, GCP big query, Ali cloud Max compute. schema), analytics (Kim Bolt methodology, star and snowflakes schema)\
+\
+The key difference between an Enterprise Logical Data Model (ELDM) and an Application Logical Data Model (ALDM) lies in their scope and purpose. An ELDM focuses on the overall data structure and relationships within an organisation, serving as a high-level blueprint for all applications. An ALDM, on the other hand, is tailored to a specific application, providing a detailed view of the data used by that particular application.\
+\
+Enterprise Logical Data Model (ELDM): \
+Scope: Org-wide.\
+Purpose: Provides a unified view of data across the enterprise, facilitating data sharing and consistency.\
+Focus: High-level concepts, entities, and relationships.\
+Example: An ELDM might define the "customer" entity, its attributes (name, address, etc.), and its relationships with other entities like "orders" and "products" across the entire organization.\
+Benefits: Improved data governance, reduced redundancy, and better integration of applications. \
+Application Logical Data Model (ALDM): \
+Scope:\
+Specific application.\
+Purpose:\
+Defines the data structure and relationships relevant to a particular application, enabling efficient database design and development.\
+Focus:\
+Detailed data structure, attributes, and relationships specific to the application.\
+Example:\
+An ALDM for an e-commerce application might focus on entities like "product," "category," "customer," and "order," including their specific attributes and relationships as they relate to the e-commerce system.\
+Benefits:\
+Better application performance, data integrity within the application, and easier database implementation.\
+\
+Hierarchy of models goes as followers:\
+PDM aligned to ALDM,\
+ALDM aligns to ELDM,\
+ALDM maps to BIM glossary of terms, acceptable values, business rules etc.\
+ELDM aligns to CDM\
+\
+\'97\'97\'97\'97\
+Thank you for providing your data modelling concepts and initial rules. Here\'92s how I propose we proceed:\
+Clarifying Questions\
+What is the primary audience for these Cursor rules? (e.g., data architects, developers, business analysts)\
+Should the rules include specific naming conventions, diagramming standards, or tool recommendations (e.g., ERD tools, UML, notation)?\
+Do you want to enforce any review/approval process for model changes?\
+Should we include examples of good/bad models or anti-patterns?\
+Are there any compliance, security, or privacy requirements to mention?\
+Project Plan\
+Draft a Cursor rule file for \'93dms\'94 in .cursor/rules/.\
+Structure the rule with:\
+Description and scope\
+Definitions of each model type (CDM, ELDM, ALDM, BIM, PDM)\
+Hierarchy and alignment rules\
+Best practices and rationale\
+(Optional) Examples, anti-patterns, and references\
+Review and refine the draft with your feedback.\
+Confirm the rule\'92s structure and content.\
+Test by referencing the rule in a sample modelling scenario.\
+Step-by-Step Approach\
+I\'92ll start by drafting the rule file structure and content based on your input and best practices.\
+I\'92ll wait for your confirmation and feedback before finalizing or expanding the rule.\
+Next Step\
+Please confirm the answers to the clarifying questions above, and let me know if you want to include any additional sections or requirements. Once confirmed, I\'92ll proceed to draft the initial Cursor rule for your data modelling standards.\
+1. All\
+2. Yes\
+3. Yes\
+4. Yes\
+5. ALDM must include attributes you generally find in an application like last updated date, created date, etc \
+ELDM and ALDM should be third normal form\
+PDM can be in any form that's most suitable for the technology\
+\
+Would like to add a wool about folder structure making sure outputs of any file are in the correct folder.\
+\
+Thank you for your detailed responses. Here\'92s how I\'92ll proceed:\
+Summary of Your Requirements\
+Audience: All (data architects, developers, business analysts, etc.)\
+Include: Naming conventions, diagramming standards, tool recommendations.\
+Review/Approval: Yes, include a process.\
+Examples/Anti-patterns: Yes, include both.\
+Compliance/Security:\
+ALDM must include standard application attributes (e.g., created/updated dates).\
+ELDM and ALDM should be in 3NF.\
+PDM can use the most suitable form for the technology.\
+Additional: Add a rule about folder structure to ensure outputs/files are in the correct folders.\
+Proposed Rule Structure\
+Description & Scope\
+Model Type Definitions\
+CDM, ELDM, ALDM, BIM, PDM\
+Hierarchy & Alignment\
+Naming Conventions & Diagramming Standards\
+Tool Recommendations\
+Review & Approval Process\
+Best Practices\
+3NF for ELDM/ALDM, standard attributes, etc.\
+Folder Structure Standards\
+Examples & Anti-patterns\
+References\
+Next Step\
+I will draft the initial Cursor rule file:\
+.cursor/rules/dms.mdc\
+This will include all the above sections, with clear, concise, and actionable rules, plus examples and anti-patterns.\
+Please confirm if you\'92re happy with this structure or if you\'92d like to add/remove any sections. Once confirmed, I\'92ll proceed to draft the rule file for your review.\
+confirm\
+\
+The initial draft of the Cursor rule for data modelling standards has been created in .cursor/rules/dms.mdc. This rule includes:\
+Clear definitions for each model type (CDM, ELDM, ALDM, BIM, PDM)\
+Model hierarchy and alignment rules\
+Naming conventions and diagramming standards\
+Tool recommendations\
+Review and approval process\
+Best practices (including 3NF, standard attributes, and compliance/security notes)\
+Folder structure standards for model artefacts\
+Good and bad examples, anti-patterns, and references\
+Next Steps:\
+Please review the generated rule file for completeness and clarity.\
+Let me know if you\'92d like any changes, additions, or further examples.\
+Once you confirm, we can test referencing this rule in a sample modelling scenario or integrate it into your workflow.\
+Would you like to review the file contents here, or proceed to the next step?\
+please add that for CDM, ELDM and ALDM outputs we Great and or update and SVG image of the models\
+\
+The rule now explicitly requires that for every CDM, ELDM, and ALDM output, an SVG image of the model must be created or updated and stored alongside the model artefact. This requirement is included in both the model definitions and best practices sections.\
+Would you like to review the updated file, or proceed to the next step (such as testing the rule in a modelling scenario or integrating it into your workflow)?}
