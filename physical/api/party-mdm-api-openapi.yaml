@@ -230,3 +230,787 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError' 
+  /parties/{party_id}/identifications:
+    get:
+      summary: Get party identifications
+      description: Retrieve all identifications for a specific party
+      operationId: getPartyIdentifications
+      tags:
+        - Party
+      parameters:
+        - name: party_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the party
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PartyIdentification'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Add party identification
+      description: Add a new identification to a party
+      operationId: addPartyIdentification
+      tags:
+        - Party
+      parameters:
+        - name: party_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the party
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartyIdentificationCreate'
+      responses:
+        '201':
+          description: Identification added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartyIdentification'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /parties/{party_id}/locations:
+    get:
+      summary: Get party locations
+      description: Retrieve all locations for a specific party
+      operationId: getPartyLocations
+      tags:
+        - Party
+      parameters:
+        - name: party_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the party
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PartyLocation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Add party location
+      description: Add a new location to a party
+      operationId: addPartyLocation
+      tags:
+        - Party
+      parameters:
+        - name: party_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the party
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartyLocationCreate'
+      responses:
+        '201':
+          description: Location added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartyLocation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /parties/{party_id}/contact-points:
+    get:
+      summary: Get party contact points
+      description: Retrieve all contact points for a specific party
+      operationId: getPartyContactPoints
+      tags:
+        - Party
+      parameters:
+        - name: party_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the party
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ContactPoint'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Add party contact point
+      description: Add a new contact point to a party
+      operationId: addPartyContactPoint
+      tags:
+        - Party
+      parameters:
+        - name: party_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the party
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactPointCreate'
+      responses:
+        '201':
+          description: Contact point added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactPoint'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError' 
+  /relationships:
+    get:
+      summary: Get party relationships
+      description: Retrieve a list of party relationships with optional filtering
+      operationId: getRelationships
+      tags:
+        - Relationship
+      parameters:
+        - name: from_party_id
+          in: query
+          schema:
+            type: string
+          description: Filter by source party ID
+        - name: to_party_id
+          in: query
+          schema:
+            type: string
+          description: Filter by target party ID
+        - name: relationship_type
+          in: query
+          schema:
+            type: string
+          description: Filter by relationship type
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [Active, Inactive, Suspended, Terminated]
+          description: Filter by relationship status
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number for pagination
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+          description: Number of records per page
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PartyRelationshipListItem'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Create a new relationship
+      description: Create a new relationship between parties
+      operationId: createRelationship
+      tags:
+        - Relationship
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/PartyRelationshipCreate'
+                - $ref: '#/components/schemas/CustomerRelationshipCreate'
+      responses:
+        '201':
+          description: Relationship created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartyRelationshipResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /relationships/{relationship_id}:
+    get:
+      summary: Get a relationship by ID
+      description: Retrieve detailed information about a specific relationship
+      operationId: getRelationshipById
+      tags:
+        - Relationship
+      parameters:
+        - name: relationship_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the relationship
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartyRelationshipResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update a relationship
+      description: Update a relationship between parties
+      operationId: updateRelationship
+      tags:
+        - Relationship
+      parameters:
+        - name: relationship_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the relationship
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/PartyRelationshipUpdate'
+                - $ref: '#/components/schemas/CustomerRelationshipUpdate'
+      responses:
+        '200':
+          description: Relationship updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartyRelationshipResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete a relationship
+      description: Mark a relationship as deleted (soft delete)
+      operationId: deleteRelationship
+      tags:
+        - Relationship
+      parameters:
+        - name: relationship_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the relationship
+      responses:
+        '204':
+          description: Relationship deleted successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError' 
+  /agreements:
+    get:
+      summary: Get agreements
+      description: Retrieve a list of agreements with optional filtering
+      operationId: getAgreements
+      tags:
+        - Agreement
+      parameters:
+        - name: agreement_type
+          in: query
+          schema:
+            type: string
+          description: Filter by agreement type
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [Draft, Active, Expired, Terminated, Renewed]
+          description: Filter by agreement status
+        - name: party_id
+          in: query
+          schema:
+            type: string
+          description: Filter by party ID (returns agreements involving this party)
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number for pagination
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+          description: Number of records per page
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AgreementListItem'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Create a new agreement
+      description: Create a new agreement between parties
+      operationId: createAgreement
+      tags:
+        - Agreement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgreementCreate'
+      responses:
+        '201':
+          description: Agreement created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgreementResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /agreements/{agreement_id}:
+    get:
+      summary: Get an agreement by ID
+      description: Retrieve detailed information about a specific agreement
+      operationId: getAgreementById
+      tags:
+        - Agreement
+      parameters:
+        - name: agreement_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the agreement
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgreementResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update an agreement
+      description: Update an agreement between parties
+      operationId: updateAgreement
+      tags:
+        - Agreement
+      parameters:
+        - name: agreement_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the agreement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgreementUpdate'
+      responses:
+        '200':
+          description: Agreement updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgreementResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete an agreement
+      description: Mark an agreement as deleted (soft delete)
+      operationId: deleteAgreement
+      tags:
+        - Agreement
+      parameters:
+        - name: agreement_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the agreement
+      responses:
+        '204':
+          description: Agreement deleted successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError' 
+  /mdm/match:
+    post:
+      summary: Match parties
+      description: Find potential matching parties based on input criteria
+      operationId: matchParties
+      tags:
+        - MDM
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  
+  /mdm/merge:
+    post:
+      summary: Merge parties
+      description: Merge two or more parties into a single golden record
+      operationId: mergeParties
+      tags:
+        - MDM
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MergeRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MergeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  
+  /mdm/unmerge/{merge_id}:
+    post:
+      summary: Unmerge parties
+      description: Unmerge previously merged parties
+      operationId: unmergeParties
+      tags:
+        - MDM
+      parameters:
+        - name: merge_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the merge operation
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnmergeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  
+  /mdm/match-rules:
+    get:
+      summary: Get match rules
+      description: Retrieve a list of party matching rules
+      operationId: getMatchRules
+      tags:
+        - MDM
+      parameters:
+        - name: active
+          in: query
+          schema:
+            type: boolean
+          description: Filter by active status
+        - name: party_type
+          in: query
+          schema:
+            type: string
+            enum: [Person, Organization, Both]
+          description: Filter by party type
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number for pagination
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+          description: Number of records per page
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MatchRuleListItem'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Create a match rule
+      description: Create a new party matching rule
+      operationId: createMatchRule
+      tags:
+        - MDM
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchRuleCreate'
+      responses:
+        '201':
+          description: Match rule created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchRuleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError' 

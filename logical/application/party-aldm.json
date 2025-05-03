@@ -1,0 +1,441 @@
+{
+  "modelName": "Party Application Logical Data Model",
+  "version": "1.0.0",
+  "date": "2023-08-10",
+  "description": "ALDM for Party domain in the Master Data Management system",
+  "entities": [
+    {
+      "name": "Party",
+      "description": "A person or organization that can enter into business relationships",
+      "attributes": [
+        { "name": "party_id", "dataType": "string", "description": "Unique identifier for the party", "isPrimaryKey": true, "nullable": false },
+        { "name": "party_name", "dataType": "string", "description": "The name of the party as it is known in business", "nullable": false },
+        { "name": "party_type", "dataType": "string", "description": "Type of party (Person or Organization)", "nullable": false, "validValues": ["Person", "Organization"] },
+        { "name": "party_date_time", "dataType": "datetime", "description": "Date and time when the party record was created", "nullable": false },
+        { "name": "status", "dataType": "string", "description": "Current status of the party", "nullable": false, "validValues": ["Active", "Inactive", "Merged", "Deleted"] },
+        { "name": "data_source_system", "dataType": "string", "description": "System where this party data originated", "nullable": false },
+        { "name": "data_source_id", "dataType": "string", "description": "ID of this party in the source system", "nullable": true },
+        { "name": "is_golden_record", "dataType": "boolean", "description": "Flag indicating if this is the golden record", "nullable": false, "defaultValue": false },
+        { "name": "data_quality_score", "dataType": "decimal", "description": "Calculated data quality score from 0-100", "nullable": true },
+        { "name": "confidence_score", "dataType": "decimal", "description": "Confidence level in the correctness of this record", "nullable": true },
+        { "name": "last_verified_date", "dataType": "date", "description": "Date when this record was last verified", "nullable": true },
+        { "name": "party_identification", "dataType": "string", "description": "A general identification for the party (e.g., TaxID)", "nullable": true },
+        { "name": "data_steward_id", "dataType": "string", "description": "ID of the data steward responsible for this party", "nullable": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "created_by", "dataType": "string", "description": "User who created this record", "nullable": false },
+        { "name": "updated_at", "dataType": "datetime", "description": "Date and time when this record was last updated", "nullable": false },
+        { "name": "updated_by", "dataType": "string", "description": "User who last updated this record", "nullable": false },
+        { "name": "deleted_at", "dataType": "datetime", "description": "Date and time when this record was marked as deleted", "nullable": true }
+      ]
+    },
+    {
+      "name": "Person",
+      "description": "A human being with personal information",
+      "parentEntity": "Party",
+      "attributes": [
+        { "name": "party_id", "dataType": "string", "description": "Foreign key to the Party entity", "isPrimaryKey": true, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "first_name", "dataType": "string", "description": "First name of the person", "nullable": false },
+        { "name": "middle_name", "dataType": "string", "description": "Middle name of the person", "nullable": true },
+        { "name": "last_name", "dataType": "string", "description": "Last name of the person", "nullable": false },
+        { "name": "given_name", "dataType": "string", "description": "Given name of the person (if different from first name)", "nullable": true },
+        { "name": "family_name", "dataType": "string", "description": "Family name of the person (if different from last name)", "nullable": true },
+        { "name": "birth_date", "dataType": "date", "description": "Date of birth", "nullable": true },
+        { "name": "gender", "dataType": "string", "description": "Gender of the person", "nullable": true },
+        { "name": "marital_status", "dataType": "string", "description": "Marital status of the person", "nullable": true },
+        { "name": "nationality", "dataType": "string", "description": "Nationality of the person", "nullable": true },
+        { "name": "residence_country", "dataType": "string", "description": "Country of residence", "nullable": true },
+        { "name": "ethnicity", "dataType": "string", "description": "Ethnicity of the person", "nullable": true },
+        { "name": "religion", "dataType": "string", "description": "Religion of the person", "nullable": true },
+        { "name": "preferred_language", "dataType": "string", "description": "Preferred language for communication", "nullable": true },
+        { "name": "residential_status", "dataType": "string", "description": "Residential status in the country of residence", "nullable": true }
+      ]
+    },
+    {
+      "name": "Organization",
+      "description": "An organization that can enter into business relationships",
+      "attributes": [
+        { "name": "party_id", "dataType": "string", "description": "Unique identifier for the organization", "isPrimaryKey": true, "nullable": false },
+        { "name": "organization_name", "dataType": "string", "description": "The name of the organization", "nullable": false },
+        { "name": "organization_type", "dataType": "string", "description": "Type of organization", "nullable": false, "validValues": ["Company", "Government", "Non-Profit", "Educational", "Other"] },
+        { "name": "industry", "dataType": "string", "description": "Industry of the organization", "nullable": true },
+        { "name": "data_source_system", "dataType": "string", "description": "System where this organization data originated", "nullable": false },
+        { "name": "data_source_id", "dataType": "string", "description": "ID of this organization in the source system", "nullable": true },
+        { "name": "is_golden_record", "dataType": "boolean", "description": "Flag indicating if this is the golden record", "nullable": false, "defaultValue": false },
+        { "name": "data_quality_score", "dataType": "decimal", "description": "Calculated data quality score from 0-100", "nullable": true },
+        { "name": "confidence_score", "dataType": "decimal", "description": "Confidence level in the correctness of this record", "nullable": true },
+        { "name": "last_verified_date", "dataType": "date", "description": "Date when this record was last verified", "nullable": true },
+        { "name": "data_steward_id", "dataType": "string", "description": "ID of the data steward responsible for this organization", "nullable": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "created_by", "dataType": "string", "description": "User who created this record", "nullable": false },
+        { "name": "updated_at", "dataType": "datetime", "description": "Date and time when this record was last updated", "nullable": false },
+        { "name": "updated_by", "dataType": "string", "description": "User who last updated this record", "nullable": false },
+        { "name": "deleted_at", "dataType": "datetime", "description": "Date and time when this record was marked as deleted", "nullable": true }
+      ]
+    },
+    {
+      "name": "PartyIdentification",
+      "description": "An identification for a party",
+      "attributes": [
+        { "name": "party_id", "dataType": "string", "description": "Foreign key to the Party entity", "isPrimaryKey": true, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "identification_type", "dataType": "string", "description": "Type of identification", "nullable": false, "validValues": ["TaxID", "Passport", "DriverLicense", "Other"] },
+        { "name": "identification_value", "dataType": "string", "description": "Value of the identification", "nullable": false },
+        { "name": "data_source_system", "dataType": "string", "description": "System where this identification data originated", "nullable": false },
+        { "name": "data_source_id", "dataType": "string", "description": "ID of this identification in the source system", "nullable": true },
+        { "name": "is_golden_record", "dataType": "boolean", "description": "Flag indicating if this is the golden record", "nullable": false, "defaultValue": false },
+        { "name": "data_quality_score", "dataType": "decimal", "description": "Calculated data quality score from 0-100", "nullable": true },
+        { "name": "confidence_score", "dataType": "decimal", "description": "Confidence level in the correctness of this record", "nullable": true },
+        { "name": "last_verified_date", "dataType": "date", "description": "Date when this record was last verified", "nullable": true },
+        { "name": "data_steward_id", "dataType": "string", "description": "ID of the data steward responsible for this identification", "nullable": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "created_by", "dataType": "string", "description": "User who created this record", "nullable": false },
+        { "name": "updated_at", "dataType": "datetime", "description": "Date and time when this record was last updated", "nullable": false },
+        { "name": "updated_by", "dataType": "string", "description": "User who last updated this record", "nullable": false },
+        { "name": "deleted_at", "dataType": "datetime", "description": "Date and time when this record was marked as deleted", "nullable": true }
+      ]
+    },
+    {
+      "name": "PartyLocation",
+      "description": "A location associated with a party",
+      "attributes": [
+        { "name": "party_id", "dataType": "string", "description": "Foreign key to the Party entity", "isPrimaryKey": true, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "location_type", "dataType": "string", "description": "Type of location", "nullable": false, "validValues": ["Physical", "Postal", "Electronic", "Other"] },
+        { "name": "location_value", "dataType": "string", "description": "Value of the location", "nullable": false },
+        { "name": "data_source_system", "dataType": "string", "description": "System where this location data originated", "nullable": false },
+        { "name": "data_source_id", "dataType": "string", "description": "ID of this location in the source system", "nullable": true },
+        { "name": "is_golden_record", "dataType": "boolean", "description": "Flag indicating if this is the golden record", "nullable": false, "defaultValue": false },
+        { "name": "data_quality_score", "dataType": "decimal", "description": "Calculated data quality score from 0-100", "nullable": true },
+        { "name": "confidence_score", "dataType": "decimal", "description": "Confidence level in the correctness of this record", "nullable": true },
+        { "name": "last_verified_date", "dataType": "date", "description": "Date when this record was last verified", "nullable": true },
+        { "name": "data_steward_id", "dataType": "string", "description": "ID of the data steward responsible for this location", "nullable": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "created_by", "dataType": "string", "description": "User who created this record", "nullable": false },
+        { "name": "updated_at", "dataType": "datetime", "description": "Date and time when this record was last updated", "nullable": false },
+        { "name": "updated_by", "dataType": "string", "description": "User who last updated this record", "nullable": false },
+        { "name": "deleted_at", "dataType": "datetime", "description": "Date and time when this record was marked as deleted", "nullable": true }
+      ]
+    },
+    {
+      "name": "ContactPoint",
+      "description": "A point of contact for a party",
+      "attributes": [
+        { "name": "party_id", "dataType": "string", "description": "Foreign key to the Party entity", "isPrimaryKey": true, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "contact_type", "dataType": "string", "description": "Type of contact", "nullable": false, "validValues": ["Phone", "Email", "SocialMedia", "Other"] },
+        { "name": "contact_value", "dataType": "string", "description": "Value of the contact", "nullable": false },
+        { "name": "data_source_system", "dataType": "string", "description": "System where this contact data originated", "nullable": false },
+        { "name": "data_source_id", "dataType": "string", "description": "ID of this contact in the source system", "nullable": true },
+        { "name": "is_golden_record", "dataType": "boolean", "description": "Flag indicating if this is the golden record", "nullable": false, "defaultValue": false },
+        { "name": "data_quality_score", "dataType": "decimal", "description": "Calculated data quality score from 0-100", "nullable": true },
+        { "name": "confidence_score", "dataType": "decimal", "description": "Confidence level in the correctness of this record", "nullable": true },
+        { "name": "last_verified_date", "dataType": "date", "description": "Date when this record was last verified", "nullable": true },
+        { "name": "data_steward_id", "dataType": "string", "description": "ID of the data steward responsible for this contact", "nullable": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "created_by", "dataType": "string", "description": "User who created this record", "nullable": false },
+        { "name": "updated_at", "dataType": "datetime", "description": "Date and time when this record was last updated", "nullable": false },
+        { "name": "updated_by", "dataType": "string", "description": "User who last updated this record", "nullable": false },
+        { "name": "deleted_at", "dataType": "datetime", "description": "Date and time when this record was marked as deleted", "nullable": true }
+      ]
+    },
+    {
+      "name": "PartyRelationship",
+      "description": "A relationship between parties",
+      "attributes": [
+        { "name": "party_id", "dataType": "string", "description": "Foreign key to the Party entity", "isPrimaryKey": true, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "related_party_id", "dataType": "string", "description": "Foreign key to the related Party entity", "isPrimaryKey": true, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "relationship_type", "dataType": "string", "description": "Type of relationship", "nullable": false, "validValues": ["Customer", "Supplier", "Partner", "Other"] },
+        { "name": "data_source_system", "dataType": "string", "description": "System where this relationship data originated", "nullable": false },
+        { "name": "data_source_id", "dataType": "string", "description": "ID of this relationship in the source system", "nullable": true },
+        { "name": "is_golden_record", "dataType": "boolean", "description": "Flag indicating if this is the golden record", "nullable": false, "defaultValue": false },
+        { "name": "data_quality_score", "dataType": "decimal", "description": "Calculated data quality score from 0-100", "nullable": true },
+        { "name": "confidence_score", "dataType": "decimal", "description": "Confidence level in the correctness of this record", "nullable": true },
+        { "name": "last_verified_date", "dataType": "date", "description": "Date when this record was last verified", "nullable": true },
+        { "name": "data_steward_id", "dataType": "string", "description": "ID of the data steward responsible for this relationship", "nullable": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "created_by", "dataType": "string", "description": "User who created this record", "nullable": false },
+        { "name": "updated_at", "dataType": "datetime", "description": "Date and time when this record was last updated", "nullable": false },
+        { "name": "updated_by", "dataType": "string", "description": "User who last updated this record", "nullable": false },
+        { "name": "deleted_at", "dataType": "datetime", "description": "Date and time when this record was marked as deleted", "nullable": true }
+      ]
+    },
+    {
+      "name": "CustomerRelationship",
+      "description": "A relationship between a party and a customer",
+      "attributes": [
+        { "name": "party_id", "dataType": "string", "description": "Foreign key to the Party entity", "isPrimaryKey": true, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "customer_id", "dataType": "string", "description": "Foreign key to the Customer entity", "isPrimaryKey": true, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "relationship_type", "dataType": "string", "description": "Type of relationship", "nullable": false, "validValues": ["Primary", "Secondary", "Other"] },
+        { "name": "data_source_system", "dataType": "string", "description": "System where this relationship data originated", "nullable": false },
+        { "name": "data_source_id", "dataType": "string", "description": "ID of this relationship in the source system", "nullable": true },
+        { "name": "is_golden_record", "dataType": "boolean", "description": "Flag indicating if this is the golden record", "nullable": false, "defaultValue": false },
+        { "name": "data_quality_score", "dataType": "decimal", "description": "Calculated data quality score from 0-100", "nullable": true },
+        { "name": "confidence_score", "dataType": "decimal", "description": "Confidence level in the correctness of this record", "nullable": true },
+        { "name": "last_verified_date", "dataType": "date", "description": "Date when this record was last verified", "nullable": true },
+        { "name": "data_steward_id", "dataType": "string", "description": "ID of the data steward responsible for this relationship", "nullable": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "created_by", "dataType": "string", "description": "User who created this record", "nullable": false },
+        { "name": "updated_at", "dataType": "datetime", "description": "Date and time when this record was last updated", "nullable": false },
+        { "name": "updated_by", "dataType": "string", "description": "User who last updated this record", "nullable": false },
+        { "name": "deleted_at", "dataType": "datetime", "description": "Date and time when this record was marked as deleted", "nullable": true }
+      ]
+    },
+    {
+      "name": "PersonProfile",
+      "description": "Additional information about a person",
+      "attributes": [
+        { "name": "person_profile_id", "dataType": "string", "description": "Unique identifier for this profile", "isPrimaryKey": true, "nullable": false },
+        { "name": "party_id", "dataType": "string", "description": "Foreign key to the Party entity", "nullable": false, "isForeignKey": true, "referencedEntity": "Person", "referencedAttribute": "party_id" },
+        { "name": "political_exposure_type", "dataType": "string", "description": "Type of political exposure", "nullable": true, "validValues": ["Foreign", "Domestic", "None"] },
+        { "name": "political_exposure_description", "dataType": "string", "description": "Description of the political exposure", "nullable": true },
+        { "name": "education_level", "dataType": "string", "description": "Highest level of education", "nullable": true },
+        { "name": "profession", "dataType": "string", "description": "Current profession", "nullable": true },
+        { "name": "income_range", "dataType": "string", "description": "Income range", "nullable": true },
+        { "name": "wealth_source", "dataType": "string", "description": "Source of wealth", "nullable": true },
+        { "name": "employment_status", "dataType": "string", "description": "Current employment status", "nullable": true },
+        { "name": "employer_name", "dataType": "string", "description": "Name of the employer", "nullable": true },
+        { "name": "job_title", "dataType": "string", "description": "Job title", "nullable": true },
+        { "name": "family_size", "dataType": "integer", "description": "Number of family members", "nullable": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "updated_at", "dataType": "datetime", "description": "Date and time when this record was last updated", "nullable": false },
+        { "name": "deleted_at", "dataType": "datetime", "description": "Date and time when this record was marked as deleted", "nullable": true }
+      ]
+    },
+    {
+      "name": "PartyDirectoryReference",
+      "description": "Reference to a party in an external directory",
+      "attributes": [
+        { "name": "party_directory_reference_id", "dataType": "string", "description": "Unique identifier for this reference", "isPrimaryKey": true, "nullable": false },
+        { "name": "party_id", "dataType": "string", "description": "Foreign key to the Party entity", "nullable": false, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "directory_name", "dataType": "string", "description": "Name of the external directory", "nullable": false },
+        { "name": "directory_entry_id", "dataType": "string", "description": "ID of the party in the external directory", "nullable": false },
+        { "name": "directory_entry_type", "dataType": "string", "description": "Type of entry in the directory", "nullable": true },
+        { "name": "directory_entry_date", "dataType": "date", "description": "Date of the entry in the directory", "nullable": true },
+        { "name": "directory_valid_period", "dataType": "string", "description": "Period for which the directory entry is valid", "nullable": true },
+        { "name": "is_verified", "dataType": "boolean", "description": "Flag indicating if this reference has been verified", "nullable": false, "defaultValue": false },
+        { "name": "verification_date", "dataType": "date", "description": "Date when this reference was verified", "nullable": true },
+        { "name": "verification_method", "dataType": "string", "description": "Method used to verify this reference", "nullable": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "updated_at", "dataType": "datetime", "description": "Date and time when this record was last updated", "nullable": false },
+        { "name": "deleted_at", "dataType": "datetime", "description": "Date and time when this record was marked as deleted", "nullable": true }
+      ]
+    },
+    {
+      "name": "PartyMergeHistory",
+      "description": "History of party merges in the MDM system",
+      "attributes": [
+        { "name": "party_merge_id", "dataType": "string", "description": "Unique identifier for this merge record", "isPrimaryKey": true, "nullable": false },
+        { "name": "survivor_party_id", "dataType": "string", "description": "ID of the surviving party", "nullable": false, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "merged_party_id", "dataType": "string", "description": "ID of the merged party", "nullable": false },
+        { "name": "merge_date", "dataType": "datetime", "description": "Date and time when the merge occurred", "nullable": false },
+        { "name": "merge_reason", "dataType": "string", "description": "Reason for the merge", "nullable": true },
+        { "name": "merge_score", "dataType": "decimal", "description": "Confidence score for the merge", "nullable": true },
+        { "name": "merge_rule", "dataType": "string", "description": "Rule used for the merge", "nullable": true },
+        { "name": "approved_by", "dataType": "string", "description": "User who approved the merge", "nullable": true },
+        { "name": "approval_date", "dataType": "datetime", "description": "Date and time when the merge was approved", "nullable": true },
+        { "name": "merged_record_json", "dataType": "json", "description": "JSON representation of the merged record", "nullable": true },
+        { "name": "status", "dataType": "string", "description": "Current status of the merge", "nullable": false, "validValues": ["Pending", "Approved", "Rejected", "Undone"] },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "created_by", "dataType": "string", "description": "User who created this record", "nullable": false }
+      ]
+    },
+    {
+      "name": "PartyMatchRule",
+      "description": "Rules for matching parties in the MDM system",
+      "attributes": [
+        { "name": "match_rule_id", "dataType": "string", "description": "Unique identifier for this match rule", "isPrimaryKey": true, "nullable": false },
+        { "name": "rule_name", "dataType": "string", "description": "Name of the match rule", "nullable": false },
+        { "name": "rule_description", "dataType": "string", "description": "Description of the match rule", "nullable": true },
+        { "name": "rule_type", "dataType": "string", "description": "Type of match rule", "nullable": false, "validValues": ["Exact", "Fuzzy", "Deterministic", "Probabilistic", "Hybrid"] },
+        { "name": "rule_definition", "dataType": "json", "description": "Definition of the match rule in JSON format", "nullable": false },
+        { "name": "threshold", "dataType": "decimal", "description": "Threshold for considering a match", "nullable": false },
+        { "name": "priority", "dataType": "integer", "description": "Priority of this rule in the matching hierarchy", "nullable": false },
+        { "name": "party_type", "dataType": "string", "description": "Type of party this rule applies to", "nullable": true, "validValues": ["Person", "Organization", "Both"] },
+        { "name": "is_active", "dataType": "boolean", "description": "Flag indicating if this rule is active", "nullable": false, "defaultValue": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "updated_at", "dataType": "datetime", "description": "Date and time when this record was last updated", "nullable": false },
+        { "name": "created_by", "dataType": "string", "description": "User who created this rule", "nullable": false },
+        { "name": "updated_by", "dataType": "string", "description": "User who last updated this rule", "nullable": false }
+      ]
+    },
+    {
+      "name": "PartyAuditLog",
+      "description": "Audit log for party data changes in the MDM system",
+      "attributes": [
+        { "name": "audit_id", "dataType": "string", "description": "Unique identifier for this audit record", "isPrimaryKey": true, "nullable": false },
+        { "name": "party_id", "dataType": "string", "description": "ID of the party being audited", "nullable": false, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "entity_name", "dataType": "string", "description": "Name of the entity being audited", "nullable": false },
+        { "name": "action", "dataType": "string", "description": "Action performed on the entity", "nullable": false, "validValues": ["Create", "Update", "Delete", "Merge", "Split", "Link", "Unlink"] },
+        { "name": "action_date", "dataType": "datetime", "description": "Date and time when the action was performed", "nullable": false },
+        { "name": "user_id", "dataType": "string", "description": "ID of the user who performed the action", "nullable": false },
+        { "name": "ip_address", "dataType": "string", "description": "IP address from which the action was performed", "nullable": true },
+        { "name": "old_values", "dataType": "json", "description": "JSON representation of the old values", "nullable": true },
+        { "name": "new_values", "dataType": "json", "description": "JSON representation of the new values", "nullable": true },
+        { "name": "change_reason", "dataType": "string", "description": "Reason for the change", "nullable": true },
+        { "name": "source_system", "dataType": "string", "description": "System from which the change originated", "nullable": true }
+      ]
+    },
+    {
+      "name": "PartyDataQuality",
+      "description": "Data quality metrics for party data in the MDM system",
+      "attributes": [
+        { "name": "data_quality_id", "dataType": "string", "description": "Unique identifier for this data quality record", "isPrimaryKey": true, "nullable": false },
+        { "name": "party_id", "dataType": "string", "description": "ID of the party being assessed", "nullable": false, "isForeignKey": true, "referencedEntity": "Party", "referencedAttribute": "party_id" },
+        { "name": "assessment_date", "dataType": "datetime", "description": "Date and time when the assessment was performed", "nullable": false },
+        { "name": "completeness_score", "dataType": "decimal", "description": "Score for data completeness (0-100)", "nullable": false },
+        { "name": "accuracy_score", "dataType": "decimal", "description": "Score for data accuracy (0-100)", "nullable": false },
+        { "name": "consistency_score", "dataType": "decimal", "description": "Score for data consistency (0-100)", "nullable": false },
+        { "name": "timeliness_score", "dataType": "decimal", "description": "Score for data timeliness (0-100)", "nullable": false },
+        { "name": "uniqueness_score", "dataType": "decimal", "description": "Score for data uniqueness (0-100)", "nullable": false },
+        { "name": "overall_score", "dataType": "decimal", "description": "Overall data quality score (0-100)", "nullable": false },
+        { "name": "issues_found", "dataType": "json", "description": "JSON representation of data quality issues found", "nullable": true },
+        { "name": "improvement_suggestions", "dataType": "json", "description": "JSON representation of suggestions for improvement", "nullable": true },
+        { "name": "created_at", "dataType": "datetime", "description": "Date and time when this record was created", "nullable": false },
+        { "name": "created_by", "dataType": "string", "description": "User or system that created this record", "nullable": false }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "party_to_person",
+      "source": "Party",
+      "target": "Person",
+      "type": "one-to-one",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A person is a type of party"
+    },
+    {
+      "name": "party_to_organization",
+      "source": "Party",
+      "target": "Organization",
+      "type": "one-to-one",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "An organization is a type of party"
+    },
+    {
+      "name": "party_to_party_identification",
+      "source": "Party",
+      "target": "PartyIdentification",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can have multiple identifications"
+    },
+    {
+      "name": "party_to_party_location",
+      "source": "Party",
+      "target": "PartyLocation",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can have multiple locations"
+    },
+    {
+      "name": "party_to_contact_point",
+      "source": "Party",
+      "target": "ContactPoint",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can have multiple contact points"
+    },
+    {
+      "name": "party_to_party_relationship_from",
+      "source": "Party",
+      "target": "PartyRelationship",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "from_party_id",
+      "description": "A party can be the source of multiple relationships"
+    },
+    {
+      "name": "party_to_party_relationship_to",
+      "source": "Party",
+      "target": "PartyRelationship",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "to_party_id",
+      "description": "A party can be the target of multiple relationships"
+    },
+    {
+      "name": "party_relationship_to_customer_relationship",
+      "source": "PartyRelationship",
+      "target": "CustomerRelationship",
+      "type": "one-to-one",
+      "sourceAttribute": "party_relationship_id",
+      "targetAttribute": "party_relationship_id",
+      "description": "A customer relationship is a type of party relationship"
+    },
+    {
+      "name": "person_to_person_profile",
+      "source": "Person",
+      "target": "PersonProfile",
+      "type": "one-to-one",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A person can have one profile with additional information"
+    },
+    {
+      "name": "party_to_party_agreement",
+      "source": "Party",
+      "target": "PartyAgreement",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can be involved in multiple agreements"
+    },
+    {
+      "name": "agreement_to_party_agreement",
+      "source": "Agreement",
+      "target": "PartyAgreement",
+      "type": "one-to-many",
+      "sourceAttribute": "agreement_id",
+      "targetAttribute": "agreement_id",
+      "description": "An agreement can involve multiple parties"
+    },
+    {
+      "name": "party_to_directory_reference",
+      "source": "Party",
+      "target": "PartyDirectoryReference",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can be referenced in multiple external directories"
+    },
+    {
+      "name": "organization_to_parent_organization",
+      "source": "Organization",
+      "target": "Organization",
+      "type": "many-to-one",
+      "sourceAttribute": "parent_organization_id",
+      "targetAttribute": "party_id",
+      "description": "An organization can have a parent organization"
+    },
+    {
+      "name": "party_to_merge_history_survivor",
+      "source": "Party",
+      "target": "PartyMergeHistory",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "survivor_party_id",
+      "description": "A party can be the survivor in multiple merge operations"
+    },
+    {
+      "name": "party_to_audit_log",
+      "source": "Party",
+      "target": "PartyAuditLog",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can have multiple audit log entries"
+    },
+    {
+      "name": "party_to_data_quality",
+      "source": "Party",
+      "target": "PartyDataQuality",
+      "type": "one-to-many",
+      "sourceAttribute": "party_id",
+      "targetAttribute": "party_id",
+      "description": "A party can have multiple data quality assessments"
+    }
+  ]
+} 
