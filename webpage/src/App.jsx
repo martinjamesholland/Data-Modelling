@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import DataModelBrowser from '../components/DataModelBrowser'
+import DataModelBrowser from './components/DataModelBrowser'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
