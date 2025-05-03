@@ -1,0 +1,72 @@
+{
+  "entities": [
+    {
+      "name": "Party",
+      "attributes": [
+        "party_id",
+        "party_name",
+        "party_type",
+        "status"
+      ]
+    },
+    {
+      "name": "Person",
+      "attributes": [
+        "first_name",
+        "middle_name",
+        "last_name",
+        "birth_date",
+        "gender"
+      ]
+    },
+    {
+      "name": "Organization",
+      "attributes": [
+        "organization_name",
+        "organization_type",
+        "registration_number"
+      ]
+    },
+    {
+      "name": "PartyRelationship",
+      "attributes": [
+        "relationship_id",
+        "source_party_id",
+        "target_party_id",
+        "relationship_type"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "Party-Person",
+      "source_entity": "Party",
+      "target_entity": "Person",
+      "type": "one-to-one",
+      "description": "A Party may be a Person specialization."
+    },
+    {
+      "name": "Party-Organization",
+      "source_entity": "Party",
+      "target_entity": "Organization",
+      "type": "one-to-one",
+      "description": "A Party may be an Organization specialization."
+    },
+    {
+      "name": "PartyRelationship-Source",
+      "source_entity": "PartyRelationship",
+      "target_entity": "Party",
+      "type": "many-to-one",
+      "foreign_key": "source_party_id",
+      "description": "Each PartyRelationship references a source Party."
+    },
+    {
+      "name": "PartyRelationship-Target",
+      "source_entity": "PartyRelationship",
+      "target_entity": "Party",
+      "type": "many-to-one",
+      "foreign_key": "target_party_id",
+      "description": "Each PartyRelationship references a target Party."
+    }
+  ]
+} 
