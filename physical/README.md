@@ -5,6 +5,7 @@ This folder contains Physical Data Models (PDM), which describe the implementati
 
 ## Contents
 - **mongodb/**: MongoDB-specific PDM artifacts (e.g., `party-pdm-schema.json`)
+- **mysql/**: MySQL-specific PDM artifacts (e.g., SQL scripts, stored procedures, views)
 - **api/**: API contract specifications (e.g., OpenAPI YAML files)
 - **data_vault/**: Data Vault 2.0 models and related artifacts
 - Other technology-specific subfolders as needed

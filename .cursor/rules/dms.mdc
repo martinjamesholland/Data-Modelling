@@ -21,6 +21,8 @@ This rule defines standards for conceptual, logical, and physical data models ac
 - ALDM maps to BIM (glossary, values, business rules).
 - ELDM aligns to CDM.
 
+- Can you output all mapping between the model type based on the Model Hierarchy & Alignment in CSV format
+
 ## Naming Conventions & Diagramming Standards
 - Use clear, descriptive, and consistent names for entities, attributes, and relationships.
 - Use lower_snake_case for physical database objects; PascalCase for logical/conceptual entities.

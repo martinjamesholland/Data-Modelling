@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .table-box { fill: #f8f9fa; stroke: #495057; stroke-width: 2; rx: 5; }
+      .table-header { fill: #6c757d; stroke: #495057; stroke-width: 1; }
+      .table-title { fill: white; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .column-text { fill: #212529; font-family: Arial, sans-serif; font-size: 11px; }
+      .pk-text { fill: #dc3545; font-weight: bold; }
+      .fk-text { fill: #007bff; font-weight: bold; }
+      .relationship-line { stroke: #6c757d; stroke-width: 2; fill: none; }
+      .relationship-arrow { fill: #6c757d; }
+      .legend-box { fill: white; stroke: #dee2e6; stroke-width: 1; rx: 3; }
+      .legend-text { fill: #495057; font-family: Arial, sans-serif; font-size: 10px; }
+    </style>
+  </defs>
+  
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#495057">
+    MySQL Physical Data Model - Party MDM
+  </text>
+  
+  <!-- Party Table -->
+  <rect x="50" y="80" width="200" height="280" class="table-box"/>
+  <rect x="50" y="80" width="200" height="25" class="table-header"/>
+  <text x="150" y="97" text-anchor="middle" class="table-title">party</text>
+  
+  <text x="60" y="115" class="column-text pk-text">🔑 party_id (VARCHAR(36)) PK</text>
+  <text x="60" y="130" class="column-text">party_name (VARCHAR(255))</text>
+  <text x="60" y="145" class="column-text">party_type (ENUM)</text>
+  <text x="60" y="160" class="column-text">status (ENUM)</text>
+  <text x="60" y="175" class="column-text">data_source_system (VARCHAR(100))</text>
+  <text x="60" y="190" class="column-text">is_golden_record (BOOLEAN)</text>
+  <text x="60" y="205" class="column-text">data_quality_score (DECIMAL(5,2))</text>
+  <text x="60" y="220" class="column-text">confidence_score (DECIMAL(5,2))</text>
+  <text x="60" y="235" class="column-text">⏰ created_at (TIMESTAMP)</text>
+  <text x="60" y="250" class="column-text">⏰ updated_at (TIMESTAMP)</text>
+  <text x="60" y="265" class="column-text">🗑️ deleted_at (TIMESTAMP)</text>
+  <text x="60" y="280" class="column-text">created_by (VARCHAR(100))</text>
+  <text x="60" y="295" class="column-text">updated_by (VARCHAR(100))</text>
+  <text x="60" y="310" class="column-text">📊 Indexes: party_type, status, golden_record</text>
+  <text x="60" y="325" class="column-text">🔍 Full-text: party_name</text>
+  
+  <!-- Person Table -->
+  <rect x="350" y="80" width="200" height="200" class="table-box"/>
+  <rect x="350" y="80" width="200" height="25" class="table-header"/>
+  <text x="450" y="97" text-anchor="middle" class="table-title">person</text>
+  
+  <text x="360" y="115" class="column-text pk-text fk-text">🔑🔗 party_id (VARCHAR(36)) PK/FK</text>
+  <text x="360" y="130" class="column-text">first_name (VARCHAR(100))</text>
+  <text x="360" y="145" class="column-text">middle_name (VARCHAR(100))</text>
+  <text x="360" y="160" class="column-text">last_name (VARCHAR(100))</text>
+  <text x="360" y="175" class="column-text">birth_date (DATE)</text>
+  <text x="360" y="190" class="column-text">gender (ENUM)</text>
+  <text x="360" y="205" class="column-text">nationality (VARCHAR(100))</text>
+  <text x="360" y="220" class="column-text">⏰ created_at (TIMESTAMP)</text>
+  <text x="360" y="235" class="column-text">⏰ updated_at (TIMESTAMP)</text>
+  <text x="360" y="250" class="column-text">🗑️ deleted_at (TIMESTAMP)</text>
+  <text x="360" y="265" class="column-text">📊 Indexes: last_name, birth_date, nationality</text>
+  <text x="360" y="280" class="column-text">🔍 Full-text: first_name, last_name</text>
+  
+  <!-- Organization Table -->
+  <rect x="650" y="80" width="200" height="200" class="table-box"/>
+  <rect x="650" y="80" width="200" height="25" class="table-header"/>
+  <text x="750" y="97" text-anchor="middle" class="table-title">organization</text>
+  
+  <text x="660" y="115" class="column-text pk-text fk-text">🔑🔗 party_id (VARCHAR(36)) PK/FK</text>
+  <text x="660" y="130" class="column-text">organization_name (VARCHAR(255))</text>
+  <text x="660" y="145" class="column-text">organization_type (ENUM)</text>
+  <text x="660" y="160" class="column-text">industry (VARCHAR(100))</text>
+  <text x="660" y="175" class="column-text">data_source_system (VARCHAR(100))</text>
+  <text x="660" y="190" class="column-text">is_golden_record (BOOLEAN)</text>
+  <text x="660" y="205" class="column-text">⏰ created_at (TIMESTAMP)</text>
+  <text x="660" y="220" class="column-text">⏰ updated_at (TIMESTAMP)</text>
+  <text x="660" y="235" class="column-text">🗑️ deleted_at (TIMESTAMP)</text>
+  <text x="660" y="250" class="column-text">📊 Indexes: organization_name, type, industry</text>
+  <text x="660" y="265" class="column-text">🔍 Full-text: organization_name</text>
+  
+  <!-- Contact Point Table -->
+  <rect x="50" y="450" width="200" height="180" class="table-box"/>
+  <rect x="50" y="450" width="200" height="25" class="table-header"/>
+  <text x="150" y="467" text-anchor="middle" class="table-title">contact_point</text>
+  
+  <text x="60" y="485" class="column-text pk-text">🔑 contact_id (BIGINT) PK</text>
+  <text x="60" y="500" class="column-text fk-text">🔗 party_id (VARCHAR(36)) FK</text>
+  <text x="60" y="515" class="column-text">contact_type (ENUM)</text>
+  <text x="60" y="530" class="column-text">contact_value (VARCHAR(255))</text>
+  <text x="60" y="545" class="column-text">data_source_system (VARCHAR(100))</text>
+  <text x="60" y="560" class="column-text">is_golden_record (BOOLEAN)</text>
+  <text x="60" y="575" class="column-text">⏰ created_at (TIMESTAMP)</text>
+  <text x="60" y="590" class="column-text">⏰ updated_at (TIMESTAMP)</text>
+  <text x="60" y="605" class="column-text">🗑️ deleted_at (TIMESTAMP)</text>
+  <text x="60" y="620" class="column-text">📊 Indexes: party_id, contact_type, value</text>
+  <text x="60" y="635" class="column-text">🔍 Full-text: contact_value</text>
+  
+  <!-- Party Location Table -->
+  <rect x="350" y="450" width="200" height="180" class="table-box"/>
+  <rect x="350" y="450" width="200" height="25" class="table-header"/>
+  <text x="450" y="467" text-anchor="middle" class="table-title">party_location</text>
+  
+  <text x="360" y="485" class="column-text pk-text">🔑 location_id (BIGINT) PK</text>
+  <text x="360" y="500" class="column-text fk-text">🔗 party_id (VARCHAR(36)) FK</text>
+  <text x="360" y="515" class="column-text">location_type (ENUM)</text>
+  <text x="360" y="530" class="column-text">location_value (TEXT)</text>
+  <text x="360" y="545" class="column-text">data_source_system (VARCHAR(100))</text>
+  <text x="360" y="560" class="column-text">is_golden_record (BOOLEAN)</text>
+  <text x="360" y="575" class="column-text">⏰ created_at (TIMESTAMP)</text>
+  <text x="360" y="590" class="column-text">⏰ updated_at (TIMESTAMP)</text>
+  <text x="360" y="605" class="column-text">🗑️ deleted_at (TIMESTAMP)</text>
+  <text x="360" y="620" class="column-text">📊 Indexes: party_id, location_type</text>
+  <text x="360" y="635" class="column-text">🔍 Full-text: location_value</text>
+  
+  <!-- Party Relationship Table -->
+  <rect x="650" y="450" width="200" height="180" class="table-box"/>
+  <rect x="650" y="450" width="200" height="25" class="table-header"/>
+  <text x="750" y="467" text-anchor="middle" class="table-title">party_relationship</text>
+  
+  <text x="660" y="485" class="column-text pk-text">🔑 relationship_id (BIGINT) PK</text>
+  <text x="660" y="500" class="column-text fk-text">🔗 party_id (VARCHAR(36)) FK</text>
+  <text x="660" y="515" class="column-text fk-text">🔗 related_party_id (VARCHAR(36)) FK</text>
+  <text x="660" y="530" class="column-text">relationship_type (ENUM)</text>
+  <text x="660" y="545" class="column-text">data_source_system (VARCHAR(100))</text>
+  <text x="660" y="560" class="column-text">is_golden_record (BOOLEAN)</text>
+  <text x="660" y="575" class="column-text">⏰ created_at (TIMESTAMP)</text>
+  <text x="660" y="590" class="column-text">⏰ updated_at (TIMESTAMP)</text>
+  <text x="660" y="605" class="column-text">🗑️ deleted_at (TIMESTAMP)</text>
+  <text x="660" y="620" class="column-text">📊 Indexes: party_id, related_party_id, type</text>
+  
+  <!-- Relationships -->
+  <!-- Party to Person -->
+  <line x1="250" y1="200" x2="350" y2="200" class="relationship-line"/>
+  <polygon points="350,200 345,195 345,205" class="relationship-arrow"/>
+  <text x="300" y="195" text-anchor="middle" class="legend-text">1:1</text>
+  
+  <!-- Party to Organization -->
+  <line x1="250" y1="220" x2="650" y2="220" class="relationship-line"/>
+  <polygon points="650,220 645,215 645,225" class="relationship-arrow"/>
+  <text x="450" y="215" text-anchor="middle" class="legend-text">1:1</text>
+  
+  <!-- Party to Contact Point -->
+  <line x1="150" y1="360" x2="150" y2="450" class="relationship-line"/>
+  <polygon points="150,450 145,445 155,445" class="relationship-arrow"/>
+  <text x="170" y="420" class="legend-text">1:N</text>
+  
+  <!-- Party to Location -->
+  <line x1="200" y1="360" x2="450" y2="450" class="relationship-line"/>
+  <polygon points="450,450 445,445 455,445" class="relationship-arrow"/>
+  <text x="325" y="420" class="legend-text">1:N</text>
+  
+  <!-- Party to Relationship (from) -->
+  <line x1="250" y1="300" x2="650" y2="500" class="relationship-line"/>
+  <polygon points="650,500 645,495 655,495" class="relationship-arrow"/>
+  <text x="450" y="420" class="legend-text">1:N</text>
+  
+  <!-- Party to Relationship (to) -->
+  <line x1="250" y1="320" x2="650" y2="520" class="relationship-line"/>
+  <polygon points="650,520 645,515 655,515" class="relationship-arrow"/>
+  <text x="450" y="440" class="legend-text">1:N</text>
+  
+  <!-- Legend -->
+  <rect x="900" y="80" width="280" height="200" class="legend-box"/>
+  <text x="920" y="105" class="legend-text" font-weight="bold">Legend</text>
+  <text x="920" y="125" class="legend-text">🔑 Primary Key</text>
+  <text x="920" y="140" class="legend-text">🔗 Foreign Key</text>
+  <text x="920" y="155" class="legend-text">📊 Index</text>
+  <text x="920" y="170" class="legend-text">🔍 Full-text Index</text>
+  <text x="920" y="185" class="legend-text">⏰ Timestamp columns</text>
+  <text x="920" y="200" class="legend-text">🗑️ Soft delete column</text>
+  <text x="920" y="220" class="legend-text" font-weight="bold">Relationships:</text>
+  <text x="920" y="235" class="legend-text">1:1 - One to One</text>
+  <text x="920" y="250" class="legend-text">1:N - One to Many</text>
+  <text x="920" y="265" class="legend-text">M:N - Many to Many</text>
+  
+  <!-- Footer -->
+  <text x="600" y="780" text-anchor="middle" class="legend-text">
+    MySQL Physical Data Model v1.0.0 | Based on ALDM v1.0.0 | Generated: 2024-01-XX
+  </text>
+</svg> 

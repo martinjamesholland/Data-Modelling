@@ -1,0 +1,420 @@
+{
+  "modelName": "Party MySQL Physical Data Model",
+  "version": "1.0.0",
+  "date": "2024-01-XX",
+  "description": "MySQL PDM for Party domain in the Master Data Management system",
+  "databaseEngine": "MySQL 8.0+",
+  "characterSet": "utf8mb4",
+  "collation": "utf8mb4_unicode_ci",
+  "normalization": "3NF",
+  "tables": [
+    {
+      "name": "party",
+      "description": "Main party entity table",
+      "primaryKey": "party_id",
+      "columns": [
+        { "name": "party_id", "dataType": "VARCHAR(36)", "nullable": false, "description": "Unique identifier for the party (UUID)" },
+        { "name": "party_name", "dataType": "VARCHAR(255)", "nullable": false, "description": "The name of the party as it is known in business" },
+        { "name": "party_type", "dataType": "ENUM('Person', 'Organization')", "nullable": false, "description": "Type of party (Person or Organization)" },
+        { "name": "party_date_time", "dataType": "DATETIME", "nullable": false, "description": "Date and time when the party record was created" },
+        { "name": "status", "dataType": "ENUM('Active', 'Inactive', 'Merged', 'Deleted')", "nullable": false, "default": "Active", "description": "Current status of the party" },
+        { "name": "data_source_system", "dataType": "VARCHAR(100)", "nullable": false, "description": "System where this party data originated" },
+        { "name": "data_source_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of this party in the source system" },
+        { "name": "is_golden_record", "dataType": "BOOLEAN", "nullable": false, "default": false, "description": "Flag indicating if this is the golden record" },
+        { "name": "data_quality_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Calculated data quality score from 0-100" },
+        { "name": "confidence_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Confidence level in the correctness of this record" },
+        { "name": "last_verified_date", "dataType": "DATE", "nullable": true, "description": "Date when this record was last verified" },
+        { "name": "party_identification", "dataType": "VARCHAR(100)", "nullable": true, "description": "A general identification for the party (e.g., TaxID)" },
+        { "name": "data_steward_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of the data steward responsible for this party" },
+        { "name": "created_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP", "description": "Date and time when this record was created" },
+        { "name": "created_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who created this record" },
+        { "name": "updated_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", "description": "Date and time when this record was last updated" },
+        { "name": "updated_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who last updated this record" },
+        { "name": "deleted_at", "dataType": "TIMESTAMP", "nullable": true, "description": "Date and time when this record was marked as deleted" }
+      ],
+      "indexes": [
+        { "name": "PRIMARY", "type": "PRIMARY KEY", "columns": ["party_id"] },
+        { "name": "idx_party_type", "type": "INDEX", "columns": ["party_type"] },
+        { "name": "idx_status", "type": "INDEX", "columns": ["status"] },
+        { "name": "idx_data_source", "type": "INDEX", "columns": ["data_source_system", "data_source_id"] },
+        { "name": "idx_golden_record", "type": "INDEX", "columns": ["is_golden_record"] },
+        { "name": "idx_created_at", "type": "INDEX", "columns": ["created_at"] },
+        { "name": "idx_deleted_at", "type": "INDEX", "columns": ["deleted_at"] },
+        { "name": "ft_party_name", "type": "FULLTEXT", "columns": ["party_name"] }
+      ]
+    },
+    {
+      "name": "person",
+      "description": "Person-specific information",
+      "primaryKey": "party_id",
+      "foreignKeys": [
+        { "column": "party_id", "referencedTable": "party", "referencedColumn": "party_id", "onDelete": "CASCADE" }
+      ],
+      "columns": [
+        { "name": "party_id", "dataType": "VARCHAR(36)", "nullable": false, "description": "Foreign key to the Party entity" },
+        { "name": "first_name", "dataType": "VARCHAR(100)", "nullable": false, "description": "First name of the person" },
+        { "name": "middle_name", "dataType": "VARCHAR(100)", "nullable": true, "description": "Middle name of the person" },
+        { "name": "last_name", "dataType": "VARCHAR(100)", "nullable": false, "description": "Last name of the person" },
+        { "name": "given_name", "dataType": "VARCHAR(100)", "nullable": true, "description": "Given name of the person (if different from first name)" },
+        { "name": "family_name", "dataType": "VARCHAR(100)", "nullable": true, "description": "Family name of the person (if different from last name)" },
+        { "name": "birth_date", "dataType": "DATE", "nullable": true, "description": "Date of birth" },
+        { "name": "gender", "dataType": "ENUM('Male', 'Female', 'Other', 'Prefer not to say')", "nullable": true, "description": "Gender of the person" },
+        { "name": "marital_status", "dataType": "ENUM('Single', 'Married', 'Divorced', 'Widowed', 'Separated', 'Other')", "nullable": true, "description": "Marital status of the person" },
+        { "name": "nationality", "dataType": "VARCHAR(100)", "nullable": true, "description": "Nationality of the person" },
+        { "name": "residence_country", "dataType": "VARCHAR(100)", "nullable": true, "description": "Country of residence" },
+        { "name": "ethnicity", "dataType": "VARCHAR(100)", "nullable": true, "description": "Ethnicity of the person" },
+        { "name": "religion", "dataType": "VARCHAR(100)", "nullable": true, "description": "Religion of the person" },
+        { "name": "preferred_language", "dataType": "VARCHAR(50)", "nullable": true, "description": "Preferred language for communication" },
+        { "name": "residential_status", "dataType": "VARCHAR(100)", "nullable": true, "description": "Residential status in the country of residence" },
+        { "name": "created_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP", "description": "Date and time when this record was created" },
+        { "name": "updated_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", "description": "Date and time when this record was last updated" },
+        { "name": "deleted_at", "dataType": "TIMESTAMP", "nullable": true, "description": "Date and time when this record was marked as deleted" }
+      ],
+      "indexes": [
+        { "name": "PRIMARY", "type": "PRIMARY KEY", "columns": ["party_id"] },
+        { "name": "idx_last_name", "type": "INDEX", "columns": ["last_name"] },
+        { "name": "idx_birth_date", "type": "INDEX", "columns": ["birth_date"] },
+        { "name": "idx_nationality", "type": "INDEX", "columns": ["nationality"] },
+        { "name": "idx_deleted_at", "type": "INDEX", "columns": ["deleted_at"] },
+        { "name": "ft_person_names", "type": "FULLTEXT", "columns": ["first_name", "middle_name", "last_name", "given_name", "family_name"] }
+      ]
+    },
+    {
+      "name": "organization",
+      "description": "Organization-specific information",
+      "primaryKey": "party_id",
+      "foreignKeys": [
+        { "column": "party_id", "referencedTable": "party", "referencedColumn": "party_id", "onDelete": "CASCADE" }
+      ],
+      "columns": [
+        { "name": "party_id", "dataType": "VARCHAR(36)", "nullable": false, "description": "Unique identifier for the organization" },
+        { "name": "organization_name", "dataType": "VARCHAR(255)", "nullable": false, "description": "The name of the organization" },
+        { "name": "organization_type", "dataType": "ENUM('Company', 'Government', 'Non-Profit', 'Educational', 'Other')", "nullable": false, "description": "Type of organization" },
+        { "name": "industry", "dataType": "VARCHAR(100)", "nullable": true, "description": "Industry of the organization" },
+        { "name": "data_source_system", "dataType": "VARCHAR(100)", "nullable": false, "description": "System where this organization data originated" },
+        { "name": "data_source_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of this organization in the source system" },
+        { "name": "is_golden_record", "dataType": "BOOLEAN", "nullable": false, "default": false, "description": "Flag indicating if this is the golden record" },
+        { "name": "data_quality_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Calculated data quality score from 0-100" },
+        { "name": "confidence_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Confidence level in the correctness of this record" },
+        { "name": "last_verified_date", "dataType": "DATE", "nullable": true, "description": "Date when this record was last verified" },
+        { "name": "data_steward_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of the data steward responsible for this organization" },
+        { "name": "created_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP", "description": "Date and time when this record was created" },
+        { "name": "created_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who created this record" },
+        { "name": "updated_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", "description": "Date and time when this record was last updated" },
+        { "name": "updated_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who last updated this record" },
+        { "name": "deleted_at", "dataType": "TIMESTAMP", "nullable": true, "description": "Date and time when this record was marked as deleted" }
+      ],
+      "indexes": [
+        { "name": "PRIMARY", "type": "PRIMARY KEY", "columns": ["party_id"] },
+        { "name": "idx_organization_name", "type": "INDEX", "columns": ["organization_name"] },
+        { "name": "idx_organization_type", "type": "INDEX", "columns": ["organization_type"] },
+        { "name": "idx_industry", "type": "INDEX", "columns": ["industry"] },
+        { "name": "idx_data_source", "type": "INDEX", "columns": ["data_source_system", "data_source_id"] },
+        { "name": "idx_golden_record", "type": "INDEX", "columns": ["is_golden_record"] },
+        { "name": "idx_deleted_at", "type": "INDEX", "columns": ["deleted_at"] },
+        { "name": "ft_organization_name", "type": "FULLTEXT", "columns": ["organization_name"] }
+      ]
+    },
+    {
+      "name": "party_identification",
+      "description": "Party identification documents",
+      "primaryKey": "identification_id",
+      "foreignKeys": [
+        { "column": "party_id", "referencedTable": "party", "referencedColumn": "party_id", "onDelete": "CASCADE" }
+      ],
+      "columns": [
+        { "name": "identification_id", "dataType": "BIGINT", "nullable": false, "autoIncrement": true, "description": "Unique identifier for this identification record" },
+        { "name": "party_id", "dataType": "VARCHAR(36)", "nullable": false, "description": "Foreign key to the Party entity" },
+        { "name": "identification_type", "dataType": "ENUM('TaxID', 'Passport', 'DriverLicense', 'Other')", "nullable": false, "description": "Type of identification" },
+        { "name": "identification_value", "dataType": "VARCHAR(255)", "nullable": false, "description": "Value of the identification" },
+        { "name": "data_source_system", "dataType": "VARCHAR(100)", "nullable": false, "description": "System where this identification data originated" },
+        { "name": "data_source_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of this identification in the source system" },
+        { "name": "is_golden_record", "dataType": "BOOLEAN", "nullable": false, "default": false, "description": "Flag indicating if this is the golden record" },
+        { "name": "data_quality_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Calculated data quality score from 0-100" },
+        { "name": "confidence_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Confidence level in the correctness of this record" },
+        { "name": "last_verified_date", "dataType": "DATE", "nullable": true, "description": "Date when this record was last verified" },
+        { "name": "data_steward_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of the data steward responsible for this identification" },
+        { "name": "created_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP", "description": "Date and time when this record was created" },
+        { "name": "created_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who created this record" },
+        { "name": "updated_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", "description": "Date and time when this record was last updated" },
+        { "name": "updated_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who last updated this record" },
+        { "name": "deleted_at", "dataType": "TIMESTAMP", "nullable": true, "description": "Date and time when this record was marked as deleted" }
+      ],
+      "indexes": [
+        { "name": "PRIMARY", "type": "PRIMARY KEY", "columns": ["identification_id"] },
+        { "name": "uk_party_identification", "type": "UNIQUE", "columns": ["party_id", "identification_type", "identification_value"] },
+        { "name": "idx_party_id", "type": "INDEX", "columns": ["party_id"] },
+        { "name": "idx_identification_type", "type": "INDEX", "columns": ["identification_type"] },
+        { "name": "idx_identification_value", "type": "INDEX", "columns": ["identification_value"] },
+        { "name": "idx_data_source", "type": "INDEX", "columns": ["data_source_system", "data_source_id"] },
+        { "name": "idx_golden_record", "type": "INDEX", "columns": ["is_golden_record"] },
+        { "name": "idx_deleted_at", "type": "INDEX", "columns": ["deleted_at"] }
+      ]
+    },
+    {
+      "name": "party_location",
+      "description": "Party location information",
+      "primaryKey": "location_id",
+      "foreignKeys": [
+        { "column": "party_id", "referencedTable": "party", "referencedColumn": "party_id", "onDelete": "CASCADE" }
+      ],
+      "columns": [
+        { "name": "location_id", "dataType": "BIGINT", "nullable": false, "autoIncrement": true, "description": "Unique identifier for this location record" },
+        { "name": "party_id", "dataType": "VARCHAR(36)", "nullable": false, "description": "Foreign key to the Party entity" },
+        { "name": "location_type", "dataType": "ENUM('Physical', 'Postal', 'Electronic', 'Other')", "nullable": false, "description": "Type of location" },
+        { "name": "location_value", "dataType": "TEXT", "nullable": false, "description": "Value of the location" },
+        { "name": "data_source_system", "dataType": "VARCHAR(100)", "nullable": false, "description": "System where this location data originated" },
+        { "name": "data_source_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of this location in the source system" },
+        { "name": "is_golden_record", "dataType": "BOOLEAN", "nullable": false, "default": false, "description": "Flag indicating if this is the golden record" },
+        { "name": "data_quality_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Calculated data quality score from 0-100" },
+        { "name": "confidence_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Confidence level in the correctness of this record" },
+        { "name": "last_verified_date", "dataType": "DATE", "nullable": true, "description": "Date when this record was last verified" },
+        { "name": "data_steward_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of the data steward responsible for this location" },
+        { "name": "created_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP", "description": "Date and time when this record was created" },
+        { "name": "created_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who created this record" },
+        { "name": "updated_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", "description": "Date and time when this record was last updated" },
+        { "name": "updated_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who last updated this record" },
+        { "name": "deleted_at", "dataType": "TIMESTAMP", "nullable": true, "description": "Date and time when this record was marked as deleted" }
+      ],
+      "indexes": [
+        { "name": "PRIMARY", "type": "PRIMARY KEY", "columns": ["location_id"] },
+        { "name": "idx_party_id", "type": "INDEX", "columns": ["party_id"] },
+        { "name": "idx_location_type", "type": "INDEX", "columns": ["location_type"] },
+        { "name": "idx_data_source", "type": "INDEX", "columns": ["data_source_system", "data_source_id"] },
+        { "name": "idx_golden_record", "type": "INDEX", "columns": ["is_golden_record"] },
+        { "name": "idx_deleted_at", "type": "INDEX", "columns": ["deleted_at"] },
+        { "name": "ft_location_value", "type": "FULLTEXT", "columns": ["location_value"] }
+      ]
+    },
+    {
+      "name": "contact_point",
+      "description": "Party contact information",
+      "primaryKey": "contact_id",
+      "foreignKeys": [
+        { "column": "party_id", "referencedTable": "party", "referencedColumn": "party_id", "onDelete": "CASCADE" }
+      ],
+      "columns": [
+        { "name": "contact_id", "dataType": "BIGINT", "nullable": false, "autoIncrement": true, "description": "Unique identifier for this contact record" },
+        { "name": "party_id", "dataType": "VARCHAR(36)", "nullable": false, "description": "Foreign key to the Party entity" },
+        { "name": "contact_type", "dataType": "ENUM('Phone', 'Email', 'SocialMedia', 'Other')", "nullable": false, "description": "Type of contact" },
+        { "name": "contact_value", "dataType": "VARCHAR(255)", "nullable": false, "description": "Value of the contact" },
+        { "name": "data_source_system", "dataType": "VARCHAR(100)", "nullable": false, "description": "System where this contact data originated" },
+        { "name": "data_source_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of this contact in the source system" },
+        { "name": "is_golden_record", "dataType": "BOOLEAN", "nullable": false, "default": false, "description": "Flag indicating if this is the golden record" },
+        { "name": "data_quality_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Calculated data quality score from 0-100" },
+        { "name": "confidence_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Confidence level in the correctness of this record" },
+        { "name": "last_verified_date", "dataType": "DATE", "nullable": true, "description": "Date when this record was last verified" },
+        { "name": "data_steward_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of the data steward responsible for this contact" },
+        { "name": "created_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP", "description": "Date and time when this record was created" },
+        { "name": "created_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who created this record" },
+        { "name": "updated_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", "description": "Date and time when this record was last updated" },
+        { "name": "updated_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who last updated this record" },
+        { "name": "deleted_at", "dataType": "TIMESTAMP", "nullable": true, "description": "Date and time when this record was marked as deleted" }
+      ],
+      "indexes": [
+        { "name": "PRIMARY", "type": "PRIMARY KEY", "columns": ["contact_id"] },
+        { "name": "uk_party_contact", "type": "UNIQUE", "columns": ["party_id", "contact_type", "contact_value"] },
+        { "name": "idx_party_id", "type": "INDEX", "columns": ["party_id"] },
+        { "name": "idx_contact_type", "type": "INDEX", "columns": ["contact_type"] },
+        { "name": "idx_contact_value", "type": "INDEX", "columns": ["contact_value"] },
+        { "name": "idx_data_source", "type": "INDEX", "columns": ["data_source_system", "data_source_id"] },
+        { "name": "idx_golden_record", "type": "INDEX", "columns": ["is_golden_record"] },
+        { "name": "idx_deleted_at", "type": "INDEX", "columns": ["deleted_at"] },
+        { "name": "ft_contact_value", "type": "FULLTEXT", "columns": ["contact_value"] }
+      ]
+    },
+    {
+      "name": "party_relationship",
+      "description": "Relationships between parties",
+      "primaryKey": "relationship_id",
+      "foreignKeys": [
+        { "column": "party_id", "referencedTable": "party", "referencedColumn": "party_id", "onDelete": "CASCADE" },
+        { "column": "related_party_id", "referencedTable": "party", "referencedColumn": "party_id", "onDelete": "CASCADE" }
+      ],
+      "columns": [
+        { "name": "relationship_id", "dataType": "BIGINT", "nullable": false, "autoIncrement": true, "description": "Unique identifier for this relationship" },
+        { "name": "party_id", "dataType": "VARCHAR(36)", "nullable": false, "description": "Foreign key to the Party entity (from party)" },
+        { "name": "related_party_id", "dataType": "VARCHAR(36)", "nullable": false, "description": "Foreign key to the related Party entity (to party)" },
+        { "name": "relationship_type", "dataType": "ENUM('Customer', 'Supplier', 'Partner', 'Other')", "nullable": false, "description": "Type of relationship" },
+        { "name": "data_source_system", "dataType": "VARCHAR(100)", "nullable": false, "description": "System where this relationship data originated" },
+        { "name": "data_source_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of this relationship in the source system" },
+        { "name": "is_golden_record", "dataType": "BOOLEAN", "nullable": false, "default": false, "description": "Flag indicating if this is the golden record" },
+        { "name": "data_quality_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Calculated data quality score from 0-100" },
+        { "name": "confidence_score", "dataType": "DECIMAL(5,2)", "nullable": true, "description": "Confidence level in the correctness of this record" },
+        { "name": "last_verified_date", "dataType": "DATE", "nullable": true, "description": "Date when this record was last verified" },
+        { "name": "data_steward_id", "dataType": "VARCHAR(100)", "nullable": true, "description": "ID of the data steward responsible for this relationship" },
+        { "name": "created_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP", "description": "Date and time when this record was created" },
+        { "name": "created_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who created this record" },
+        { "name": "updated_at", "dataType": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", "description": "Date and time when this record was last updated" },
+        { "name": "updated_by", "dataType": "VARCHAR(100)", "nullable": false, "description": "User who last updated this record" },
+        { "name": "deleted_at", "dataType": "TIMESTAMP", "nullable": true, "description": "Date and time when this record was marked as deleted" }
+      ],
+      "indexes": [
+        { "name": "PRIMARY", "type": "PRIMARY KEY", "columns": ["relationship_id"] },
+        { "name": "uk_party_relationship", "type": "UNIQUE", "columns": ["party_id", "related_party_id", "relationship_type"] },
+        { "name": "idx_party_id", "type": "INDEX", "columns": ["party_id"] },
+        { "name": "idx_related_party_id", "type": "INDEX", "columns": ["related_party_id"] },
+        { "name": "idx_relationship_type", "type": "INDEX", "columns": ["relationship_type"] },
+        { "name": "idx_data_source", "type": "INDEX", "columns": ["data_source_system", "data_source_id"] },
+        { "name": "idx_golden_record", "type": "INDEX", "columns": ["is_golden_record"] },
+        { "name": "idx_deleted_at", "type": "INDEX", "columns": ["deleted_at"] }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "name": "v_party_complete",
+      "description": "Complete party information view (excluding soft deleted records)",
+      "type": "SELECT"
+    },
+    {
+      "name": "v_party_active",
+      "description": "Active parties view",
+      "type": "SELECT"
+    },
+    {
+      "name": "v_party_golden_records",
+      "description": "Golden records view",
+      "type": "SELECT"
+    },
+    {
+      "name": "v_party_contacts",
+      "description": "Party contact information view",
+      "type": "SELECT"
+    },
+    {
+      "name": "v_party_locations",
+      "description": "Party location information view",
+      "type": "SELECT"
+    },
+    {
+      "name": "v_party_relationships",
+      "description": "Party relationships view",
+      "type": "SELECT"
+    },
+    {
+      "name": "v_data_quality_summary",
+      "description": "Data quality summary view",
+      "type": "SELECT"
+    },
+    {
+      "name": "v_recent_audit_activity",
+      "description": "Recent audit activity view",
+      "type": "SELECT"
+    },
+    {
+      "name": "v_party_statistics",
+      "description": "Party statistics view",
+      "type": "SELECT"
+    },
+    {
+      "name": "v_party_search",
+      "description": "Party search view (for full-text search)",
+      "type": "SELECT"
+    }
+  ],
+  "storedProcedures": [
+    {
+      "name": "sp_create_person_party",
+      "description": "Create a new person party",
+      "parameters": ["p_party_name", "p_first_name", "p_last_name", "p_middle_name", "p_birth_date", "p_gender", "p_nationality", "p_data_source_system", "p_data_source_id", "p_created_by", "p_party_id"]
+    },
+    {
+      "name": "sp_create_organization_party",
+      "description": "Create a new organization party",
+      "parameters": ["p_party_name", "p_organization_name", "p_organization_type", "p_industry", "p_data_source_system", "p_data_source_id", "p_created_by", "p_party_id"]
+    },
+    {
+      "name": "sp_update_party",
+      "description": "Update party information",
+      "parameters": ["p_party_id", "p_party_name", "p_status", "p_data_quality_score", "p_confidence_score", "p_updated_by"]
+    },
+    {
+      "name": "sp_soft_delete_party",
+      "description": "Soft delete a party",
+      "parameters": ["p_party_id", "p_updated_by"]
+    },
+    {
+      "name": "sp_add_contact_point",
+      "description": "Add contact point to party",
+      "parameters": ["p_party_id", "p_contact_type", "p_contact_value", "p_data_source_system", "p_data_source_id", "p_created_by"]
+    },
+    {
+      "name": "sp_assess_party_data_quality",
+      "description": "Assess data quality for a party",
+      "parameters": ["p_party_id", "p_assessed_by"]
+    },
+    {
+      "name": "sp_search_parties_by_name",
+      "description": "Search parties by name",
+      "parameters": ["p_search_term", "p_party_type", "p_limit"]
+    },
+    {
+      "name": "sp_get_party_statistics",
+      "description": "Get party statistics",
+      "parameters": []
+    }
+  ],
+  "triggers": [
+    {
+      "name": "tr_party_audit_insert",
+      "table": "party",
+      "timing": "AFTER",
+      "event": "INSERT",
+      "description": "Audit logging for party insertions"
+    },
+    {
+      "name": "tr_party_audit_update",
+      "table": "party",
+      "timing": "AFTER",
+      "event": "UPDATE",
+      "description": "Audit logging for party updates"
+    },
+    {
+      "name": "tr_party_type_validation",
+      "table": "party",
+      "timing": "BEFORE",
+      "event": "INSERT",
+      "description": "Validate party type consistency"
+    },
+    {
+      "name": "tr_golden_record_validation",
+      "table": "party",
+      "timing": "BEFORE",
+      "event": "UPDATE",
+      "description": "Ensure only one golden record per party"
+    },
+    {
+      "name": "tr_soft_delete_cascade",
+      "table": "party",
+      "timing": "BEFORE",
+      "event": "UPDATE",
+      "description": "Maintain referential integrity for soft deletes"
+    }
+  ],
+  "features": [
+    "Third Normal Form (3NF) compliance",
+    "Soft delete functionality",
+    "Comprehensive audit logging",
+    "Data quality assessment",
+    "Golden record management",
+    "Full-text search capabilities",
+    "Performance optimization indexes",
+    "Business rule enforcement",
+    "Data validation triggers",
+    "Stored procedures for common operations"
+  ],
+  "compliance": [
+    "GDPR compliance through audit trails",
+    "Data retention policies",
+    "Data quality monitoring",
+    "Data lineage tracking"
+  ],
+  "performance": [
+    "Optimized indexes for common queries",
+    "Covering indexes for frequent operations",
+    "Full-text search indexes",
+    "Functional indexes for case-insensitive searches",
+    "Partitioning support for large tables"
+  ]
+} 
